@@ -1,0 +1,61 @@
+# ==========================================
+# Archivo .gitignore para Proyecto TMV
+# ==========================================
+
+# Sistema Operativo y Archivos Temporales
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+*~
+
+# Variables de Entorno y Secretos
+.env
+.env.local
+.env.*.local
+*.credentials
+*.key
+
+# IDEs y Editores de Código
+.idea/
+*.iml
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+.springBeans
+
+# Java y Maven (Backend)
+target/
+*.class
+*.jar
+*.war
+*.ear
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+hs_err_pid*
+
+# Node / Gestores de paquetes (Frontend / QA)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Selenium y Pruebas QA
+frontend/qa/selenium/reports/*
+!frontend/qa/selenium/reports/.gitkeep
+chromedriver
+chromedriver.exe
+geckodriver
+geckodriver.exe
+msedgedriver
+msedgedriver.exe
+*.log
