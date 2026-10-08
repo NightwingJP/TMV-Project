@@ -6,36 +6,66 @@
     <meta name="description" content="¿Quiénes somos? - Conoce nuestra misión, visión, reseña histórica y trayectoria en TMV.">
     <title>¿Quiénes somos? - TMV</title>
 
-    <!-- Estilos Personalizados -->
+    <!-- Google Fonts: Patrick Hand & Comic Neue -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- Estilos Personalizados en Vanilla CSS -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/components/header.css">
     <link rel="stylesheet" href="../styles/components/navbar.css">
     <link rel="stylesheet" href="../styles/components/footer.css">
+    <link rel="stylesheet" href="../styles/pages/quienes-somos.css">
 </head>
 <body>
 
     <!-- ==================== HEADER (JULIAN) ==================== -->
-    
-    <div></div>
-    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
-    <main>  
-    <!-- ==================== CONTENIDO INSTITUCIONAL (FER) ==================== -->
-    
-        
-    <!-- ====================================== -->   
-    <!-- ==================== MISION Y VISION (JUAN) ==================== -->
-    <!-- ====================================== -->
+    <div id="header-container"></div>
 
-    <!-- ====================================== -->   
-    <!-- ==================== TARJETAS EQUIPO (JUAN PABLO ) ==================== -->
-    <!-- ====================================== -->   
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <main class="main-content">  
+        
+        <!-- ==================== CONTENIDO INSTITUCIONAL (FER) ==================== -->
+        <section class="container py-5">
+            <div class="text-center mb-5">
+                <h1>¿Quiénes somos?</h1>
+                <p>Conoce nuestra historia, valores y el propósito que impulsa a Distribuciones TMV.</p>
+            </div>
+        </section>
+            
+        <!-- ====================================== -->   
+        <!-- ==================== MISION Y VISION (JUAN) ==================== -->
+        <!-- ====================================== -->
+        <section class="container mb-5">
+            <div class="row">
+                <div class="col card-institucional">
+                    <h2>Nuestra Misión</h2>
+                    <p>Facilitar el acceso a productos de calidad mediante un canal mayorista virtual eficiente, confiable y cercano a nuestros aliados estratégicos.</p>
+                </div>
+                <div class="col card-institucional">
+                    <h2>Nuestra Visión</h2>
+                    <p>Ser la plataforma mayorista virtual líder a nivel regional, reconocida por su innovación tecnológica, soporte y solidez comercial para el 2030.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================== -->   
+        <!-- ==================== TARJETAS EQUIPO (JUAN PABLO ) ==================== -->
+        <!-- ====================================== -->   
+        <section class="container mb-5">
+            <h2 class="text-center mb-4">Nuestro Equipo</h2>
+            <div class="row">
+                <!-- Espacio reservado para las tarjetas del equipo -->
+            </div>
+        </section>
       
     </main>
 
     <!-- ==================== FOOTER (JULIAN) ==================== -->
-    <footer class="">
-        
-    </footer>
+    <div id="footer-container"></div>
+
+    <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
 </body>
 </html>
