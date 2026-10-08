@@ -1,0 +1,292 @@
+/* ==========================================================================
+   TMV - Estilos del Componente Header y Navbar (Vanilla CSS)
+   ========================================================================== */
+
+.tmv-header {
+    --color-bg: #ffffff;
+    --color-surface: #f9f9f9;
+    --color-text-main: #111111;
+    --color-text-muted: #666666;
+    --color-border: #111111;
+    --color-border-light: #cccccc;
+    --color-accent: #000000;
+    --transition-fast: 0.2s ease-in-out;
+    --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+    width: 100%;
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.tmv-header-container {
+    width: 100%;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    gap: 1rem;
+}
+
+/* ==================== BLOQUE DE MARCA (IZQUIERDA) ==================== */
+.tmv-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.tmv-brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-main);
+    text-decoration: none;
+}
+
+.tmv-brand-badge {
+    display: inline-block;
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1;
+    letter-spacing: 0.5px;
+    background-color: var(--color-bg);
+}
+
+.tmv-brand-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    white-space: nowrap;
+}
+
+.tmv-logo-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--color-border);
+    padding: 0.2rem 0.5rem;
+    background-color: var(--color-surface);
+    height: 28px;
+}
+
+.tmv-logo-placeholder {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.tmv-logo-img {
+    max-height: 24px;
+    width: auto;
+    display: none; /* Se mostrará cuando exista el recurso definitivo */
+}
+
+/* ==================== NAVEGACIÓN Y ENLACES ==================== */
+.tmv-nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 1.5rem;
+}
+
+.tmv-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tmv-nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tmv-nav-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--color-text-main);
+    padding: 0.35rem 0.15rem;
+    position: relative;
+    text-decoration: none;
+    transition: opacity var(--transition-fast), border-color var(--transition-fast);
+    border-bottom: 2px solid transparent;
+}
+
+.tmv-nav-link:hover {
+    opacity: 0.75;
+}
+
+/* Estado activo según wireframe (negrita y línea horizontal inferior) */
+.tmv-nav-link.active {
+    font-weight: 800;
+    border-bottom: 2px solid var(--color-border);
+    opacity: 1;
+}
+
+/* ==================== ACCIONES DERECHA (CARRITO Y LOGIN) ==================== */
+.tmv-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.tmv-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-text-main);
+    text-decoration: none;
+    padding: 0.3rem 0.4rem;
+    border-radius: 4px;
+    transition: background-color var(--transition-fast);
+}
+
+.tmv-cart-btn:hover {
+    background-color: var(--color-surface);
+}
+
+.tmv-cart-icon {
+    display: block;
+}
+
+.tmv-cart-badge {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.tmv-auth-btn {
+    display: inline-block;
+    border: 1px solid var(--color-border);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    text-decoration: none;
+    background-color: var(--color-bg);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.tmv-auth-btn:hover {
+    background-color: var(--color-text-main);
+    color: #ffffff;
+}
+
+/* ==================== BOTÓN TOGGLE MÓVIL ==================== */
+.tmv-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+}
+
+.tmv-hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-main);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1080px) {
+    .tmv-nav-list {
+        gap: 0.85rem;
+    }
+    .tmv-nav-link {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .tmv-nav-toggle {
+        display: flex;
+    }
+
+    .tmv-nav-wrapper {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1.25rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .tmv-nav-wrapper.is-open {
+        display: flex;
+    }
+
+    .tmv-nav {
+        width: 100%;
+        margin: 0;
+    }
+
+    .tmv-nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .tmv-nav-item {
+        width: 100%;
+    }
+
+    .tmv-nav-link {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .tmv-nav-link.active {
+        border-bottom: none;
+        border-left: 3px solid var(--color-border);
+        padding-left: 0.5rem;
+    }
+
+    .tmv-actions {
+        width: 100%;
+        justify-content: space-between;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--color-border-light);
+    }
+}
