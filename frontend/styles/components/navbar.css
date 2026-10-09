@@ -1,4 +1,4 @@
 /* ==========================================================================
-   TMV - Navbar CSS (Importa estilos unificados de header.css)
+   TMV - Navbar CSS (Estilos unificados en header.css para evitar doble carga)
    ========================================================================== */
-@import "./header.css";
+

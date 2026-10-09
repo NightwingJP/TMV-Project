@@ -66,13 +66,6 @@
     display: block;
 }
 
-.tmv-brand-logo {
-    height: 38px;
-    width: auto;
-    max-width: 120px;
-    object-fit: contain;
-}
-
 .tmv-brand-title {
     font-size: 0.92rem;
     font-weight: 700;
