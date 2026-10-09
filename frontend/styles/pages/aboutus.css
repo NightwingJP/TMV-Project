@@ -1,12 +1,15 @@
-// ESTILO 
+/* ESTILO GENERAL */
 
+/* ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS? */
+.about-hero {
+  background-color: var(--color-bg-light);
+  border-radius: 0.5rem;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+}
 
+/* ESTILO FER */
 
-// ESTILO FER
+/* ESTILO JUAN */
 
-
-// ESTILO JUAN
-
-
-
-//ESTILO JUAN PABLO
+/* ESTILO JUAN PABLO */

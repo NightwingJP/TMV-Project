@@ -8,20 +8,26 @@
         content="¿Quiénes somos? - Conoce nuestra misión, visión, reseña histórica y trayectoria en TMV.">
     <title>¿Quiénes somos? - TMV</title>
 
-    <!-- Estilos Personalizados -->
+    <!-- Google Fonts: Patrick Hand & Comic Neue -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- Estilos Personalizados en Vanilla CSS -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/components/header.css">
-    <link rel="stylesheet" href="../styles/components/navbar.css">
     <link rel="stylesheet" href="../styles/components/footer.css">
+    <link rel="stylesheet" href="../styles/pages/aboutus.css">
 </head>
 
 <body>
 
     <!-- ==================== HEADER (JULIAN) ==================== -->
+    <div id="header-container"></div>
 
-    <div></div>
     <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
-    <main>
+    <main class="main-content">  
+        
         <!-- ==================== CONTENIDO INSTITUCIONAL (FER) ==================== -->
         <section class="perfil-institucional">
             <div class="perfil-texto">
@@ -43,27 +49,60 @@
                 </p>
             </div>
 
-
             <div class="perfil-imagen">
-                <img src="../assets/images/products/perfil-tmv.jpg" alt="Camión de distribución de alimentos TMV">
+                <img src="pictures.jpg" alt="Camión de distribución de alimentos TMV">
             </div>
-         </section>
-
-        <!-- ====================================== -->
+        </section>
+        
         <!-- ==================== MISION Y VISION (JUAN) ==================== -->
-        <!-- ====================================== -->
+        <section class="mision-vision">
+            <div class="mision-vision-titulo">
+                <h2>Misión y Visión</h2>
+            </div>
 
-        <!-- ====================================== -->
+            <div class="mision-vision-contenedor">
+                <!-- MISIÓN -->
+                <article class="mision-vision-card">
+                    <h3>Misión</h3>
+
+                    <p>
+                        Desarrollamos soluciones web innovadoras, personalizadas y de alta calidad que permiten a nuestros clientes
+                        fortalecer su presencia digital, optimizar sus procesos y generar nuevas oportunidades de crecimiento, 
+                        mediante tecnología accesible, escalable y orientada a sus necesidades.
+                    </p>
+                </article>
+
+                <!-- VISIÓN -->
+                <article class="mision-vision-card">
+                    <h3>Visión</h3>
+
+                    <p>
+                        En los próximos 5 años, nos consolidaremos como una empresa referente en el desarrollo de soluciones web, 
+                        reconocida por la innovación, calidad, seguridad y compromiso con nuestros clientes, generando soluciones que
+                        contribuyan al crecimiento y transformación digital de las empresas.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ====================================== -->   
         <!-- ==================== TARJETAS EQUIPO (JUAN PABLO ) ==================== -->
-        <!-- ====================================== -->
-
+        <!-- ====================================== -->   
+        <section class="container mb-5">
+            <h2 class="text-center mb-4">Nuestro Equipo</h2>
+            <div class="row">
+                <!-- Espacio reservado para las tarjetas del equipo -->
+            </div>
+        </section>
+      
     </main>
 
     <!-- ==================== FOOTER (JULIAN) ==================== -->
-    <footer class="">
+    <div id="footer-container"></div>
 
-    </footer>
+    <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/pages/aboutus.js"></script>
 </body>
 
 </html>
