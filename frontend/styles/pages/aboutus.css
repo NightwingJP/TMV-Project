@@ -2,13 +2,44 @@
 
 /* ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS? */
 .about-hero {
-  background-color: var(--color-bg-light);
-  border-radius: 0.5rem;
-  padding: 3rem 2rem;
-  margin-bottom: 3rem;
+    background-color: var(--color-bg-light);
+    border-radius: 0.5rem;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
 }
 
 /* ESTILO FER */
+.perfil-institucional {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+    align-items: center;
+    gap: 24px;
+    padding: 16px 20px;
+}
+
+.perfil-imagen {
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+}
+
+.perfil-imagen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 800px) {
+    .perfil-institucional {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ESTILO JUAN */
+
+/* ESTILO JUAN PABLO */
+
 
 /* ESTILO JUAN */
 
