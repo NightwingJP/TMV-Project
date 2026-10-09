@@ -1,22 +1,40 @@
 <!-- ==========================================================================
-   Componente: Footer Legal y de Contacto Compartido - TMV
+   Componente: Footer - TMV
    ========================================================================== -->
 
-<footer class="site-footer bg-dark text-white">
-    <div class="container">
-        <div class="row">
-            <!-- Sección de Información Legal -->
-            <div class="col-md-6 legal-info">
-                <h5 class="business-name"><!-- Nombre del negocio o comercial --></h5>
-                <p class="nit"><!-- Número de Identificación Tributaria Nit --></p>
-                <p class="address"><!-- Dirección --></p>
+<footer class="tmv-footer">
+    <div class="container tmv-footer-container">
+
+        <!-- Fila 1: Logo y Enlaces de Navegación -->
+        <div class="tmv-footer-main">
+            <div class="tmv-footer-brand">
+                <a href="index.html" class="tmv-footer-brand-link" data-path="index.html" aria-label="Ir a Inicio - Tu Mayorista Virtual">
+                    <img src="assets/images/logos/logo-cube.png" alt="Logo Cubo TMV" class="tmv-footer-cube">
+                    <img src="assets/images/logos/logo-tmv.png" alt="TMV" class="tmv-footer-letters">
+                </a>
             </div>
 
-            <!-- Sección de Contacto -->
-            <div class="col-md-6 contact-info text-md-right">
-                <p class="email"><!-- Correo y usuario --></p>
-                <p class="phone"><!-- Teléfono --></p>
-            </div>
+            <nav class="tmv-footer-nav" aria-label="Navegación del pie de página">
+                <ul class="tmv-footer-list">
+                    <li class="tmv-footer-item">
+                        <a href="pages/quienes-somos.html" class="tmv-footer-link" data-path="quienes-somos.html">¿Quiénes Somos?</a>
+                    </li>
+                    <li class="tmv-footer-separator" aria-hidden="true">•</li>
+                    <li class="tmv-footer-item">
+                        <a href="pages/que-ofrecemos.html" class="tmv-footer-link" data-path="que-ofrecemos.html">¿Qué Ofrecemos?</a>
+                    </li>
+                    <li class="tmv-footer-separator" aria-hidden="true">•</li>
+                    <li class="tmv-footer-item">
+                        <a href="pages/contactanos.html" class="tmv-footer-link" data-path="contactanos.html">Contacto</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+
+        <!-- Fila 2: Derechos de Autor -->
+        <div class="tmv-footer-bottom">
+            <p class="tmv-footer-copy">&copy; 2026 Tu Mayorista Virtual. Todos los derechos reservados.</p>
+        </div>
+
     </div>
 </footer>
