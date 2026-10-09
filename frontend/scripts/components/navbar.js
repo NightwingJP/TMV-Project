@@ -11,7 +11,9 @@ export function initNavbar() {
     const navWrapper = document.getElementById("tmvNavWrapper");
     const navLinks = document.querySelectorAll(".tmv-nav-link");
     const brandLink = document.querySelector(".tmv-brand-link");
-    const logoImg = document.querySelector(".tmv-logo-img");
+    const logoCube = document.querySelector(".tmv-brand-cube");
+    const logoLetters = document.querySelector(".tmv-brand-letters");
+    const legacyLogo = document.querySelector(".tmv-brand-logo, .tmv-logo-img");
 
     // Determinar si estamos dentro del subdirectorio /pages/ o en la raíz
     const pathname = window.location.pathname;
@@ -25,8 +27,16 @@ export function initNavbar() {
         brandLink.setAttribute("href", `${pathToRoot}index.html`);
     }
 
-    if (logoImg) {
-        logoImg.setAttribute("src", `${pathToRoot}assets/images/logos/logo.png`);
+    if (logoCube) {
+        logoCube.setAttribute("src", `${pathToRoot}assets/images/logos/logo-cube.png`);
+    }
+
+    if (logoLetters) {
+        logoLetters.setAttribute("src", `${pathToRoot}assets/images/logos/logo-tmv.png`);
+    }
+
+    if (legacyLogo) {
+        legacyLogo.setAttribute("src", `${pathToRoot}assets/images/logos/logoTMV.jpg`);
     }
 
     navLinks.forEach((link) => {
