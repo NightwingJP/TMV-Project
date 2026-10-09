@@ -1,21 +1,66 @@
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS?
+   ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS? (aboutus.css)
    ========================================================================== */
 
-.about-hero {
-    background-color: var(--color-bg-light);
+/* SECCIÓN: PERFIL INSTITUCIONAL */
+.perfil-institucional {
+    background-color: var(--color-bg-light); /* Fondo azul destacado[cite: 9] */
     border-radius: 0.5rem;
     padding: 3rem 2rem;
     margin-bottom: 3rem;
+    /* Flexbox interno para dividir texto e imagen */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center; 
 }
 
-.about-hero h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+.perfil-texto {
+    flex: 1;
+    min-width: 280px;
 }
 
-.card-institucional {
-    background-color: var(--color-bg-soft);
+.perfil-texto h2 {
+    font-family: var(--font-titles);         /* Tipografía de títulos oficial[cite: 9] */
+    font-size: 2.5rem;
+    color: var(--color-primary);             /* Azul oscuro principal[cite: 9] */
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.perfil-texto p {
+    font-family: var(--font-body);           /* Tipografía de textos oficial[cite: 9] */
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.perfil-imagen {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+.perfil-imagen img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 50, 89, 0.15);
+}
+
+/* SECCIÓN: MISIÓN Y VISIÓN */
+.mision-vision-titulo h2 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+/* Tarjetas individuales de Misión y Visión */
+.mision-vision-card {
+    background-color: var(--color-bg-soft);  /* Fondo azul suave[cite: 9] */
     border: 1px solid var(--color-highlight);
     border-radius: 0.5rem;
     padding: 2rem;
@@ -23,21 +68,20 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-institucional:hover {
+.mision-vision-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 12px rgba(0, 50, 89, 0.12);
 }
 
-.card-institucional h2 {
+.mision-vision-card h3 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
     border-bottom: 2px solid var(--color-accent);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
 }
 
-/* ==========================================================================
-   ESTILOS DE INTEGRACIÓN
-   ========================================================================== */
-
-/* ESTILO JUAN */
-
-/* ESTILO JUAN PABLO */
+.mision-vision-card p {
+    font-family: var(--font-body);
+    color: var(--color-primary);
+}
