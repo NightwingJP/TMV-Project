@@ -1,46 +1,88 @@
-/* ESTILO GENERAL */
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS? (aboutus.css)
+   ========================================================================== */
 
 /* ESTILOS ESPECÍFICOS - PÁGINA ¿QUIÉNES SOMOS? */
-.about-hero {
-    background-color: var(--color-bg-light);
+/* SECCIÓN: PERFIL INSTITUCIONAL */
+.perfil-institucional {
+    background-color: var(--color-bg-light); /* Fondo azul destacado[cite: 9] */
     border-radius: 0.5rem;
     padding: 3rem 2rem;
     margin-bottom: 3rem;
+    /* Flexbox interno para dividir texto e imagen */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center; 
 }
 
-/* ESTILO FER */
-.perfil-institucional {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
-    align-items: center;
-    gap: 24px;
-    padding: 16px 20px;
+.perfil-texto {
+    flex: 1;
+    min-width: 280px;
+}
+
+.perfil-texto h2 {
+    font-family: var(--font-titles);         /* Tipografía de títulos oficial[cite: 9] */
+    font-size: 2.5rem;
+    color: var(--color-primary);             /* Azul oscuro principal[cite: 9] */
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.perfil-texto p {
+    font-family: var(--font-body);           /* Tipografía de textos oficial[cite: 9] */
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
 }
 
 .perfil-imagen {
-    width: 100%;
-    max-width: 400px;
-    justify-self: center;
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
 }
 
 .perfil-imagen img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    max-width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 50, 89, 0.15);
 }
 
-@media (max-width: 800px) {
-    .perfil-institucional {
-        grid-template-columns: 1fr;
-    }
+/* SECCIÓN: MISIÓN Y VISIÓN */
+.mision-vision-titulo h2 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
 }
 
-/* ESTILO JUAN */
+/* Tarjetas individuales de Misión y Visión */
+.mision-vision-card {
+    background-color: var(--color-bg-soft);  /* Fondo azul suave[cite: 9] */
+    border: 1px solid var(--color-highlight);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 50, 89, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-/* ESTILO JUAN PABLO */
+.mision-vision-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 50, 89, 0.12);
+}
 
+.mision-vision-card h3 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
 
-/* ESTILO JUAN */
-
-/* ESTILO JUAN PABLO */
+.mision-vision-card p {
+    font-family: var(--font-body);
+    color: var(--color-primary);
+}
