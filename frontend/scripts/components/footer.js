@@ -15,7 +15,16 @@ export function initFooter() {
     const pathToRoot = isInsidePages ? "../" : "./";
     const pathToPages = isInsidePages ? "./" : "pages/";
 
-    // 1. Ajustar enlaces relativos del footer según la ubicación actual
+    // 1. Ajustar enlaces relativos y recursos de imagen del footer según la ubicación actual
+    const logoCube = footerContainer.querySelector(".tmv-footer-cube");
+    const logoLetters = footerContainer.querySelector(".tmv-footer-letters");
+    if (logoCube) {
+        logoCube.setAttribute("src", `${pathToRoot}assets/images/logos/logo-cube.png`);
+    }
+    if (logoLetters) {
+        logoLetters.setAttribute("src", `${pathToRoot}assets/images/logos/logo-tmv.png`);
+    }
+
     const footerLinks = footerContainer.querySelectorAll(".tmv-footer-link, .tmv-footer-brand-link, [data-path]");
     footerLinks.forEach((link) => {
         const targetPath = link.getAttribute("data-path");
