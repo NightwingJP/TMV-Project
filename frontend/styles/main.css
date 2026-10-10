@@ -1,0 +1,97 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO GLOBAL - TMV (Vanilla CSS)
+   ========================================================================== */
+
+:root {
+    /* Paleta de Colores Oficial (Task 3) */
+    --color-primary: #003259;       /* Encabezados, títulos destacados, footer */
+    --color-secondary: #00497E;     /* Botones principales */
+    --color-accent: #2D7AC2;        /* Enlaces e interactivos */
+    --color-highlight: #4E94DE;     /* Detalles visuales y estados activos */
+    --color-bg-light: #6BAFFA;      /* Fondos destacados y efectos hover */
+    --color-bg-soft: #9FCAFF;       /* Fondos suaves para tarjetas */
+
+    /* Tipografías Oficiales */
+    --font-titles: 'Patrick Hand', cursive;
+    --font-body: 'Comic Neue', cursive;
+}
+
+/* ==========================================================================
+   RESET Y ESTILOS BASE
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--color-primary);
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titles);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   UTILIDADES DE DISEÑO (Reemplazo responsivo de Bootstrap con Flexbox)
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.col {
+    flex: 1;
+    min-width: 280px; /* Se ajusta automáticamente en celulares */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.py-5 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* ==========================================================================
+   COMPONENTES GLOBALES
+   ========================================================================== */
+
+.btn-tmv {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.btn-tmv:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
