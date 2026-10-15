@@ -1,4 +1,3 @@
-
 // ============================================================
 // contact.js - Validaciones y envío asíncrono PQRSF (Contáctanos)
 // ============================================================
@@ -140,6 +139,8 @@ function initContactForm() {
     const submitBtn = document.getElementById('submitBtn') || form?.querySelector('button[type="submit"]');
     if (!form) return;
 
+    let isSubmitting = false;
+
     // Solo activamos los campos que efectivamente existan en el DOM (permite desacoplar teléfono temporalmente)
     const activeFields = ALL_FIELDS.filter((f) => document.getElementById(f.id));
 
@@ -150,8 +151,9 @@ function initContactForm() {
         // Al salir del campo se valida por primera vez
         input.addEventListener('blur', () => checkField(field));
 
-        // Mientras escribe se revalida solo si ya tenía un error previo
-        input.addEventListener('input', () => {
+        // Mientras escribe o selecciona opción, se revalida de inmediato si ya tenía un error previo
+        const eventType = input.tagName === 'SELECT' ? 'change' : 'input';
+        input.addEventListener(eventType, () => {
             if (input.classList.contains('is-invalid')) {
                 checkField(field);
             }
@@ -160,6 +162,9 @@ function initContactForm() {
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
+
+        // Control de concurrencia: evitar doble envío por clics rápidos o presionar Enter múltiples veces
+        if (isSubmitting) return;
 
         // Limpiar estado previo
         status.textContent = '';
@@ -184,13 +189,16 @@ function initContactForm() {
         }
 
         // 3. Preparación de datos para Web3Forms
+        const emailValue = document.getElementById('contactEmail').value.trim().toLowerCase();
         const phoneInput = document.getElementById('contactPhone');
+
         const payload = {
             access_key: WEB3FORMS_ACCESS_KEY,
             subject: 'Nueva solicitud PQRSF - TMV',
             from_name: 'Portal TMV - Contáctanos',
+            replyto: emailValue, // Permite responder directamente al remitente desde el cliente de correo
             name: document.getElementById('contactName').value.trim().replace(/\s+/g, ' '),
-            email: document.getElementById('contactEmail').value.trim().toLowerCase(),
+            email: emailValue,
             tipo_solicitud: document.getElementById('pqrsfType').value,
             message: document.getElementById('contactMessage').value.trim(),
         };
@@ -200,6 +208,7 @@ function initContactForm() {
         }
 
         // 4. Bloquear botón y mostrar estado de carga
+        isSubmitting = true;
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando solicitud...';
@@ -228,8 +237,7 @@ function initContactForm() {
                 activeFields.forEach(({ id }) => {
                     const input = document.getElementById(id);
                     if (input) {
-                        input.classList.remove('is-valid', 'is-invalid');
-                        input.removeAttribute('aria-invalid');
+                        clearError(input);
                     }
                 });
             } else {
@@ -241,6 +249,7 @@ function initContactForm() {
             status.textContent = 'No fue posible conectar con el servidor. Revisa tu conexión a internet e inténtalo de nuevo.';
             status.classList.add('form-status--error');
         } finally {
+            isSubmitting = false;
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar Solicitud';
@@ -249,4 +258,9 @@ function initContactForm() {
     });
 }
 
-initContactForm();
+// Inicialización segura del formulario asegurando que el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+} else {
+    initContactForm();
+}
