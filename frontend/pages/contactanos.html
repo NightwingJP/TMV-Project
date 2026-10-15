@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Contáctanos - Información de contacto, radicación de PQRSF y ubicación en Google Maps de TMV.">
+    <meta name="description" content="Contáctanos - Información de contacto, radicación de PQRSF y ubicación en Google Maps de TMV.">
     <title>Contáctanos - TMV</title>
 
     <!-- Google Fonts: Patrick Hand & Comic Neue -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
 
     <!-- Estilos Personalizados en Vanilla CSS -->
     <link rel="stylesheet" href="../styles/main.css">
@@ -21,7 +17,6 @@
     <link rel="stylesheet" href="../styles/components/footer.css">
     <link rel="stylesheet" href="../styles/pages/contact.css">
 </head>
-
 <body>
 
     <!-- ==================== HEADER (Reutilizable) ==================== -->
@@ -52,32 +47,67 @@
 
             <section>
                 <h2>Formulario PQRSF</h2>
-                <form id="pqrsfForm">
-                    <div>
-                        <label for="contactName">Nombre Completo</label>
-                        <input type="text" id="contactName" placeholder="Tu nombre" required>
-                    </div>
-                    <div>
-                        <label for="contactEmail">Correo Electrónico</label>
-                        <input type="email" id="contactEmail" placeholder="correo@ejemplo.com" required>
-                    </div>
-                    <div>
-                        <label for="pqrsfType">Tipo de Solicitud</label>
-                        <select id="pqrsfType" required>
-                            <option value="">Selecciona una opción...</option>
-                            <option value="peticion">Petición</option>
-                            <option value="queja">Queja</option>
-                            <option value="reclamo">Reclamo</option>
-                            <option value="sugerencia">Sugerencia</option>
-                            <option value="felicitacion">Felicitación</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="contactMessage">Mensaje / Detalle de la Solicitud</label>
-                        <textarea id="contactMessage" rows="4" placeholder="Describe tu caso detalladamente..."
-                            required></textarea>
-                    </div>
+
+                <!-- novalidate: desactiva los avisos del navegador; la validación la hace contact.js -->
+                <form id="pqrsfForm" novalidate>
+
+                    <!-- ===== BLOQUE 1: Datos del usuario ===== -->
+                    <fieldset class="form-block" id="userDataBlock">
+                        <legend>Tus datos</legend>
+
+                        <div class="form-field">
+                            <label for="contactName">Nombre Completo</label>
+                            <input type="text" id="contactName" name="name" placeholder="Ej: Juan Pérez"
+                                   autocomplete="name" maxlength="60"
+                                   aria-describedby="contactName-error">
+                            <small class="field-error" id="contactName-error" role="alert"></small>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contactEmail">Correo Electrónico</label>
+                            <input type="email" id="contactEmail" name="email" placeholder="correo@ejemplo.com"
+                                   autocomplete="email" maxlength="100"
+                                   aria-describedby="contactEmail-error">
+                            <small class="field-error" id="contactEmail-error" role="alert"></small>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contactPhone">Teléfono (Colombia)</label>
+                            <input type="tel" id="contactPhone" name="phone" placeholder="Ej: 300 123 4567"
+                                   inputmode="tel" autocomplete="tel" maxlength="20"
+                                   aria-describedby="contactPhone-error">
+                            <small class="field-error" id="contactPhone-error" role="alert"></small>
+                        </div>
+                    </fieldset>
+
+                    <!-- ===== BLOQUE 2: Detalle de la solicitud ===== -->
+                    <fieldset class="form-block" id="requestBlock">
+                        <legend>Tu solicitud</legend>
+
+                        <div class="form-field">
+                            <label for="pqrsfType">Tipo de Solicitud</label>
+                            <select id="pqrsfType" name="type" aria-describedby="pqrsfType-error">
+                                <option value="">Selecciona una opción...</option>
+                                <option value="peticion">Petición</option>
+                                <option value="queja">Queja</option>
+                                <option value="reclamo">Reclamo</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="felicitacion">Felicitación</option>
+                            </select>
+                            <small class="field-error" id="pqrsfType-error" role="alert"></small>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contactMessage">Mensaje / Detalle de la Solicitud</label>
+                            <textarea id="contactMessage" name="message" rows="4" maxlength="1000"
+                                      placeholder="Describe tu caso detalladamente..."
+                                      aria-describedby="contactMessage-error"></textarea>
+                            <small class="field-error" id="contactMessage-error" role="alert"></small>
+                        </div>
+                    </fieldset>
+
                     <button type="submit" class="btn-tmv">Enviar Solicitud</button>
+                    <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </section>
 
@@ -95,5 +125,4 @@
     <script type="module" src="../scripts/main.js"></script>
     <script type="module" src="../scripts/pages/contact.js"></script>
 </body>
-
 </html>
