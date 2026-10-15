@@ -1,30 +1,222 @@
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS - PÁGINA CONTÁCTANOS / PQRSF (contact.css)
+   ESTILOS - PÁGINA CONTÁCTANOS (contact.css)
+   Fiel a la estructura del Wireframe TMV
    ========================================================================== */
 
-.form-field {
+/* ---------- Encabezado y Breadcrumbs ---------- */
+.contact-header {
+    margin-bottom: 2rem;
+}
+
+.contact-breadcrumb {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.contact-main-title {
+    font-family: var(--font-titles);
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.contact-lead {
+    font-size: 1.05rem;
+    color: #475569;
+    max-width: 850px;
+    line-height: 1.5;
+}
+
+/* ---------- Barra de Sección Superior ---------- */
+.section-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-banner-title {
+    font-family: var(--font-titles);
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.section-banner-badge {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.05em;
+}
+
+/* ---------- Fila de 3 Tarjetas de Soporte ---------- */
+.support-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.support-card {
+    background-color: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.support-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 4px 12px rgba(0, 50, 89, 0.08);
+}
+
+.support-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.support-card-header .card-icon {
+    font-size: 1.15rem;
+}
+
+.support-card-header h3 {
+    font-family: var(--font-titles);
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.support-card .card-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.45;
     margin-bottom: 1.25rem;
 }
 
-.form-field label {
-    font-weight: 700;
-    margin-bottom: 0.4rem;
+.support-card-footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.footer-highlight {
+    font-size: 1.05rem;
     color: var(--color-primary);
+    font-weight: 700;
+}
+
+.footer-subtext {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.btn-card-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-card-action:hover {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+}
+
+/* ---------- Cuadrícula Principal (2 Columnas: Formulario & Mapa) ---------- */
+.contact-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.content-box {
+    background-color: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 0.25rem;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-box-header {
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.85rem;
+}
+
+.content-box-header h2 {
+    font-family: var(--font-titles);
+    font-size: 1.35rem;
+    color: var(--color-primary);
+    margin: 0 0 0.35rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.content-box-header p {
+    font-size: 0.92rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ---------- Formulario PQRSF ---------- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-field label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .form-field input[type="text"],
 .form-field input[type="email"],
-.form-field input[type="tel"],
 .form-field select,
 .form-field textarea {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 0.85rem;
     border: 1.5px solid #cbd5e1;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.98rem;
     color: #1e293b;
     background-color: #ffffff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -32,7 +224,7 @@
 
 .form-field textarea {
     resize: vertical;
-    min-height: 110px;
+    min-height: 95px;
 }
 
 .form-field input:focus,
@@ -40,10 +232,10 @@
 .form-field textarea:focus {
     outline: none;
     border-color: var(--color-highlight);
-    box-shadow: 0 0 0 3px rgba(78, 148, 222, 0.25);
+    box-shadow: 0 0 0 3px rgba(78, 148, 222, 0.2);
 }
 
-/* Estados de validación accesibles */
+/* Estados de error y validación */
 .form-field input.is-invalid,
 .form-field select.is-invalid,
 .form-field textarea.is-invalid {
@@ -63,29 +255,56 @@
     border-color: #16a34a;
 }
 
-/* Mensaje de error por campo */
 .field-error {
     color: #dc2626;
-    font-size: 0.875rem;
-    margin-top: 0.35rem;
-    min-height: 1.2rem;
+    font-size: 0.82rem;
+    margin-top: 0.25rem;
+    min-height: 1.1rem;
     display: block;
 }
 
-/* Estado del botón mientras envía */
-button[type="submit"]:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-    filter: grayscale(20%);
+/* Botón principal del formulario */
+.btn-submit-main {
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* Mensajes generales de estado del formulario */
+.btn-submit-main:hover {
+    background-color: var(--color-secondary);
+}
+
+.btn-submit-main:active {
+    transform: translateY(1px);
+}
+
+.btn-submit-main:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* Notificación de estado de envío */
 .form-status {
     display: none;
-    margin-top: 1.25rem;
-    padding: 0.85rem 1.25rem;
-    border-radius: 0.375rem;
-    font-size: 0.95rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.92rem;
     font-weight: 700;
 }
 
@@ -108,4 +327,76 @@ button[type="submit"]:disabled {
     background-color: #fef2f2;
     color: #b91c1c;
     border: 1px solid #fecaca;
+}
+
+/* ---------- Sección de Google Maps ---------- */
+.map-embed-wrapper {
+    width: 100%;
+    border: 1.5px dashed #94a3b8;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    background-color: #f8fafc;
+    margin-bottom: 1.25rem;
+    display: flex;
+}
+
+.map-embed-wrapper iframe {
+    width: 100%;
+    height: 270px;
+    border: 0;
+    display: block;
+}
+
+.location-details {
+    margin-top: auto;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.85rem;
+}
+
+.location-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+    font-size: 1.05rem;
+}
+
+.location-address {
+    font-size: 0.92rem;
+    color: #334155;
+    margin: 0 0 0.25rem 0;
+}
+
+.location-contacts {
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ---------- Responsividad ---------- */
+@media (max-width: 992px) {
+    .support-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-main-title {
+        font-size: 1.75rem;
+    }
+
+    .section-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .content-box {
+        padding: 1.25rem;
+    }
 }

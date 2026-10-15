@@ -1,3 +1,4 @@
+
 // ============================================================
 // contact.js - Validaciones y envío asíncrono PQRSF (Contáctanos)
 // ============================================================
@@ -87,10 +88,10 @@ function validateMessage(value) {
 // ---------- Configuración: campo -> validador ----------
 
 const ALL_FIELDS = [
-    { id: 'contactName',    validate: validateName },
-    { id: 'contactEmail',   validate: validateEmail },
-    { id: 'contactPhone',   validate: validatePhone },
-    { id: 'pqrsfType',      validate: validateType },
+    { id: 'contactName', validate: validateName },
+    { id: 'contactEmail', validate: validateEmail },
+    { id: 'contactPhone', validate: validatePhone },
+    { id: 'pqrsfType', validate: validateType },
     { id: 'contactMessage', validate: validateMessage },
 ];
 
