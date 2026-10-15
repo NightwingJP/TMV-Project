@@ -1,6 +1,5 @@
 /* ==========================================================================
    ESTILOS - PÁGINA CONTÁCTANOS (contact.css)
-   Auditoría de rendimiento, simplificación y márgenes de pantalla
    ========================================================================== */
 
 /* ---------- 1. Márgenes Globales del Documento y Contenedor ---------- */
@@ -12,7 +11,8 @@
 
 .main-content .container {
     width: 100%;
-    max-width: 920px; /* Ancho de lectura óptimo y centrado en pantallas grandes */
+    max-width: 920px;
+    /* Ancho de lectura óptimo y centrado en pantallas grandes */
     margin: 0 auto;
     padding: 0;
 }
