@@ -30,22 +30,25 @@
     <!-- Contenido principal -->
     <main class="main-content py-5">
         <div class="container">
-            <h1 class="text-center">Contáctanos</h1>
-
-            <div class="text-center mb-5">
-                <h1 class="fw-bold">Centro de Ayuda y Gestión</h1>
+            <!-- Encabezado Hero con fondo destacado -->
+            <header class="contact-hero text-center mb-5">
+                <h1 class="text-center">Contáctanos</h1>
+                <h2 class="fw-bold">Centro de Ayuda y Gestión</h2>
                 <p class="lead text-muted mx-auto" style="max-width: 800px;">
                     Estamos aquí para escucharte y brindarte el mejor soporte. En esta sección puedes comunicarte con
                     nosotros para resolver cualquier inquietud general, o reportar rápidamente cualquier novedad, queja
                     o sugerencia sobre tus solicitudes previas.
                 </p>
-            </div>
+            </header>
 
             <section>
                 <h2>Información del Comercio</h2>
                 <ul>
-                    <li><strong>📞 Teléfono:</strong> +57 (601) 325-4157</li>
-                    <li><strong>🟢 WhatsApp:</strong> +57 (312) 456 7890</li>
+                    <li>
+                        <strong>📞 Teléfono &amp; WhatsApp:</strong>
+                        <span>+57 (601) 325-4157</span>
+                        <span>+57 (312) 456 7890</span>
+                    </li>
                     <li><strong>📍 Dirección:</strong> Calle Boulevard # 123, Bogotá D.C., Colombia</li>
                     <li><strong>✉️ Correo:</strong> tumayoristavirtual1@gmail.com</li>
                 </ul>
@@ -54,25 +57,30 @@
             <section>
                 <h2>Formulario PQRSF</h2>
 
-                <form id="pqrsfForm" action="https://api.web3forms.com/submit" method="POST">
+                <!-- novalidate: desactiva avisos nativos del navegador; la validación y envío se gestionan con fetch en contact.js -->
+                <form id="pqrsfForm" novalidate>
 
-                    <!--  clave de Web3Forms -->
-                    <input type="hidden" name="access_key" value="7ba4153d-f08c-460b-9453-83f7ff916d77">
-                    <input type="hidden" name="subject" value="Nueva solicitud PQRSF - TMV">
+                    <!-- Campo Honeypot anti-spam (oculto para humanos, completado por bots) -->
+                    <input type="checkbox" name="botcheck" id="botcheck" style="display: none;" tabindex="-1"
+                        autocomplete="off">
 
-                    <div>
+                    <div class="form-field">
                         <label for="contactName">Nombre Completo</label>
-                        <input type="text" id="contactName" name="name" placeholder="Tu nombre" required>
+                        <input type="text" id="contactName" name="name" placeholder="Tu nombre" required maxlength="60"
+                            aria-describedby="contactName-error">
+                        <small class="field-error" id="contactName-error" role="alert"></small>
                     </div>
 
-                    <div>
+                    <div class="form-field">
                         <label for="contactEmail">Correo Electrónico</label>
-                        <input type="email" id="contactEmail" name="email" placeholder="correo@ejemplo.com" required>
+                        <input type="email" id="contactEmail" name="email" placeholder="correo@ejemplo.com" required
+                            maxlength="100" aria-describedby="contactEmail-error">
+                        <small class="field-error" id="contactEmail-error" role="alert"></small>
                     </div>
 
-                    <div>
+                    <div class="form-field">
                         <label for="pqrsfType">Tipo de Solicitud</label>
-                        <select id="pqrsfType" name="tipo_solicitud" required>
+                        <select id="pqrsfType" name="tipo_solicitud" required aria-describedby="pqrsfType-error">
                             <option value="">Selecciona una opción...</option>
                             <option value="peticion">Petición</option>
                             <option value="queja">Queja</option>
@@ -80,15 +88,18 @@
                             <option value="sugerencia">Sugerencia</option>
                             <option value="felicitacion">Felicitación</option>
                         </select>
+                        <small class="field-error" id="pqrsfType-error" role="alert"></small>
                     </div>
 
-                    <div>
+                    <div class="form-field">
                         <label for="contactMessage">Mensaje / Detalle de la Solicitud</label>
-                        <textarea id="contactMessage" name="message" rows="4"
-                            placeholder="Describe tu caso detalladamente..." required></textarea>
+                        <textarea id="contactMessage" name="message" rows="4" maxlength="1000"
+                            placeholder="Describe tu caso detalladamente..." required
+                            aria-describedby="contactMessage-error"></textarea>
+                        <small class="field-error" id="contactMessage-error" role="alert"></small>
                     </div>
 
-                    <button type="submit" class="btn-tmv">Enviar Solicitud</button>
+                    <button type="submit" id="submitBtn" class="btn-tmv">Enviar Solicitud</button>
                     <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </section>
