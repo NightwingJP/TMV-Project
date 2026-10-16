@@ -77,6 +77,13 @@
                     </div>
 
                     <div class="form-field">
+                        <label for="contactPhone">Número de Teléfono / WhatsApp</label>
+                        <input type="tel" id="contactPhone" name="phone" placeholder="Ej: 300 123 4567 o (601) 325 4157" required
+                            maxlength="20" inputmode="tel" autocomplete="tel" aria-describedby="contactPhone-error">
+                        <small class="field-error" id="contactPhone-error" role="alert"></small>
+                    </div>
+
+                    <div class="form-field">
                         <label for="pqrsfType">Tipo de Solicitud</label>
                         <select id="pqrsfType" name="tipo_solicitud" required aria-describedby="pqrsfType-error">
                             <option value="">Selecciona una opción...</option>
