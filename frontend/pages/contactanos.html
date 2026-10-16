@@ -34,7 +34,7 @@
             <header class="contact-hero text-center mb-4">
                 <span class="hero-tag">Soporte &amp; Ventas TMV</span>
                 <h1>Centro de Ayuda y Contacto</h1>
-                <p class="lead text-muted mx-auto" style="max-width: 750px;">
+                <p class="lead">
                     Estamos aquí para escucharte y brindarte el mejor soporte. Comunícate con nosotros para resolver cualquier inquietud general, o radicar novedades y solicitudes PQRSF.
                 </p>
             </header>
@@ -74,6 +74,13 @@
                         <input type="email" id="contactEmail" name="email" placeholder="correo@ejemplo.com" required
                             maxlength="100" aria-describedby="contactEmail-error">
                         <small class="field-error" id="contactEmail-error" role="alert"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="contactPhone">Número de Teléfono / WhatsApp</label>
+                        <input type="tel" id="contactPhone" name="phone" placeholder="Ej: 300 123 4567 o (601) 325 4157" required
+                            maxlength="20" inputmode="tel" autocomplete="tel" aria-describedby="contactPhone-error">
+                        <small class="field-error" id="contactPhone-error" role="alert"></small>
                     </div>
 
                     <div class="form-field">
