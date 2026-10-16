@@ -4,8 +4,8 @@
 
 /* ---------- 1. Márgenes Globales del Documento y Contenedor ---------- */
 .main-content {
-    /* Margen exterior fluido: garantiza que el contenido nunca toque los bordes de la pantalla */
-    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+    /* Margen exterior fluido y compacto para optimizar el primer vistazo (Above-the-fold) */
+    padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 5vw, 4rem);
     min-height: 70vh;
 }
 
@@ -17,13 +17,13 @@
     padding: 0;
 }
 
-/* ---------- 2. Encabezado Hero con Gradiente Suave TMV ---------- */
+/* ---------- 2. Encabezado Hero Compacto con Gradiente Suave TMV ---------- */
 .contact-hero {
     background: linear-gradient(135deg, rgba(159, 202, 255, 0.45) 0%, rgba(107, 175, 250, 0.25) 100%);
     border: 1.5px solid rgba(45, 122, 194, 0.3);
     border-radius: 0.75rem;
-    padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
-    margin-bottom: 2.5rem;
+    padding: clamp(1.25rem, 2.5vw, 1.85rem) clamp(1.25rem, 3vw, 2rem);
+    margin-bottom: 1.75rem;
     box-shadow: 0 4px 16px rgba(0, 50, 89, 0.05);
     position: relative;
     overflow: hidden;
@@ -40,28 +40,35 @@
     pointer-events: none;
 }
 
+.hero-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(45, 122, 194, 0.25);
+    border-radius: 9999px;
+    padding: 0.2rem 0.85rem;
+    margin-bottom: 0.45rem;
+}
+
 .contact-hero h1 {
-    font-size: clamp(2.2rem, 4.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
     color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 0.35rem;
-    line-height: 1.15;
-}
-
-.contact-hero h2.fw-bold {
-    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
-    color: var(--color-secondary);
-    margin-bottom: 0.85rem;
-    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
 }
 
 .contact-hero .lead {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     color: #1e293b;
-    max-width: 780px;
+    max-width: 720px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* ---------- 3. Tarjetas de Sección (Secciones Principales) ---------- */
@@ -69,16 +76,16 @@
     background-color: #ffffff;
     border: 1.5px solid #cbd5e1;
     border-radius: 0.5rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    margin-bottom: 2rem;
+    padding: clamp(1.15rem, 2.5vw, 1.75rem);
+    margin-bottom: 1.75rem;
     box-shadow: 0 2px 8px rgba(0, 50, 89, 0.04);
 }
 
 .main-content section h2 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.25rem;
+    padding-bottom: 0.45rem;
+    margin-bottom: 1.15rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
