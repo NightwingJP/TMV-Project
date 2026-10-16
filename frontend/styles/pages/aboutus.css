@@ -4,10 +4,12 @@
 
 /* SECCIÓN: PERFIL INSTITUCIONAL */
 .perfil-institucional {
-    background-color: var(--color-bg-light); /* Fondo azul destacado[cite: 9] */
+    background-color: var(--color-bg-light); /* Fondo azul destacado */
+    border: 1px solid var(--color-highlight);
     border-radius: 0.5rem;
-    padding: 3rem 2rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
     margin-bottom: 3rem;
+    box-shadow: 0 4px 12px rgba(0, 50, 89, 0.08);
     /* Flexbox interno para dividir texto e imagen */
     display: flex;
     flex-wrap: wrap;
@@ -21,9 +23,9 @@
 }
 
 .perfil-texto h2 {
-    font-family: var(--font-titles);         /* Tipografía de títulos oficial[cite: 9] */
+    font-family: var(--font-titles);         /* Tipografía de títulos oficial */
     font-size: 2.5rem;
-    color: var(--color-primary);             /* Azul oscuro principal[cite: 9] */
+    color: var(--color-primary);             /* Azul oscuro principal */
     border-bottom: 2px solid var(--color-accent);
     display: inline-block;
     padding-bottom: 0.5rem;
@@ -31,10 +33,15 @@
 }
 
 .perfil-texto p {
-    font-family: var(--font-body);           /* Tipografía de textos oficial[cite: 9] */
+    font-family: var(--font-body);           /* Tipografía de textos oficial */
     font-size: 1.15rem;
     color: var(--color-primary);
     margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.perfil-texto p:last-child {
+    margin-bottom: 0;
 }
 
 .perfil-imagen {
@@ -45,11 +52,18 @@
 
 .perfil-imagen img {
     max-width: 100%;
+    height: auto;
     border-radius: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 50, 89, 0.15);
+    display: block;
+    margin: 0 auto;
 }
 
 /* SECCIÓN: MISIÓN Y VISIÓN */
+.mision-vision {
+    margin-bottom: 3rem;
+}
+
 .mision-vision-titulo h2 {
     font-family: var(--font-titles);
     color: var(--color-primary);
@@ -58,19 +72,26 @@
     font-size: 2.5rem;
 }
 
+.mision-vision-contenedor {
+    margin-bottom: 0; /* Unifica el margen vertical controlado por la sección */
+}
+
 /* Tarjetas individuales de Misión y Visión */
 .mision-vision-card {
-    background-color: var(--color-bg-soft);  /* Fondo azul suave[cite: 9] */
+    background-color: var(--color-bg-soft);  /* Fondo azul suave */
     border: 1px solid var(--color-highlight);
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 50, 89, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .mision-vision-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 12px rgba(0, 50, 89, 0.12);
+    border-color: var(--color-accent);
 }
 
 .mision-vision-card h3 {
@@ -84,11 +105,15 @@
 .mision-vision-card p {
     font-family: var(--font-body);
     color: var(--color-primary);
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
-/*tarjetas integrantes jp
-//////////////////////////////////////////////////////////////
 /* SECCIÓN: EQUIPO */
+.equipo {
+    margin-bottom: 1.5rem;
+}
+
 .equipo-titulo {
     font-family: var(--font-titles);
     color: var(--color-primary);
@@ -97,7 +122,7 @@
     margin-bottom: 2rem;
 }
 
-/* Grid responsive: 3 tarjetas arriba y 2 abajo centradas en escritorio */
+/* Grid responsive: 3 tarjetas arriba y 2 abajo centradas en escritorio con ancho simétrico */
 .equipo-grid {
     display: flex;
     flex-wrap: wrap;
@@ -106,19 +131,24 @@
 }
 
 .equipo-card {
-    flex: 0 1 300px;
+    flex: 1 1 280px;
+    max-width: 350px;
     background-color: var(--color-bg-soft);
     border: 1px solid var(--color-highlight);
     border-radius: 0.5rem;
     padding: 2rem 1.5rem;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 50, 89, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .equipo-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 12px rgba(0, 50, 89, 0.12);
+    border-color: var(--color-accent);
 }
 
 .equipo-card img {
@@ -128,12 +158,14 @@
     border-radius: 50%;         /* foto circular */
     border: 4px solid var(--color-accent);
     margin-bottom: 1rem;
+    display: block;
 }
 
 .equipo-card h3 {
     font-family: var(--font-titles);
     color: var(--color-primary);
-    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .equipo-rol {
@@ -141,11 +173,13 @@
     font-family: var(--font-body);
     font-weight: 700;
     color: var(--color-accent);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
 }
 
 .equipo-card p {
     font-family: var(--font-body);
     color: var(--color-primary);
     font-size: 1rem;
-}
+    line-height: 1.5;
+    margin-bottom: 0;
+}
