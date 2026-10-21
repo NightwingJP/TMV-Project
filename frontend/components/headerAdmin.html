@@ -1,0 +1,93 @@
+<header class="tmv-header tmv-header-admin">
+    <div class="container tmv-header-container tmv-admin-header-container">
+
+        <!-- Marca y logo del administrador -->
+        <div class="tmv-brand-group">
+            <a href="pages/homePageAdmin.html" class="tmv-brand-link" id="tmvAdminBrandLink"
+                aria-label="Tu Mayorista Virtual - Panel Admin">
+                <img src="assets/images/logos/logo-cube.png" alt="Logo Cubo TMV" class="tmv-brand-cube">
+                <img src="assets/images/logos/logo-tmv.png" alt="TMV" class="tmv-brand-letters">
+                <span class="tmv-brand-title">Tu Mayorista Virtual</span>
+                <span class="tmv-admin-badge" aria-label="Modo Administrador">ADMIN</span>
+            </a>
+        </div>
+
+        <div class="tmv-nav-wrapper tmv-admin-nav-wrapper" id="tmvAdminNavWrapper">
+            
+            <!-- Navegación desktop -->
+            <nav class="tmv-nav tmv-admin-desktop-nav" aria-label="Navegación del panel de administración">
+                <ul class="tmv-nav-list tmv-admin-nav-list">
+                    <li class="tmv-nav-item">
+                        <a href="#dashboard" class="tmv-nav-link active" data-anchor="dashboard">INICIO</a>
+                    </li>
+                    <li class="tmv-nav-item">
+                        <a href="#agregar-producto" class="tmv-nav-link" data-anchor="agregar-producto">AGREGAR PRODUCTO</a>
+                    </li>
+                    <li class="tmv-nav-item">
+                        <a href="#mis-productos" class="tmv-nav-link" data-anchor="mis-productos">MIS PRODUCTOS</a>
+                    </li>
+                    <li class="tmv-nav-item">
+                        <a href="index.html" class="tmv-nav-link tmv-nav-link-exit" data-public-store="true">TIENDA PÚBLICA</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Menú desplegable para móviles -->
+            <div class="tmv-dropdown tmv-admin-mobile-dropdown" id="tmvAdminDropdown">
+                <button type="button" class="tmv-nav-link tmv-dropdown-toggle" id="adminDropdownBtn"
+                    aria-expanded="false" aria-haspopup="true">
+                    <span>INICIO</span>
+                    <svg class="tmv-chevron-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+
+                <ul class="tmv-dropdown-menu" id="adminDropdownMenu" aria-labelledby="adminDropdownBtn">
+                    <li class="tmv-dropdown-header">FUNCIONES DEL DASHBOARD</li>
+                    <li>
+                        <a href="#dashboard" class="tmv-dropdown-item active" data-anchor="dashboard">
+                            <span class="tmv-item-bullet">▪</span>
+                            <span class="tmv-item-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#agregar-producto" class="tmv-dropdown-item" data-anchor="agregar-producto">
+                            <span class="tmv-item-bullet">▪</span>
+                            <span class="tmv-item-text">Agregar Producto</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mis-productos" class="tmv-dropdown-item" data-anchor="mis-productos">
+                            <span class="tmv-item-bullet">▪</span>
+                            <span class="tmv-item-text">Mis Productos</span>
+                        </a>
+                    </li>
+                    <li class="tmv-dropdown-divider" role="separator"></li>
+                    <li>
+                        <a href="index.html" class="tmv-dropdown-item tmv-dropdown-item-exit" data-public-store="true">
+                            <span class="tmv-item-bullet">↗</span>
+                            <span class="tmv-item-text">Ver Tienda Pública</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botón de perfil del administrador -->
+            <div class="tmv-actions tmv-admin-actions">
+                <a href="#admin-perfil" class="tmv-auth-btn tmv-admin-user-btn" id="tmvAdminUserBtn"
+                    aria-label="Perfil del Administrador">
+                    <svg class="tmv-auth-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="tmv-admin-user-text">Administrador</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</header>

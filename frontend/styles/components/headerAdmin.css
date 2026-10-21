@@ -1,0 +1,228 @@
+/* ==========================================================================
+   Header y Navbar Administrativo (headerAdmin.css)
+   ========================================================================== */
+
+.tmv-header-admin .tmv-header-container {
+    min-height: 56px;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    gap: 1rem;
+    flex-wrap: nowrap;
+}
+
+.tmv-header-admin .tmv-brand-link {
+    white-space: nowrap;
+}
+
+.tmv-admin-badge {
+    background-color: var(--color-bg-soft);
+    color: var(--color-primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+}
+
+/* Navegación desktop */
+.tmv-admin-desktop-nav {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.tmv-admin-desktop-nav .tmv-admin-nav-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+}
+
+.tmv-header-admin .tmv-nav-link {
+    white-space: nowrap !important;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.84rem;
+}
+
+.tmv-header-admin .tmv-actions {
+    padding-left: 1rem;
+    gap: 0.65rem;
+    flex-shrink: 0;
+}
+
+.tmv-header-admin .tmv-auth-btn {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+/* Menú desplegable móvil */
+.tmv-admin-mobile-dropdown {
+    display: none;
+    position: relative;
+}
+
+.tmv-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.tmv-chevron-icon {
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.tmv-dropdown.is-open .tmv-chevron-icon {
+    transform: rotate(180deg);
+}
+
+.tmv-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 220px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 50, 89, 0.14);
+    border-radius: 8px;
+    padding: 0.4rem;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0 10px 28px rgba(0, 50, 89, 0.16);
+    z-index: 2000;
+    display: none;
+}
+
+.tmv-dropdown.is-open .tmv-dropdown-menu {
+    display: block;
+}
+
+.tmv-dropdown-header {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--color-secondary);
+    padding: 0.35rem 0.65rem 0.2rem;
+    opacity: 0.75;
+}
+
+.tmv-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tmv-dropdown-item:hover,
+.tmv-dropdown-item.active {
+    background-color: var(--color-bg-soft);
+    color: var(--color-primary);
+}
+
+.tmv-item-bullet {
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.tmv-dropdown-divider {
+    height: 1px;
+    background-color: rgba(0, 50, 89, 0.08);
+    margin: 0.3rem 0;
+    list-style: none;
+}
+
+/* Responsividad móvil */
+.tmv-header-admin .tmv-nav-toggle {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .tmv-admin-desktop-nav {
+        display: none !important;
+    }
+
+    .tmv-admin-mobile-dropdown {
+        display: inline-block !important;
+    }
+
+    .tmv-header-admin .tmv-header-container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        min-height: 54px;
+        justify-content: space-between !important;
+    }
+
+    .tmv-header-admin .tmv-nav-wrapper {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+        gap: 0.5rem !important;
+    }
+
+    .tmv-header-admin .tmv-actions {
+        width: auto !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .tmv-header-admin .tmv-auth-btn {
+        flex: 0 0 auto !important;
+        margin-left: 0 !important;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .tmv-header-admin .tmv-admin-user-text {
+        display: none !important;
+    }
+
+    .tmv-header-admin .tmv-auth-btn {
+        width: 32px !important;
+        height: 32px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        flex: 0 0 32px !important;
+    }
+
+    .tmv-header-admin .tmv-dropdown-toggle {
+        padding: 0.3rem 0.5rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    .tmv-header-admin .tmv-brand-cube {
+        height: 28px !important;
+    }
+
+    .tmv-header-admin .tmv-brand-letters {
+        height: 16px !important;
+    }
+
+    .tmv-header-admin .tmv-admin-badge {
+        font-size: 0.6rem !important;
+        padding: 0.1rem 0.35rem !important;
+    }
+}

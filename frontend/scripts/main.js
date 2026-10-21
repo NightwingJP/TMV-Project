@@ -3,6 +3,7 @@
 // ==========================================================================
 
 import { initNavbar } from "./components/navbar.js";
+import { initNavbarAdmin } from "./components/navbarAdmin.js";
 import { initFooter } from "./components/footer.js";
 
 /**
@@ -46,14 +47,26 @@ async function loadComponent(containerId, componentFile, onLoadedCallback) {
 // Inicialización cuando el DOM esté listo
 if (typeof document !== "undefined") {
     document.addEventListener("DOMContentLoaded", () => {
-        // 1. Cargar e inicializar Header y Navbar
-        loadComponent("header-container", "header.html", () => {
-            initNavbar();
-        });
+        // Header y Navbar
+        const headerContainer = document.getElementById("header-container");
+        if (headerContainer) {
+            const headerFile = headerContainer.getAttribute("data-component") || "header.html";
+            loadComponent("header-container", headerFile, () => {
+                if (headerFile.includes("headerAdmin")) {
+                    initNavbarAdmin();
+                } else {
+                    initNavbar();
+                }
+            });
+        }
 
-        // 2. Cargar e inicializar Footer (para Fase 2 o si el contenedor está presente)
-        loadComponent("footer-container", "footer.html", () => {
-            initFooter();
-        });
+        // Footer
+        const footerContainer = document.getElementById("footer-container");
+        if (footerContainer) {
+            const footerFile = footerContainer.getAttribute("data-component") || "footer.html";
+            loadComponent("footer-container", footerFile, () => {
+                initFooter();
+            });
+        }
     });
 }
