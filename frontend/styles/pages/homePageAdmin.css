@@ -1,4 +1,253 @@
 /* ==========================================================================
+   TMV - Estilos del Panel de Administración (homePageAdmin.css)
+   ========================================================================== */
+
+.admin-container {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+/* Encabezado del Dashboard */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.page-header p {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+}
+
+/* Estilo común de tarjetas administrativas */
+.admin-product-card,
+.producto-catalogo {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 50, 89, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 50, 89, 0.06);
+}
+
+/* Tarjeta para Agregar Producto */
+.admin-product-card {
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.admin-product-card .card-header {
+    margin-bottom: 1.5rem;
+}
+
+.admin-product-card .card-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+}
+
+.admin-product-card .card-header p {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+}
+
+/* Formulario */
+#formAgregarProducto {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+/* Carga y vista previa de imagen */
+.imagen-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--color-bg-soft);
+    border: 2px dashed rgba(0, 50, 89, 0.25);
+    border-radius: 12px;
+}
+
+.imagen-producto img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* Botones compartidos */
+.btn-imagen,
+.btn-agregar-catalogo {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-imagen:hover,
+.btn-agregar-catalogo:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.btn-imagen {
+    display: inline-block;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.88rem;
+}
+
+.btn-agregar-catalogo {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+}
+
+.btn-agregar-catalogo:hover {
+    box-shadow: 0 4px 12px rgba(0, 50, 89, 0.18);
+}
+
+/* Campos del formulario */
+.campos-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.campo-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-producto label {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.campo-producto input,
+.campo-producto textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(0, 50, 89, 0.2);
+    border-radius: 8px;
+    outline: none;
+    font: inherit;
+    color: var(--color-primary);
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo-producto input:focus,
+.campo-producto textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(45, 122, 194, 0.15);
+}
+
+.campo-producto textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#mensajeProducto {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-secondary);
+}
+
+/* Catálogo de Productos Agregados */
+.catalogo-admin {
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.catalogo-admin h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+}
+
+.lista-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.producto-catalogo {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.producto-catalogo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 50, 89, 0.12);
+}
+
+.producto-catalogo img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background-color: var(--color-bg-soft);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.producto-catalogo h3 {
+    font-size: 1.2rem;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.producto-catalogo p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+}
+
+.precio-producto {
+    font-weight: 700;
+    color: var(--color-secondary) !important;
+    font-size: 1.15rem !important;
+    margin-top: auto;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .admin-container {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .admin-product-card {
+        padding: 1.25rem;
+    }
+
+    #formAgregarProducto {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .imagen-producto img {
+        height: 200px;
+    }
+}
+/* ==========================================================================
    ESTILOS ESPECÍFICOS - PÁGINA PANEL ADMIN (homePageAdmin.css)
    ========================================================================== */
 
