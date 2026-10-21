@@ -1,1 +1,116 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS - PÁGINA PANEL ADMIN (homePageAdmin.css)
+   ========================================================================== */
 
+/* ---------- Tarjeta de Formulario (Agregar Producto) ---------- */
+.admin-add-card {
+    padding: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 6px 12px rgba(0, 50, 89, 0.08);
+}
+
+.admin-add-card h2 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+}
+
+.form-field label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.4rem;
+}
+
+.form-field input,
+.form-field textarea {
+    padding: 0.75rem;
+    border: 1.5px solid var(--color-highlight);
+    border-radius: 0.375rem;
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    background-color: #ffffff;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(45, 122, 194, 0.2);
+}
+
+.w-100 {
+    min-width: 100%;
+}
+
+/* ---------- Cuadrícula de Productos Base ---------- */
+.admin-products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* ---------- Tarjetas de Productos ---------- */
+.product-card {
+    flex: 1 1 250px;
+    max-width: 300px;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 50, 89, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 14px rgba(0, 50, 89, 0.12);
+}
+
+.product-img-wrapper {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid var(--color-highlight);
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.product-desc {
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    flex-grow: 1; /* Permite que el botón siempre quede al fondo si las descripciones varían */
+    margin-bottom: 1rem;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+}

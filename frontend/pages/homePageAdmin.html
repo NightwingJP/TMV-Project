@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="¿Quiénes somos? - Conoce nuestra misión, visión, reseña histórica y trayectoria en TMV.">
-    <title>Pagina admin - TMV</title>
+    <meta name="description" content="Panel de Administración - Gestión de productos y catálogo en TMV.">
+    <title>Panel Admin - TMV</title>
 
     <!-- Google Fonts: Patrick Hand & Comic Neue -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,19 +20,146 @@
 </head>
 <body>
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- ==================== HEADER ADMIN ==================== -->
     <div id="header-container" data-component="headerAdmin.html"></div>
 
     <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
-    <main>  
- <!-- ==================== TARJETA PARA AGREGAR PRODUCTOS POR EL ADMIN ==================== -->
+    <main class="py-5">  
+        
+        <!-- ==================== TARJETA PARA AGREGAR PRODUCTOS POR EL ADMIN ==================== -->
+        
 
 
         
- <!-- ==================== TARJETAS DE LOS 10 PRODUCTOS BASE DE TMV ==================== -->
+        <!-- ==================== TARJETAS DE LOS PRODUCTOS BASE DE TMV ==================== -->
+        <section class="container mb-5">
+            <h2 class="text-center mb-4">Mis Productos</h2>
+            <div class="admin-products-grid row" id="contenedorProductos">
+                
+                <!-- Tarjeta 1 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/balde trapero.webp" alt="Balde Trapero">
+                    </div>
+                    <h3>Balde Trapero</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$32.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
 
+                <!-- Tarjeta 2 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/cepillo-ropa.jpg" alt="Cepillo Ropa">
+                    </div>
+                    <h3>Cepillo para Ropa</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$5.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
 
-        
+                <!-- Tarjeta 3 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/clorox.jpeg" alt="Clorox">
+                    </div>
+                    <h3>Clorox</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$2.800</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 4 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/detergentePolvo.png" alt="Detergente en polvo">
+                    </div>
+                    <h3>Detergente en Polvo</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$8.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 5 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/escoba.jpg" alt="Escoba">
+                    </div>
+                    <h3>Escoba</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$8.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 6 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/fabuloso.jpg" alt="Fabuloso">
+                    </div>
+                    <h3>Fabuloso</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$7.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 7 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/guantes-limpieza.jpg" alt="Guantes limpieza">
+                    </div>
+                    <h3>Guantes de Limpieza</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$5.800</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 8 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/jabon-barra.jpg" alt="Jabón en barra">
+                    </div>
+                    <h3>Jabón en Barra</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$2.000</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 9 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/lavaloza.webp" alt="Lavaloza">
+                    </div>
+                    <h3>Lavaloza</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$8.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 10 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/trapero.jpeg" alt="Trapero">
+                    </div>
+                    <h3>Trapero</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$8.500</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+                <!-- Tarjeta 11 -->
+                <article class="col product-card card-tmv-soft">
+                    <div class="product-img-wrapper">
+                        <img src="../assets/images/products/wipe.jpg" alt="Wipe (Toallas húmedas)">
+                    </div>
+                    <h3>Wipe (Toallas húmedas)</h3>
+                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <p class="product-price"><strong>$9.000</strong></p>
+                    <button class="btn-tmv w-100">Modificar</button>
+                </article>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- ==================== FOOTER ==================== -->
@@ -43,4 +170,3 @@
     <script type="module" src="../scripts/pages/homePageAdmin.js"></script>
 </body>
 </html>
-
