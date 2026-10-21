@@ -28,6 +28,427 @@
  <!-- ==================== TARJETA PARA AGREGAR PRODUCTOS POR EL ADMIN ==================== -->
 
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Administración | TMV</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f4f6f9;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1f2937;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+            color: #1e293b;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* TARJETA DE AGREGAR PRODUCTO */
+        .admin-product-card {
+            width: 100%;
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            box-shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+        }
+
+        .card-header {
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            margin: 0 0 8px;
+            font-size: 23px;
+            color: #1e293b;
+        }
+
+        .card-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FORMULARIO HORIZONTAL */
+        #formAgregarProducto {
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: 25px;
+            align-items: start;
+            width: 100%;
+            margin: 0;
+        }
+
+        /* IMAGEN */
+        .imagen-producto {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-width: 0;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+        }
+
+        .imagen-producto img {
+            display: block;
+            width: 100%;
+            height: 240px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .btn-imagen {
+            display: inline-block;
+            padding: 11px 16px;
+            border-radius: 8px;
+            background: #e8efff;
+            color: #2456c5;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-imagen:hover {
+            background: #d8e4ff;
+        }
+
+        /* CAMPOS */
+        .campos-datos {
+            display: flex;
+            flex-direction: column;
+            gap: 19px;
+            min-width: 0;
+        }
+
+        .campo-producto {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .campo-producto label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .campo-producto input,
+        .campo-producto textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            background: #ffffff;
+            color: #1e293b;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .campo-producto input:focus,
+        .campo-producto textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .campo-producto textarea {
+            min-height: 105px;
+            resize: vertical;
+        }
+
+        /* BOTÓN AZUL */
+        .btn-agregar-catalogo {
+            grid-column: 1 / -1;
+            display: block;
+            width: 100%;
+            min-height: 50px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-agregar-catalogo:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-agregar-catalogo:focus-visible,
+        .btn-imagen:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 3px;
+        }
+
+        #mensajeProducto {
+            grid-column: 1 / -1;
+            margin: 0;
+            font-size: 14px;
+            text-align: center;
+            color: #2563eb;
+        }
+
+        /* CATÁLOGO */
+        .catalogo-admin {
+            margin-top: 35px;
+        }
+
+        .catalogo-admin h2 {
+            margin-bottom: 20px;
+            font-size: 23px;
+            color: #1e293b;
+        }
+
+        .lista-productos {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+            gap: 20px;
+        }
+
+        .producto-catalogo {
+            min-width: 0;
+            padding: 16px;
+            overflow-wrap: anywhere;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+        }
+
+        .producto-catalogo img {
+            display: block;
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .producto-catalogo h3 {
+            margin: 14px 0 8px;
+            font-size: 17px;
+        }
+
+        .producto-catalogo p {
+            line-height: 1.5;
+        }
+
+        .precio-producto {
+            color: #2563eb;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* CELULARES Y TABLETAS */
+        @media (max-width: 700px) {
+            body {
+                padding: 16px;
+            }
+
+            .admin-product-card {
+                padding: 20px;
+            }
+
+            #formAgregarProducto {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 20px;
+            }
+
+            .imagen-producto,
+            .campos-datos {
+                grid-column: 1;
+            }
+
+            .imagen-producto img {
+                height: 200px;
+            }
+
+            .btn-agregar-catalogo,
+            #mensajeProducto {
+                grid-column: 1;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="admin-container">
+
+        <header class="page-header">
+            <h1>Panel de administración</h1>
+            <p>Administra los productos de tu catálogo.</p>
+        </header>
+
+        <section class="admin-product-card">
+
+            <div class="card-header">
+                <h2>Agregar nuevo producto</h2>
+                <p>
+                    Completa la información y selecciona una imagen
+                    para agregar un producto al catálogo.
+                </p>
+            </div>
+
+            <form id="formAgregarProducto">
+
+                <!-- IMAGEN A LA IZQUIERDA -->
+                <div class="imagen-producto">
+
+                    <img
+                        id="vistaPrevia"
+                        src="https://placehold.co/300x240?text=Producto"
+                        alt="Vista previa del producto"
+                    >
+
+                    <label
+                        for="imagenProducto"
+                        class="btn-imagen"
+                        tabindex="0"
+                    >
+                        Seleccionar imagen
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagenProducto"
+                        accept="image/*"
+                        hidden
+                        required
+                    >
+
+                </div>
+
+                <!-- CAMPOS A LA DERECHA -->
+                <div class="campos-datos">
+
+                    <div class="campo-producto">
+                        <label for="tituloProducto">
+                            Título del producto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="tituloProducto"
+                            placeholder="Ej. Camiseta básica"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo-producto">
+                        <label for="descripcionProducto">
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="descripcionProducto"
+                            placeholder="Describe las características del producto"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="campo-producto">
+                        <label for="precioProducto">
+                            Precio (COP)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="precioProducto"
+                            placeholder="Ej. 50000"
+                            min="0.01"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <!-- BOTÓN AZUL -->
+                <button
+                    type="submit"
+                    class="btn-agregar-catalogo"
+                >
+                    + Agregar al catálogo
+                </button>
+
+                <p id="mensajeProducto" role="status"></p>
+
+            </form>
+
+        </section>
+
+        <!-- PRODUCTOS AGREGADOS -->
+        <section class="catalogo-admin">
+            <h2>Productos del catálogo</h2>
+
+            <div
+                id="listaProductos"
+                class="lista-productos"
+            ></div>
+        </section>
+
+    </main>
+
+    <!-- Ajusta esta ruta al nombre real de tu archivo JavaScript -->
+    <script src="./homePageAdmin.js"></script>
+
+</body>
+</html>
+
+
+
+
         
  <!-- ==================== TARJETAS DE LOS 10 PRODUCTOS BASE DE TMV ==================== -->
 
