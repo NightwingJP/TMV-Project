@@ -328,7 +328,8 @@
 
 .product-img-wrapper {
     width: 100%;
-    height: 180px;
+    /* Cambio: Aumentamos la altura de 180px a 280px para que el contenedor de las imágenes sea vertical */
+    height: 280px;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -336,13 +337,16 @@
     background-color: #ffffff;
     border: 1px solid var(--color-highlight);
     border-radius: 0.375rem;
+    /* Cambio: Un padding interno para que la imagen no toque los bordes */
+    padding: 0.5rem;
     overflow: hidden;
 }
 
 .product-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* Cambio: Cambiamos 'cover' por 'contain' para que la imagen vertical se vea completa sin recortes */
+    object-fit: contain;
 }
 
 .product-card h3 {
