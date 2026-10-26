@@ -1,0 +1,128 @@
+/* ==========================================================================
+   TMV - Estilos del Área de Productos y Paginación (catalog.css)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. ÁREA Y CUADRÍCULA DE PRODUCTOS
+   ========================================================================== */
+.products-area {
+    width: 100%;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Estado de Carga */
+.products-loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 44px;
+    height: 44px;
+    border: 4px solid var(--color-bg-soft);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.status-message {
+    color: var(--color-primary);
+    opacity: 0.75;
+    font-size: 0.95rem;
+}
+
+/* Estado Vacío de Productos */
+.products-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+/* ==========================================================================
+   2. CONTROLES DE PAGINACIÓN LISTADO PRODUCTOS
+   ========================================================================== */
+.pagination-wrapper {
+    margin-top: 2.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1.5px solid rgba(0, 50, 89, 0.15);
+    background-color: #ffffff;
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(.disabled):not(.active) {
+    background-color: var(--color-bg-soft);
+    border-color: var(--color-highlight);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.pagination-btn.active {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 73, 126, 0.25);
+    cursor: default;
+}
+
+.pagination-btn.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background-color: #f7f9fa;
+    border-color: rgba(0, 50, 89, 0.1);
+}
