@@ -60,18 +60,30 @@
                 <div class="campos-datos">
                     <div class="campo-producto">
                         <label for="tituloProducto">Título del producto</label>
-                        <input type="text" id="tituloProducto" placeholder="Ej. Camiseta básica" required>
+                        <input type="text" id="tituloProducto" placeholder="Ej. Limpiador Multiusos Concentrado" required>
+                    </div>
+
+                    <div class="campo-producto">
+                        <label for="categoriaProducto">Categoría</label>
+                        <select id="categoriaProducto" required>
+                            <option value="Aseo y Limpieza">Aseo y Limpieza</option>
+                            <option value="Desinfectantes">Desinfectantes</option>
+                            <option value="Detergentes">Detergentes</option>
+                            <option value="Protección">Protección</option>
+                            <option value="Cocina">Cocina</option>
+                            <option value="General">General</option>
+                        </select>
                     </div>
 
                     <div class="campo-producto">
                         <label for="descripcionProducto">Descripción</label>
-                        <textarea id="descripcionProducto" placeholder="Describe las características del producto"
+                        <textarea id="descripcionProducto" placeholder="Describe las características y usos del producto"
                             required></textarea>
                     </div>
 
                     <div class="campo-producto">
                         <label for="precioProducto">Precio (COP)</label>
-                        <input type="number" id="precioProducto" placeholder="Ej. 50000" min="0.01" step="0.01"
+                        <input type="number" id="precioProducto" placeholder="Ej. 12500" min="50" step="50"
                             required>
                     </div>
                 </div>
@@ -86,12 +98,13 @@
 
         <!-- Catálogo de Productos Agregados -->
         <section id="mis-productos" class="catalogo-admin">
-            <h2>Productos del catálogo</h2>
+            <h2>Productos agregados por el Administrador</h2>
+            <p class="admin-section-subtitle">Los productos listados aquí se sincronizan automáticamente con la tienda pública (<a href="productos.html">Catálogo de Productos</a>). Al eliminarlos, se borrarán de ambas páginas.</p>
             <div id="listaProductos" class="lista-productos"></div>
         </section>
 
-    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
-    <main class="py-5">  
+        <!-- ==================== PRODUCTOS BASE DE TMV ==================== -->
+        <div class="py-4">
         
         
         <!-- ==================== TARJETAS DE LOS PRODUCTOS BASE DE TMV ==================== -->
@@ -222,7 +235,7 @@
 
             </div>
         </section>
-
+        </div>
     </main>
 
     <!-- Footer -->
@@ -230,7 +243,7 @@
 
     <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
-    <script type="module" src="../scripts/pages/home.js"></script>
+    <script type="module" src="../scripts/pages/homePageAdmin.js"></script>
 </body>
 
 </html>

@@ -20,6 +20,11 @@
    RESET Y ESTILOS BASE
    ========================================================================== */
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
