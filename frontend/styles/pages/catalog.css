@@ -6,9 +6,130 @@
    1. HERO - FILTRO DE PRODUCTOS POR INPUT & ORDENAMIENTO
    ========================================================================== */
 
+.search-icon {
+    display: block;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+}
+
+
 /* ==========================================================================
    2. BARRA LATERAL DE FILTRO POR CATEGORIAS CON BOTONES RADIO
    ========================================================================== */
+
+.catalog-sidebar {
+    width: 100%;
+    max-width: 270px;
+}
+
+.filters-card {
+    width: 100%;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #edf0f3;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 50, 89, 0.09);
+}
+
+.filters-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d9e1e8;
+}
+
+.filters-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #252b32;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.filter-icon {
+    display: block;
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    color: #1682c4;
+}
+
+.category-filters-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.category-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 28px;
+    color: #68727f;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.category-filter:hover {
+    color: var(--color-primary);
+}
+
+.category-filter input[type="radio"] {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #1682c4;
+    cursor: pointer;
+}
+
+.category-filter span {
+    flex: 1;
+}
+
+.btn-clear-filters {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 32px;
+    padding: 6px 12px;
+    color: #68727f;
+    background: #ffffff;
+    border: 1px solid #8994a0;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-clear-filters:hover {
+    background: #f7f9fb;
+    border-color: #1682c4;
+}
+
+.btn-clear-filters:focus-visible,
+.category-filter input[type="radio"]:focus-visible {
+    outline: 2px solid #1682c4;
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .catalog-sidebar {
+        max-width: 100%;
+    }
+}
 
 /* ==========================================================================
    3. ÁREA Y CUADRÍCULA DE PRODUCTOS
@@ -75,6 +196,7 @@
     text-align: center;
     padding: 3rem 1rem;
 }
+
 
 /* ==========================================================================
    2. CONTROLES DE PAGINACIÓN LISTADO PRODUCTOS

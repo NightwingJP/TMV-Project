@@ -86,37 +86,41 @@
 
             <!-- Layout: Sidebar + Products Grid FER (inicio) -->
             <div class="catalog-layout">
-                <!-- Sidebar: Categories Filter -->
-                <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
-                    <div class="filters-card">
-                        <div class="filters-header">
-                            <h3 class="filters-title">
-                                <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" aria-hidden="true">
-                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                                </svg>
-                                Categorías
-                            </h3>
-                        </div>
+    <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
+        <div class="filters-card">
+            <div class="filters-header">
+                <h3 class="filters-title">
+                    <svg class="filter-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#1682c4"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                    Categorías
+                </h3>
+            </div>
 
-                        <div id="category-filters" class="category-filters-container">
-                            <p class="status-message">Cargando categorías...</p>
-                        </div>
+            <div id="category-filters" class="category-filters-container">
+                <p class="status-message">Cargando categorías...</p>
+            </div>
 
-                        <button type="button" id="clear-filters" class="btn-clear-filters">
-                            <svg class="clear-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="15" y1="9" x2="9" y2="15"></line>
-                                <line x1="9" y1="9" x2="15" y2="15"></line>
-                            </svg>
-                            Limpiar filtros
-                        </button>
-                    </div>
-                </aside>
-                <!-- Layout: Sidebar + Products Grid FER (FIN) -->
+            <button type="button" id="clear-filters" class="btn-clear-filters">
+                <span aria-hidden="true">×</span>
+                Limpiar filtros
+            </button>
+        </div>
+    </aside>
+    <!-- Layout: Sidebar + Products Grid FER (Finaliza) -->
+
+    <!-- Aquí continúa la cuadrícula de productos -->
+</div>
+    <!-- Aquí continúa la cuadrícula de productos -->
+</div>
 
                 <!-- Products Area-->
                 <div class="products-area">
@@ -163,6 +167,7 @@
     <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
     <script type="module" src="../scripts/pages/catalog.js"></script>
+    <script type="module" src="../scripts/catalog/categoryFilters.js"></script>
 </body>
 
 </html>
