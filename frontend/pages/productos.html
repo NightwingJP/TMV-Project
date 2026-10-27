@@ -86,43 +86,39 @@
 
             <!-- Layout: Sidebar + Products Grid FER (inicio) -->
             <div class="catalog-layout">
-    <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
-        <div class="filters-card">
-            <div class="filters-header">
-                <h3 class="filters-title">
-                    <svg class="filter-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#1682c4"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                    </svg>
-                    Categorías
-                </h3>
-            </div>
+                <!-- Barra lateral de filtros (FER) -->
+                <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
+                    <div class="filters-card">
+                        <div class="filters-header">
+                            <h3 class="filters-title">
+                                <svg class="filter-icon"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                                Categorías
+                            </h3>
+                        </div>
 
-            <div id="category-filters" class="category-filters-container">
-                <p class="status-message">Cargando categorías...</p>
-            </div>
+                        <div id="category-filters" class="category-filters-container">
+                            <p class="status-message">Cargando categorías...</p>
+                        </div>
 
-            <button type="button" id="clear-filters" class="btn-clear-filters">
-                <span aria-hidden="true">×</span>
-                Limpiar filtros
-            </button>
-        </div>
-    </aside>
-    <!-- Layout: Sidebar + Products Grid FER (Finaliza) -->
+                        <button type="button" id="clear-filters" class="btn-clear-filters">
+                            <span aria-hidden="true">×</span>
+                            Limpiar filtros
+                        </button>
+                    </div>
+                </aside>
+                <!-- Layout: Sidebar FER (Finaliza) -->
 
-    <!-- Aquí continúa la cuadrícula de productos -->
-</div>
-    <!-- Aquí continúa la cuadrícula de productos -->
-</div>
-
-                <!-- Products Area-->
+                <!-- Products Area JULIAN -->
                 <div class="products-area">
                     <!-- Products Grid -->
                     <div id="products-grid" class="products-grid" aria-live="polite">
