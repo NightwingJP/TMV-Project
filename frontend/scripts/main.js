@@ -17,7 +17,7 @@ async function loadComponent(containerId, componentFile, onLoadedCallback) {
     if (!container) return;
 
     const pathname = window.location.pathname;
-    const isInsidePages = pathname.includes("/pages/") || pathname.split("/").slice(-2)[0] === "pages";
+    const isInsidePages = /\/pages(\/|$)/i.test(pathname);
     const componentPath = isInsidePages
         ? `../components/${componentFile}`
         : `components/${componentFile}`;
