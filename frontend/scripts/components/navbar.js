@@ -16,7 +16,7 @@ export function initNavbar() {
 
     // Determinar si estamos dentro del subdirectorio /pages/ o en la raíz
     const pathname = window.location.pathname;
-    const isInsidePages = pathname.includes("/pages/") || pathname.split("/").slice(-2)[0] === "pages";
+    const isInsidePages = /\/pages(\/|$)/i.test(pathname);
 
     const pathToRoot = isInsidePages ? "../" : "./";
     const pathToPages = isInsidePages ? "./" : "pages/";
@@ -34,20 +34,31 @@ export function initNavbar() {
         logoLetters.setAttribute("src", `${pathToRoot}assets/images/logos/logo-tmv.png`);
     }
 
-    navLinks.forEach((link) => {
-        const targetPath = link.getAttribute("data-path");
+    // Actualizar todos los elementos con atributo data-path
+    const elementsWithPath = document.querySelectorAll("[data-path]");
+    elementsWithPath.forEach((element) => {
+        const targetPath = element.getAttribute("data-path");
         if (!targetPath) return;
 
         if (targetPath === "index.html") {
-            link.setAttribute("href", `${pathToRoot}index.html`);
+            element.setAttribute("href", `${pathToRoot}index.html`);
         } else {
-            link.setAttribute("href", `${pathToPages}${targetPath}`);
+            element.setAttribute("href", `${pathToPages}${targetPath}`);
         }
     });
 
+    // Enlace del botón de login / panel administrativo
     const authBtn = document.getElementById("tmvAuthBtn");
     if (authBtn) {
-        authBtn.setAttribute("href", `${pathToPages}homePageAdmin.html`);
+        const targetHref = `${pathToPages}homePageAdmin.html`;
+        authBtn.setAttribute("href", targetHref);
+
+        // Prevenir redirección errónea o duplicada en entornos como GitHub Pages
+        authBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const inPages = /\/pages(\/|$)/i.test(window.location.pathname);
+            window.location.href = inPages ? "homePageAdmin.html" : "pages/homePageAdmin.html";
+        });
     }
 
     // 2. Detección y activación del enlace actual (estado active)

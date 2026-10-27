@@ -19,7 +19,7 @@ export function initNavbarAdmin() {
 
     // Resolver rutas relativas según el nivel de directorio
     const pathname = window.location.pathname;
-    const isInsidePages = pathname.includes("/pages/") || pathname.split("/").slice(-2)[0] === "pages";
+    const isInsidePages = /\/pages(\/|$)/i.test(pathname);
     const pathToRoot = isInsidePages ? "../" : "./";
     const pathToHomeAdmin = isInsidePages ? "homePageAdmin.html" : "pages/homePageAdmin.html";
 
