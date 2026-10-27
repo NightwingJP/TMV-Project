@@ -63,20 +63,19 @@ export function createProductCard(product, options = {}) {
     priceStrong.textContent = formatPrice(product.price);
     price.appendChild(priceStrong);
 
-    // 5. Botón de Acción ("Ver detalle")
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "btn-tmv btn-card-action w-100";
-    button.setAttribute("data-action", "details");
-    button.setAttribute("data-id", String(product.id));
-    button.textContent = "Ver detalle";
+    // 5. Botón de Acción ("Ver detalle" público estándar para todos los productos)
+    const detailBtn = document.createElement("button");
+    detailBtn.type = "button";
+    detailBtn.className = "btn-tmv btn-card-action w-100";
+    detailBtn.setAttribute("data-action", "details");
+    detailBtn.setAttribute("data-id", String(product.id));
+    detailBtn.textContent = "Ver detalle";
 
-    button.addEventListener("click", (event) => {
+    detailBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         if (typeof options.onDetailsClick === "function") {
             options.onDetailsClick(product);
         } else {
-            // Evento personalizado emitido para que cualquier módulo pueda escucharlo
             const detailEvent = new CustomEvent("product:view-detail", {
                 bubbles: true,
                 detail: { product }
@@ -86,7 +85,7 @@ export function createProductCard(product, options = {}) {
     });
 
     // Ensamblar la tarjeta
-    article.append(imgWrapper, title, desc, price, button);
+    article.append(imgWrapper, title, desc, price, detailBtn);
 
     return article;
 }

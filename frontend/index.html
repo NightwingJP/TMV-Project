@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="TMV - Plataforma comercial oficial. Descubre nuestros servicios, catálogo de productos y opciones para aliados comerciales.">
+        content="TMV - Soluciones comerciales y distribución de productos de aseo, limpieza y desinfección para minimercados y negocios.">
     <title>TMV - Página Principal</title>
 
     <!-- Google Fonts: Patrick Hand & Comic Neue -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap"
+        rel="stylesheet">
 
     <!-- Estilos Personalizados -->
     <link rel="stylesheet" href="styles/main.css">
@@ -25,17 +27,96 @@
     <div id="header-container"></div>
 
     <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
-    <main class="main-content py-5">
-        <div class="container text-center">
-            <section class="hero-section">
-                <h1>Bienvenido a TMV</h1>
-                <p>Soluciones integrales y productos de alta calidad para tu negocio.</p>
-                <div>
+    <main class="main-content">
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero-section py-5 text-center">
+            <div class="container">
+                <h1>Soluciones Integrales en Aseo y Limpieza</h1>
+                <p class="hero-subtitle">
+                    Abastece tu minimercado o negocio con los mejores productos de aseo, detergentes y desinfectantes con la mejor calidad y precios competitivos.
+                </p>
+                <div class="hero-actions">
                     <a href="pages/productos.html" class="btn-tmv">Ver Catálogo</a>
                     <a href="pages/aliados.html" class="btn-tmv">Ser Aliado</a>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <!-- ==================== BENEFICIOS / PROPUESTA DE VALOR ==================== -->
+        <section class="features-section py-5">
+            <div class="container">
+                <h2 class="text-center">¿Por qué elegir TMV?</h2>
+                <div class="row features-grid">
+                    <article class="col feature-card">
+                        <h3>Precios Mayoristas</h3>
+                        <p>Tarifas accesibles y márgenes comerciales favorables pensados especialmente para minimercados y comercios locales.</p>
+                    </article>
+
+                    <article class="col feature-card">
+                        <h3>Calidad Garantizada</h3>
+                        <p>Selección rigurosa de productos con alta efectividad en higiene, desinfección y cuidado de superficies.</p>
+                    </article>
+
+                    <article class="col feature-card">
+                        <h3>Entregas Confiables</h3>
+                        <p>Procesos de distribución ágiles para asegurar que tu negocio siempre cuente con stock suficiente.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CATEGORÍAS DESTACADAS ==================== -->
+        <section class="categories-preview-section py-5">
+            <div class="container">
+                <h2 class="text-center">Líneas de Productos Destacadas</h2>
+                <div class="row categories-grid">
+                    <article class="col category-card">
+                        <h3>Aseo y Desinfección</h3>
+                        <p>Clorox, Fabuloso, multiusos y desinfectantes para espacios limpios y seguros.</p>
+                    </article>
+
+                    <article class="col category-card">
+                        <h3>Cuidado y Lavado de Ropa</h3>
+                        <p>Detergentes en polvo y jabones en barra de alto rendimiento para el lavado diario.</p>
+                    </article>
+
+                    <article class="col category-card">
+                        <h3>Utensilios y Accesorios</h3>
+                        <p>Escobas, traperos, baldes, cepillos y toallas húmedas resistentes y duraderos.</p>
+                    </article>
+                </div>
+                <div class="text-center">
+                    <a href="pages/productos.html" class="btn-tmv">Explorar Todo el Catálogo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RESUMEN INSTITUCIONAL ==================== -->
+        <section class="about-summary-section py-5">
+            <div class="container text-center">
+                <h2>Impulsando el Comercio Local</h2>
+                <p>
+                    En TMV facilitamos la compra de suministros esenciales en un solo lugar, brindando una experiencia sencilla, segura y confiable para comerciantes y clientes.
+                </p>
+                <div>
+                    <a href="pages/quienes-somos.html" class="btn-tmv">Conoce Más Sobre Nosotros</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LLAMADO A LA ACCIÓN (ALIADOS) ==================== -->
+        <section class="cta-section py-5">
+            <div class="container text-center">
+                <h2>¿Tienes un minimercado o negocio?</h2>
+                <p>Únete a nuestra red de aliados y optimiza el abastecimiento de tus productos.</p>
+                <div class="cta-actions">
+                    <a href="pages/aliados.html" class="btn-tmv">Únete como Aliado</a>
+                    <a href="pages/contactanos.html" class="btn-tmv">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- ==================== FOOTER (Reutilizable) ==================== -->
@@ -43,6 +124,7 @@
 
     <!-- Scripts de la Aplicación -->
     <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/pages/home.js"></script>
 </body>
 
 </html>

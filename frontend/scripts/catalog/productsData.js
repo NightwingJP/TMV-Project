@@ -96,35 +96,110 @@ export const BASE_PRODUCTS = [
     }
 ];
 
+export const STORAGE_KEY = "productosCatalogo";
+
 /**
- * Obtiene la lista unificada de productos (base + productos creados en el admin vía localStorage).
- * @returns {Array} Lista completa de productos
+ * Obtiene exclusivamente los productos personalizados creados en el admin vía localStorage.
+ * @returns {Array} Lista de productos personalizados
  */
-export function getProducts() {
+export function getCustomProducts() {
     try {
-        const stored = localStorage.getItem("productosCatalogo");
-        if (!stored) return [...BASE_PRODUCTS];
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return [];
 
         const parsed = JSON.parse(stored);
         if (!Array.isArray(parsed) || parsed.length === 0) {
-            return [...BASE_PRODUCTS];
+            return [];
         }
 
-        // Normalizar los productos guardados en el admin si tienen campos en español (titulo/descripcion)
-        const customProducts = parsed.map((item, index) => ({
+        // Normalizar los productos guardados en el admin con campos consistentes
+        return parsed.map((item, index) => ({
             id: item.id || `custom-${index}`,
             title: item.title || item.titulo || "Producto TMV",
             description: item.description || item.descripcion || "Sin descripción disponible.",
             price: Number(item.price || item.precio) || 0,
             image: item.image || item.imagen || "https://placehold.co/300x240?text=Producto",
-            category: item.category || "General"
+            category: item.category || item.categoria || "General",
+            isCustom: true
         }));
-
-        return [...BASE_PRODUCTS, ...customProducts];
     } catch (e) {
         console.warn("[TMV Catalog] No se pudieron cargar productos de localStorage:", e);
-        return [...BASE_PRODUCTS];
+        return [];
     }
+}
+
+/**
+ * Obtiene la lista unificada de productos (base + productos creados en el admin vía localStorage).
+ * Los productos hardcodeados BASE_PRODUCTS siempre se mantienen.
+ * @returns {Array} Lista completa de productos
+ */
+export function getProducts() {
+    const baseWithFlag = BASE_PRODUCTS.map((p) => ({ ...p, isCustom: false }));
+    const custom = getCustomProducts();
+    return [...baseWithFlag, ...custom];
+}
+
+/**
+ * Guarda un nuevo producto personalizado en localStorage.
+ * @param {Object} productData
+ * @returns {Object} Producto guardado con ID asignado
+ */
+export function saveProduct(productData) {
+    const custom = getCustomProducts();
+    const newProduct = {
+        id: productData.id || Date.now(),
+        title: productData.title || productData.titulo || "Nuevo Producto",
+        description: productData.description || productData.descripcion || "Sin descripción.",
+        price: Number(productData.price || productData.precio) || 0,
+        image: productData.image || productData.imagen || "https://placehold.co/300x240?text=Producto",
+        category: productData.category || productData.categoria || "General",
+        isCustom: true
+    };
+
+    custom.push(newProduct);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(custom));
+    notifyProductsUpdated();
+    return newProduct;
+}
+
+/**
+ * Elimina un producto de localStorage por su ID.
+ * Solo elimina productos personalizados; los productos base hardcodeados nunca se modifican.
+ * @param {string|number} productId
+ * @returns {boolean} true si se eliminó, false si no se encontró o es base
+ */
+export function deleteProduct(productId) {
+    const custom = getCustomProducts();
+    const filtered = custom.filter((item) => String(item.id) !== String(productId));
+
+    if (filtered.length !== custom.length) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+        notifyProductsUpdated();
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Emite eventos para sincronizar los componentes y páginas en tiempo real.
+ */
+export function notifyProductsUpdated() {
+    const allProducts = getProducts();
+    const event = new CustomEvent("catalog:products-updated", {
+        bubbles: true,
+        detail: { products: allProducts }
+    });
+    document.dispatchEvent(event);
+    window.dispatchEvent(event);
+}
+
+// Escuchar cambios en localStorage desde otras pestañas o ventanas del navegador
+if (typeof window !== "undefined") {
+    window.addEventListener("storage", (e) => {
+        if (e.key === STORAGE_KEY) {
+            notifyProductsUpdated();
+        }
+    });
 }
 
 /**

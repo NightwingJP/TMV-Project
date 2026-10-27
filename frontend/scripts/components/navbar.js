@@ -45,6 +45,11 @@ export function initNavbar() {
         }
     });
 
+    const authBtn = document.getElementById("tmvAuthBtn");
+    if (authBtn) {
+        authBtn.setAttribute("href", `${pathToPages}homePageAdmin.html`);
+    }
+
     // 2. Detección y activación del enlace actual (estado active)
     let currentFile = pathname.substring(pathname.lastIndexOf("/") + 1);
     if (!currentFile || currentFile === "") {

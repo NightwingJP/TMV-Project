@@ -2,13 +2,13 @@
 // TMV - Módulo de Paginación del Catálogo (pagination.js)
 // ==========================================================================
 
-export const DEFAULT_ITEMS_PER_PAGE = 9;
+export const DEFAULT_ITEMS_PER_PAGE = 6;
 
 /**
  * Segmenta un arreglo de items según la página y cantidad por página.
  * @param {Array} items - Arreglo total de productos
  * @param {number} currentPage - Página actual (1-indexed)
- * @param {number} [itemsPerPage=9] - Cantidad de tarjetas por página
+ * @param {number} [itemsPerPage=6] - Cantidad de tarjetas por página
  * @returns {Object} { paginatedItems, totalPages, totalItems, currentPage, startIndex, endIndex }
  */
 export function paginateItems(items, currentPage = 1, itemsPerPage = DEFAULT_ITEMS_PER_PAGE) {
