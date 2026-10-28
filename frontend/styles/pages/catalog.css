@@ -3,9 +3,146 @@
    ========================================================================== */
 
 /* ==========================================================================
-   1. HERO - FILTRO DE PRODUCTOS POR INPUT & ORDENAMIENTO
+   1. HERO - SECCIÓN DE BIENVENIDA (ANGELA)
    ========================================================================== */
+.catalog-hero {
+    background-color: var(--color-bg-light);
+    border-radius: 0.5rem;
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
 
+.catalog-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 50, 89, 0.1);
+}
+
+.catalog-hero-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-text {
+    color: var(--color-accent);
+    border-bottom: 3px solid var(--color-highlight);
+}
+
+.catalog-hero-description {
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    font-size: 1.15rem;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   1.2 ENCABEZADO DEL CATÁLOGO Y BARRA DE HERRAMIENTAS (ANGELA)
+   ========================================================================== */
+.catalog-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.catalog-heading {
+    flex: 1;
+    min-width: 250px;
+}
+
+.catalog-eyebrow {
+    display: block;
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.catalog-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 2.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.catalog-count {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.catalog-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem; /* Mantiene la separación visual de ~5-8mm entre input y select */
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 350px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+}
+
+.sort-box {
+    flex: 0 1 auto;
+    min-width: 180px;
+}
+
+.search-input,
+.sort-select {
+    width: 100%;
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    background-color: #ffffff;
+    border: 1.5px solid var(--color-highlight);
+    border-radius: 50px;
+    padding: 0.75rem 1.2rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.search-input {
+    padding-left: 2.8rem; /* Espacio exacto para que el texto no pise el ícono SVG */
+}
+
+.search-input:focus,
+.sort-select:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(45, 122, 194, 0.2);
+}
 /* ==========================================================================
    2. ESTRUCTURA Y LAYOUT (Filtros a la izquierda, Catálogo a la derecha)
    ========================================================================== */
