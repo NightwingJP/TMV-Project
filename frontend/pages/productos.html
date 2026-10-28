@@ -36,7 +36,7 @@
                 <div class="catalog-hero-content">
                     <span class="hero-badge">Tu Mayorista Virtual</span>
                     <h1 class="catalog-hero-title">
-                        Descubre nuestro <span class="highlight-text">catálogo de productos</span>
+                        <span class="color-primary-text">Catálogo de productos</span>
                     </h1>
                     <p class="catalog-hero-description">
                         Explora los mejores suministros de aseo y limpieza para tu hogar o negocio con calidad
@@ -47,7 +47,7 @@
         </section>
 
         <section class="catalog-section container">
-            
+
             <!-- Catalog Header & Toolbar (Buscador y Ordenamiento) ANGELA -->
             <div class="catalog-header">
                 <div class="catalog-heading">
@@ -80,70 +80,70 @@
             </div>
             <!-- Toolbar ANGELA (FIN) -->
 
-        <!-- Layout: Sidebar + Products Grid FER (inicio) -->
-        <div class="catalog-layout">
-            <!-- Barra lateral de filtros (FER) -->
-            <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
-                <div class="filters-card">
-                    <div class="filters-header">
-                        <h3 class="filters-title">
-                            <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                            </svg>
-                            Categorías
-                        </h3>
-                    </div>
-
-                    <div id="category-filters" class="category-filters-container">
-                        <p class="status-message">Cargando categorías...</p>
-                    </div>
-
-                    <button type="button" id="clear-filters" class="btn-clear-filters">
-                        <span aria-hidden="true">×</span>
-                        Limpiar filtros
-                    </button>
-                </div>
-            </aside>
-            <!-- Layout: Sidebar FER (Finaliza) -->
-
-            <!-- Products Area JULIAN -->
-            <div class="products-area">
-                <!-- Products Grid -->
-                <div id="products-grid" class="products-grid" aria-live="polite">
-                    <div class="products-loading">
-                        <div class="loading-spinner" role="status">
-                            <span class="visually-hidden">Cargando...</span>
+            <!-- Layout: Sidebar + Products Grid FER (inicio) -->
+            <div class="catalog-layout">
+                <!-- Barra lateral de filtros (FER) -->
+                <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
+                    <div class="filters-card">
+                        <div class="filters-header">
+                            <h3 class="filters-title">
+                                <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                                Categorías
+                            </h3>
                         </div>
-                        <p class="status-message">Estamos preparando los productos...</p>
+
+                        <div id="category-filters" class="category-filters-container">
+                            <p class="status-message">Cargando categorías...</p>
+                        </div>
+
+                        <button type="button" id="clear-filters" class="btn-clear-filters">
+                            <span aria-hidden="true">×</span>
+                            Limpiar filtros
+                        </button>
+                    </div>
+                </aside>
+                <!-- Layout: Sidebar FER (Finaliza) -->
+
+                <!-- Products Area JULIAN -->
+                <div class="products-area">
+                    <!-- Products Grid -->
+                    <div id="products-grid" class="products-grid" aria-live="polite">
+                        <div class="products-loading">
+                            <div class="loading-spinner" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="status-message">Estamos preparando los productos...</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav id="pagination" class="pagination-wrapper" aria-label="Páginas del catálogo"></nav>
+                </div>
+            </div>
+
+            <!-- Favorites Section JUAN (inicio) -->
+            <section class="favorites-section" aria-labelledby="favorites-title">
+                <div class="favorites-header">
+                    <div>
+                        <span class="catalog-eyebrow">TU SELECCIÓN PERSONAL</span>
+                        <h2 id="favorites-title" class="favorites-title">
+                            Mis favoritos <span class="favorite-heart">♥</span>
+                        </h2>
+                        <p id="favorites-count" class="favorites-count">0 productos guardados</p>
                     </div>
                 </div>
 
-                <!-- Pagination -->
-                <nav id="pagination" class="pagination-wrapper" aria-label="Páginas del catálogo"></nav>
-            </div>
-        </div>
-
-        <!-- Favorites Section JUAN (inicio) -->
-        <section class="favorites-section" aria-labelledby="favorites-title">
-            <div class="favorites-header">
-                <div>
-                    <span class="catalog-eyebrow">TU SELECCIÓN PERSONAL</span>
-                    <h2 id="favorites-title" class="favorites-title">
-                        Mis favoritos <span class="favorite-heart">♥</span>
-                    </h2>
-                    <p id="favorites-count" class="favorites-count">0 productos guardados</p>
+                <div id="favorites-grid" class="favorites-grid" aria-live="polite">
+                    <div class="favorites-empty">
+                        <p class="status-message">Todavía no has agregado favoritos.</p>
+                    </div>
                 </div>
-            </div>
-
-            <div id="favorites-grid" class="favorites-grid" aria-live="polite">
-                <div class="favorites-empty">
-                    <p class="status-message">Todavía no has agregado favoritos.</p>
-                </div>
-            </div>
-        </section>
-        <!-- Favorites Section JUAN (FIN) -->
+            </section>
+            <!-- Favorites Section JUAN (FIN) -->
         </section>
     </main>
 
