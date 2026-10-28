@@ -39,8 +39,7 @@
 }
 
 .highlight-text {
-    color: var(--color-accent);
-    border-bottom: 3px solid var(--color-highlight);
+    color: var(--color-primary);
 }
 
 .catalog-hero-description {
