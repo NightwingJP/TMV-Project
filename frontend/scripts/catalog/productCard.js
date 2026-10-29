@@ -1,30 +1,10 @@
-// ==========================================================================
-// TMV - Generador Modular de Tarjetas de Producto (productCard.js)
-// ==========================================================================
-
 import { formatPrice } from "./productsData.js";
 import {
     addToCart,
     getProductQuantity
 } from "../pages/carrito.js";
 
-/**
- * Crea e inyecta dinámicamente un elemento DOM de tarjeta de producto.
- * Estructura equivalente a frontend/components/productCard.html.
- *
- * Incluye:
- * - Botón "Agregar al carrito" (+1 unidad en localStorage por cada clic).
- * - Texto interactivo "Ver detalle" debajo del botón (solo visual con animación hover).
- *
- * @param {Object} product - Datos del producto
- * @param {number|string} product.id - ID único del producto
- * @param {string} product.title - Nombre comercial del producto
- * @param {string} product.description - Descripción detallada
- * @param {number} product.price - Precio en número
- * @param {string} product.image - Ruta o URL de la imagen
- * @param {string} [product.category] - Categoría opcional
- * @returns {HTMLElement} Elemento <article> listo para insertar en el DOM
- */
+// Crea la tarjeta de producto para el catálogo
 export function createProductCard(product) {
     const article = document.createElement("article");
     article.className = "product-card card-tmv-soft";
@@ -34,7 +14,7 @@ export function createProductCard(product) {
         article.setAttribute("data-category", product.category);
     }
 
-    // 1. Contenedor de Imagen
+    // Imagen del producto
     const imgWrapper = document.createElement("div");
     imgWrapper.className = "product-img-wrapper";
 
@@ -44,7 +24,6 @@ export function createProductCard(product) {
     img.alt = product.title || "Producto TMV";
     img.loading = "lazy";
 
-    // Respaldo por si la imagen local no carga o falla la ruta
     img.onerror = function () {
         this.onerror = null;
         this.src = "https://placehold.co/300x240?text=TMV+Producto";
@@ -52,31 +31,32 @@ export function createProductCard(product) {
 
     imgWrapper.appendChild(img);
 
-    // 2. Título
+    // Información del producto
     const title = document.createElement("h3");
     title.className = "product-card-title";
     title.textContent = product.title || "Producto sin nombre";
 
-    // 3. Descripción
     const desc = document.createElement("p");
     desc.className = "product-card-desc";
     desc.textContent = product.description || "Sin descripción disponible.";
 
-    // 4. Precio
     const price = document.createElement("p");
     price.className = "product-card-price";
     const priceStrong = document.createElement("strong");
     priceStrong.textContent = formatPrice(product.price);
     price.appendChild(priceStrong);
 
-    // 5. Botón "Agregar al carrito" (incrementa +1 cada vez que se hace clic)
+    // Fila con botón de agregar al carrito y botón de favoritos
+    const actionsRow = document.createElement("div");
+    actionsRow.className = "product-card-actions";
+
     const addBtn = document.createElement("button");
     addBtn.type = "button";
-    addBtn.className = "btn-tmv btn-card-action btn-add-cart w-100";
+    addBtn.className = "btn-tmv btn-card-action btn-add-cart";
     addBtn.setAttribute("data-action", "add-to-cart");
     addBtn.setAttribute("data-id", String(product.id));
 
-    // Función interna para sincronizar el estado visual del botón según la cantidad en localStorage
+    // Muestra en el botón cuántas unidades de este producto hay en el carrito
     function syncCardCartState() {
         const currentQty = getProductQuantity(product.id);
 
@@ -89,32 +69,50 @@ export function createProductCard(product) {
         }
     }
 
-    // Evento para agregar (+1) al carrito en localStorage
     addBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         addToCart(product);
         syncCardCartState();
     });
 
-    // Mantener la tarjeta sincronizada si el carrito se actualiza desde otro lugar
     document.addEventListener("cart:updated", () => {
         if (article.isConnected) {
             syncCardCartState();
         }
     });
 
-    // Inicializar estado según lo que ya exista en localStorage
     syncCardCartState();
 
-    // 6. Texto "Ver detalle" debajo del botón (solo visual con animación hover, sin lógica por ahora)
+    // Icono de corazón para favoritos (solo cambio visual)
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = "btn-favorite-heart";
+    favBtn.setAttribute("data-action", "favorite");
+    favBtn.setAttribute("data-id", String(product.id));
+    favBtn.setAttribute("aria-label", `Marcar ${product.title} como favorito`);
+    favBtn.setAttribute("aria-pressed", "false");
+    favBtn.innerHTML = `
+        <svg class="heart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+    `;
+
+    favBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isFavorite = favBtn.classList.toggle("is-favorite");
+        favBtn.setAttribute("aria-pressed", isFavorite ? "true" : "false");
+    });
+
+    actionsRow.append(addBtn, favBtn);
+
+    // Texto "Ver detalle" debajo de los botones
     const detailText = document.createElement("span");
     detailText.className = "product-card-detail-link";
     detailText.setAttribute("role", "button");
     detailText.setAttribute("tabindex", "0");
     detailText.textContent = "Ver detalle";
 
-    // Ensamblar la tarjeta
-    article.append(imgWrapper, title, desc, price, addBtn, detailText);
+    article.append(imgWrapper, title, desc, price, actionsRow, detailText);
 
     return article;
 }
