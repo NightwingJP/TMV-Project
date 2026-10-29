@@ -339,3 +339,19 @@
     }
 }
 
+
+.tmv-cart-badge.badge-pop {
+    animation: tmvCartBadgePop 0.25s ease;
+}
+
+@keyframes tmvCartBadgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.28);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

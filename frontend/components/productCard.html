@@ -10,8 +10,15 @@
         <h3 class="product-card-title"></h3>
         <p class="product-card-desc"></p>
         <p class="product-card-price"><strong></strong></p>
-        <button type="button" class="btn-tmv btn-card-action w-100" data-action="details">
-            Ver detalle
+
+        <!-- Botón Agregar al Carrito -->
+        <button type="button" class="btn-tmv btn-card-action btn-add-cart w-100" data-action="add-to-cart">
+            Agregar al carrito
         </button>
+
+        <!-- Texto interactivo "Ver detalle" (solo visual con animación hover) -->
+        <span class="product-card-detail-link" role="button" tabindex="0">
+            Ver detalle
+        </span>
     </article>
 </template>

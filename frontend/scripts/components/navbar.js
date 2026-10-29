@@ -2,9 +2,29 @@
 // TMV - Lógica del Componente Header & Navbar (navbar.js)
 // ==========================================================================
 
+import { getTotalCartCount } from "../pages/carrito.js";
+
+/**
+ * Actualiza el contador visual del carrito (#tmvCartBadge) en el navbar
+ * leyendo el total de unidades almacenadas en localStorage.
+ */
+export function updateNavbarCartBadge() {
+    const cartBadge = document.getElementById("tmvCartBadge");
+    if (!cartBadge) return;
+
+    const totalCount = getTotalCartCount();
+    cartBadge.textContent = String(totalCount);
+
+    // Pequeña animación visual cuando cambia el número
+    cartBadge.classList.remove("badge-pop");
+    void cartBadge.offsetWidth; // Reflow para reiniciar animación
+    cartBadge.classList.add("badge-pop");
+}
+
 /**
  * Inicializa la funcionalidad interactiva del Header y Navbar
- * ajustando rutas relativas, resaltando la página activa y habilitando el menú móvil.
+ * ajustando rutas relativas, resaltando la página activa, sincronizando el carrito
+ * y habilitando el menú móvil.
  */
 export function initNavbar() {
     const navToggle = document.getElementById("tmvNavToggle");
@@ -61,7 +81,18 @@ export function initNavbar() {
         });
     }
 
-    // 2. Detección y activación del enlace actual (estado active)
+    // 2. Sincronizar el contador del carrito en el navbar en cualquier página pública
+    updateNavbarCartBadge();
+
+    // Escuchar actualizaciones del carrito en tiempo real
+    if (!window.__tmvCartNavbarListenerBound) {
+        document.addEventListener("cart:updated", () => {
+            updateNavbarCartBadge();
+        });
+        window.__tmvCartNavbarListenerBound = true;
+    }
+
+    // 3. Detección y activación del enlace actual (estado active)
     let currentFile = pathname.substring(pathname.lastIndexOf("/") + 1);
     if (!currentFile || currentFile === "") {
         currentFile = "index.html";
@@ -78,7 +109,7 @@ export function initNavbar() {
         }
     });
 
-    // 3. Menú responsivo (Toggle para móviles)
+    // 4. Menú responsivo (Toggle para móviles)
     if (navToggle && navWrapper) {
         navToggle.addEventListener("click", () => {
             const isOpen = navWrapper.classList.toggle("is-open");

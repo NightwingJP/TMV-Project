@@ -3,10 +3,18 @@
 // ==========================================================================
 
 import { formatPrice } from "./productsData.js";
+import {
+    addToCart,
+    getProductQuantity
+} from "../pages/carrito.js";
 
 /**
  * Crea e inyecta dinámicamente un elemento DOM de tarjeta de producto.
  * Estructura equivalente a frontend/components/productCard.html.
+ *
+ * Incluye:
+ * - Botón "Agregar al carrito" (+1 unidad en localStorage por cada clic).
+ * - Texto interactivo "Ver detalle" debajo del botón (solo visual con animación hover).
  *
  * @param {Object} product - Datos del producto
  * @param {number|string} product.id - ID único del producto
@@ -15,11 +23,9 @@ import { formatPrice } from "./productsData.js";
  * @param {number} product.price - Precio en número
  * @param {string} product.image - Ruta o URL de la imagen
  * @param {string} [product.category] - Categoría opcional
- * @param {Object} [options] - Opciones de configuración del botón o callbacks
- * @param {Function} [options.onDetailsClick] - Callback al hacer clic en "Ver detalle"
  * @returns {HTMLElement} Elemento <article> listo para insertar en el DOM
  */
-export function createProductCard(product, options = {}) {
+export function createProductCard(product) {
     const article = document.createElement("article");
     article.className = "product-card card-tmv-soft";
     article.setAttribute("data-product-id", String(product.id));
@@ -63,29 +69,52 @@ export function createProductCard(product, options = {}) {
     priceStrong.textContent = formatPrice(product.price);
     price.appendChild(priceStrong);
 
-    // 5. Botón de Acción ("Ver detalle" público estándar para todos los productos)
-    const detailBtn = document.createElement("button");
-    detailBtn.type = "button";
-    detailBtn.className = "btn-tmv btn-card-action w-100";
-    detailBtn.setAttribute("data-action", "details");
-    detailBtn.setAttribute("data-id", String(product.id));
-    detailBtn.textContent = "Ver detalle";
+    // 5. Botón "Agregar al carrito" (incrementa +1 cada vez que se hace clic)
+    const addBtn = document.createElement("button");
+    addBtn.type = "button";
+    addBtn.className = "btn-tmv btn-card-action btn-add-cart w-100";
+    addBtn.setAttribute("data-action", "add-to-cart");
+    addBtn.setAttribute("data-id", String(product.id));
 
-    detailBtn.addEventListener("click", (event) => {
-        event.stopPropagation();
-        if (typeof options.onDetailsClick === "function") {
-            options.onDetailsClick(product);
+    // Función interna para sincronizar el estado visual del botón según la cantidad en localStorage
+    function syncCardCartState() {
+        const currentQty = getProductQuantity(product.id);
+
+        if (currentQty > 0) {
+            addBtn.textContent = `Agregar al carrito (${currentQty})`;
+            addBtn.classList.add("in-cart");
         } else {
-            const detailEvent = new CustomEvent("product:view-detail", {
-                bubbles: true,
-                detail: { product }
-            });
-            article.dispatchEvent(detailEvent);
+            addBtn.textContent = "Agregar al carrito";
+            addBtn.classList.remove("in-cart");
+        }
+    }
+
+    // Evento para agregar (+1) al carrito en localStorage
+    addBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        addToCart(product);
+        syncCardCartState();
+    });
+
+    // Mantener la tarjeta sincronizada si el carrito se actualiza desde otro lugar
+    document.addEventListener("cart:updated", () => {
+        if (article.isConnected) {
+            syncCardCartState();
         }
     });
 
+    // Inicializar estado según lo que ya exista en localStorage
+    syncCardCartState();
+
+    // 6. Texto "Ver detalle" debajo del botón (solo visual con animación hover, sin lógica por ahora)
+    const detailText = document.createElement("span");
+    detailText.className = "product-card-detail-link";
+    detailText.setAttribute("role", "button");
+    detailText.setAttribute("tabindex", "0");
+    detailText.textContent = "Ver detalle";
+
     // Ensamblar la tarjeta
-    article.append(imgWrapper, title, desc, price, detailBtn);
+    article.append(imgWrapper, title, desc, price, addBtn, detailText);
 
     return article;
 }
