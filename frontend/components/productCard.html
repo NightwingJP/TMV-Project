@@ -1,7 +1,3 @@
-<!-- ==========================================================================
-   Componente Reutilizable: Tarjeta de Producto - TMV (productCard.html)
-   ========================================================================== -->
-
 <template id="product-card-template">
     <article class="product-card card-tmv-soft" data-product-id="">
         <div class="product-img-wrapper">
@@ -11,12 +7,17 @@
         <p class="product-card-desc"></p>
         <p class="product-card-price"><strong></strong></p>
 
-        <!-- Botón Agregar al Carrito -->
-        <button type="button" class="btn-tmv btn-card-action btn-add-cart w-100" data-action="add-to-cart">
-            Agregar al carrito
-        </button>
+        <div class="product-card-actions">
+            <button type="button" class="btn-tmv btn-card-action btn-add-cart" data-action="add-to-cart">
+                Agregar al carrito
+            </button>
+            <button type="button" class="btn-favorite-heart" data-action="favorite" aria-label="Marcar como favorito" aria-pressed="false">
+                <svg class="heart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </button>
+        </div>
 
-        <!-- Texto interactivo "Ver detalle" (solo visual con animación hover) -->
         <span class="product-card-detail-link" role="button" tabindex="0">
             Ver detalle
         </span>
