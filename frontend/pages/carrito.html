@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - TMV</title>
 
+    <!-- Fuentes globales -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- Estilos modulares del proyecto -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components/header.css">
+    <link rel="stylesheet" href="../styles/components/footer.css">
+    
+    <!-- Tu hoja de estilos específica para esta página -->
+    <link rel="stylesheet" href="../styles/pages/carrito.css">
+</head>
+<body>
+
+    <!-- ==================== HEADER DINÁMICO ==================== -->
+    <div id="header-container" data-component="header.html"></div>
+
+    <!-- ==================== CONTENIDO PRINCIPAL DEL CARRITO ==================== -->
+    <main class="cart-main-container container py-5">
+        <h1 class="cart-page-title">Mi Carrito</h1>
+
+        <div class="cart-layout-grid">
+            
+            <!-- COLUMNA IZQUIERDA: Lista de Productos (Juan) -->
+            <section class="cart-items-section">
+                <!-- Aquí Juan  -->
+                <div id="cart-items-container">
+                    <p>Cargando productos...</p>
+                </div>
+            </section>
+
+            <!-- COLUMNA DERECHA: Resumen de Compra (ANGELA) -->
+            <aside class="cart-summary-card">
+                <h3 class="summary-title">Resumen de compra</h3>
+
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Productos (<span id="summary-count">0</span>)</span>
+                        <span id="summary-subtotal">$0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span id="summary-shipping" class="shipping-status">Pendiente</span>
+                    </div>
+                </div>
+
+                <hr class="summary-divider">
+
+                <div class="summary-row summary-total-row">
+                    <span>Total</span>
+                    <span id="summary-total" class="total-price">$0</span>
+                </div>
+
+                <button id="summary-checkout-btn" class="btn-tmv w-100 mt-summary" disabled>
+                    Continuar compra
+                </button>
+            </aside>
+            
+        </div>
+    </main>
+
+    <!-- ==================== FOOTER DINÁMICO ==================== -->
+    <div id="footer-container" data-component="footer.html"></div>
+
+    <!-- Scripts de la Aplicación -->
+    <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/pages/carritoView.js"></script>
+</body>
+</html>
