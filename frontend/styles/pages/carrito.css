@@ -1,1 +1,107 @@
 
+/* ==========================================================================
+   CARRITO Resumen de compra (ANGELA)
+   ========================================================================== */
+.cart-page-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-highlight);
+    padding-bottom: 0.5rem;
+}
+
+.cart-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* En pantallas de PC, el resumen se va a la derecha y los productos a la izquierda */
+@media (min-width: 992px) {
+    .cart-layout-grid {
+        flex-direction: row;
+    }
+    .cart-items-section {
+        flex: 1; /* Toma el espacio sobrante */
+    }
+    .cart-summary-card {
+        width: 350px; /* Ancho fijo para tu tarjeta de resumen */
+        flex-shrink: 0;
+    }
+}
+
+/* ... [Aquí pegas el resto del CSS de tu tarjeta que generamos antes] ... */
+
+/* ==========================================================================
+   MÓDULO: RESUMEN DE COMPRA (ANGELA)
+   ========================================================================== */
+
+.cart-summary-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-highlight);
+    border-radius: 8px;
+    padding: 1.75rem;
+    box-shadow: 0 6px 12px rgba(0, 50, 89, 0.06);
+    /* Permite que la tarjeta baje contigo si haces scroll en la lista de productos */
+    position: sticky; 
+    top: 2rem; 
+}
+
+.summary-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 0.35rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    font-size: 1.05rem;
+}
+
+/* Clase dinámica para cuando el JS detecte envío gratuito */
+.shipping-free {
+    color: #28a745; /* Verde positivo */
+    font-weight: 700;
+}
+
+.summary-divider {
+    border: 0;
+    border-top: 1px solid rgba(0, 50, 89, 0.15);
+    margin: 1.5rem 0;
+}
+
+.summary-total-row {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0;
+}
+
+.total-price {
+    font-size: 1.6rem;
+    color: var(--color-secondary);
+}
+
+/* Espaciado del botón */
+.mt-summary {
+    margin-top: 2rem;
+}
+
+/* Estado deshabilitado del botón cuando no hay productos seleccionados */
+.btn-tmv:disabled {
+    background-color: rgba(0, 73, 126, 0.4); /* Azul secundario con opacidad */
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
