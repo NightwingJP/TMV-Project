@@ -86,14 +86,14 @@
     margin-bottom: 1rem;
 }
 
-/* Botón de Acción en la Tarjeta */
+/* ==================== BOTÓN AGREGAR AL CARRITO ==================== */
 .product-card .btn-card-action {
     margin-top: auto;
     width: 100%;
     padding: 0.65rem 1rem;
     font-size: 0.95rem;
     border-radius: 8px;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .product-card .btn-card-action:hover {
@@ -105,3 +105,43 @@
     transform: translateY(0);
 }
 
+.product-card .btn-card-action.in-cart {
+    background-color: var(--color-primary);
+    box-shadow: 0 3px 8px rgba(0, 50, 89, 0.2);
+}
+
+/* ==================== TEXTO "VER DETALLE" (SOLO VISUAL) ==================== */
+.product-card .product-card-detail-link {
+    display: inline-block;
+    align-self: center;
+    margin-top: 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.product-card .product-card-detail-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--color-primary);
+    transition: width 0.25s ease, left 0.25s ease;
+}
+
+.product-card .product-card-detail-link:hover {
+    color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.product-card .product-card-detail-link:hover::after {
+    width: 100%;
+    left: 0;
+}
