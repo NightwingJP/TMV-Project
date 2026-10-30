@@ -2,377 +2,109 @@
    TMV - Estilos de la página del carrito
    ========================================================================== */
 
-/* 1. CONTENEDOR PRINCIPAL */
-
-.cart-main {
-    width: 100%;
-    padding-top: 2rem;
-    padding-bottom: 3.5rem;
-    color: var(--color-primary);
-    font-family: var(--font-body);
-}
-
-.cart-hero {
-    background-color: var(--color-bg-light);
-    border-radius: 0.5rem;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-.cart-title {
+/* ==========================================================================
+   CARRITO Resumen de compra (ANGELA)
+   ========================================================================== */
+.cart-page-title {
     font-family: var(--font-titles);
     color: var(--color-primary);
-    font-size: 2.8rem;
-    margin: 0.5rem 0;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-highlight);
+    padding-bottom: 0.5rem;
 }
 
-.cart-description {
+.cart-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* En pantallas de PC, el resumen se va a la derecha y los productos a la izquierda */
+@media (min-width: 992px) {
+    .cart-layout-grid {
+        flex-direction: row;
+    }
+    .cart-items-section {
+        flex: 1; /* Toma el espacio sobrante */
+    }
+    .cart-summary-card {
+        width: 350px; /* Ancho fijo para tu tarjeta de resumen */
+        flex-shrink: 0;
+    }
+}
+
+/* ... [Aquí pegas el resto del CSS de tu tarjeta que generamos antes] ... */
+
+/* ==========================================================================
+   MÓDULO: RESUMEN DE COMPRA (ANGELA)
+   ========================================================================== */
+
+.cart-summary-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-highlight);
+    border-radius: 8px;
+    padding: 1.75rem;
+    box-shadow: 0 6px 12px rgba(0, 50, 89, 0.06);
+    /* Permite que la tarjeta baje contigo si haces scroll en la lista de productos */
+    position: sticky; 
+    top: 2rem; 
+}
+
+.summary-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 0.35rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-family: var(--font-body);
     color: var(--color-primary);
     font-size: 1.05rem;
-    margin: 0 auto;
-    line-height: 1.6;
 }
 
-/* 2. DISTRIBUCIÓN DEL CARRITO */
-
-.cart-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 2rem;
-    align-items: start;
+/* Clase dinámica para cuando el JS detecte envío gratuito */
+.shipping-free {
+    color: #28a745; /* Verde positivo */
+    font-weight: 700;
 }
 
-.cart-products-section {
-    width: 100%;
-    min-width: 0;
+.summary-divider {
+    border: 0;
+    border-top: 1px solid rgba(0, 50, 89, 0.15);
+    margin: 1.5rem 0;
 }
 
-.cart-section-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.cart-section-header h2,
-.cart-summary h2 {
-    font-family: var(--font-titles);
+.summary-total-row {
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--color-primary);
-    font-size: 1.5rem;
-    margin: 0;
+    margin-bottom: 0;
 }
 
-/* 3. LISTA VERTICAL DE PRODUCTOS */
-
-.cart-products {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    width: 100%;
-}
-
-.cart-product {
-    display: grid;
-    grid-template-columns: 130px minmax(0, 1fr);
-    align-items: start;
-    gap: 1.25rem;
-    padding: 1.25rem;
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 50, 89, 0.12);
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0, 50, 89, 0.08);
-}
-
-.cart-product-image {
-    display: block;
-    width: 130px;
-    height: 140px;
-    object-fit: contain;
-    border-radius: 8px;
-    background-color: var(--color-bg-soft);
-}
-
-.cart-product-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.65rem;
-    min-width: 0;
-}
-
-.cart-product-title {
-    font-family: var(--font-titles);
-    font-size: 1.4rem;
-    line-height: 1.2;
-    color: var(--color-primary);
-    margin: 0;
-}
-
-.cart-product-description {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--color-primary);
-    opacity: 0.85;
-    margin: 0;
-    overflow-wrap: anywhere;
-}
-
-.cart-product-price {
-    font-size: 0.95rem;
+.total-price {
+    font-size: 1.6rem;
     color: var(--color-secondary);
 }
 
-.cart-product-subtotal {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-primary);
+/* Espaciado del botón */
+.mt-summary {
+    margin-top: 2rem;
 }
 
-/* 4. CONTROLES DE CANTIDAD */
-
-.cart-product-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.35rem;
-}
-
-.cart-quantity-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border: 1.5px solid var(--color-highlight);
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-size: 1.25rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.cart-quantity-button:hover:not(:disabled) {
-    background-color: var(--color-bg-soft);
-    border-color: var(--color-accent);
-}
-
-.cart-quantity-button:disabled {
-    opacity: 0.45;
+/* Estado deshabilitado del botón cuando no hay productos seleccionados */
+.btn-tmv:disabled {
+    background-color: rgba(0, 73, 126, 0.4); /* Azul secundario con opacidad */
     cursor: not-allowed;
-}
-
-.cart-quantity-input {
-    width: 76px;
-    height: 38px;
-    padding: 0.4rem;
-    border: 1.5px solid var(--color-highlight);
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    text-align: center;
-}
-
-.cart-quantity-input:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(45, 122, 194, 0.2);
-}
-
-.cart-remove-button {
-    min-height: 38px;
-    padding: 0.45rem 0.85rem;
-    border: 1.5px solid var(--color-highlight);
-    border-radius: 50px;
-    background-color: transparent;
-    color: var(--color-secondary);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.cart-remove-button:hover {
-    background-color: var(--color-bg-soft);
-    border-color: var(--color-accent);
-}
-
-/* 5. RESUMEN DEL PEDIDO */
-
-.cart-summary {
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 50, 89, 0.12);
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0, 50, 89, 0.08);
-}
-
-.cart-summary h2 {
-    margin-bottom: 1.5rem;
-}
-
-.cart-summary-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin: 1rem 0;
-    font-size: 0.95rem;
-}
-
-.cart-summary-divider {
-    border-top: 1px solid rgba(0, 50, 89, 0.12);
-    margin: 1.25rem 0;
-}
-
-.cart-total-row {
-    font-size: 1.15rem;
-    color: var(--color-primary);
-}
-
-.cart-checkout-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 44px;
-    margin-top: 0.75rem;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-radius: 50px;
-    background-color: var(--color-secondary);
-    color: #ffffff;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.cart-checkout-button:hover:not(:disabled) {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-.cart-checkout-button:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
-
-.cart-summary-note {
-    margin: 1rem 0 0;
-    color: var(--color-primary);
-    opacity: 0.75;
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-/* 6. ENLACE PARA VOLVER AL CATÁLOGO */
-
-.cart-back-link {
-    display: inline-block;
-    margin-top: 1.5rem;
-    color: var(--color-secondary);
-    font-family: var(--font-body);
-    text-decoration: none;
-}
-
-.cart-back-link:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-}
-
-/* 7. ESTADOS VACÍOS Y CARGA */
-
-.cart-loading,
-.cart-empty {
-    padding: 3rem 1.25rem;
-    border: 1px solid rgba(0, 50, 89, 0.12);
-    border-radius: 14px;
-    background-color: #ffffff;
-    text-align: center;
-    color: var(--color-primary);
-}
-
-.cart-empty h3 {
-    font-family: var(--font-titles);
-    margin-top: 0;
-}
-
-/* 8. ACCESIBILIDAD */
-
-.cart-quantity-button:focus-visible,
-.cart-remove-button:focus-visible,
-.cart-checkout-button:focus-visible,
-.cart-back-link:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-}
-
-/* 9. DISEÑO RESPONSIVO */
-
-@media (max-width: 991px) {
-    .cart-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .cart-summary {
-        width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .cart-hero {
-        padding: 2rem 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .cart-title {
-        font-size: 2.2rem;
-    }
-
-    .cart-product {
-        grid-template-columns: 85px minmax(0, 1fr);
-        gap: 0.85rem;
-        padding: 0.85rem;
-    }
-
-    .cart-product-image {
-        width: 85px;
-        height: 100px;
-    }
-
-    .cart-product-title {
-        font-size: 1.2rem;
-    }
-
-    .cart-product-description {
-        font-size: 0.9rem;
-    }
-
-    .cart-product-actions {
-        gap: 0.4rem;
-    }
-
-    .cart-quantity-button {
-        width: 34px;
-        height: 36px;
-    }
-
-    .cart-quantity-input {
-        width: 60px;
-    }
-
-    .cart-summary {
-        padding: 1.25rem;
-    }
+    transform: none;
+    box-shadow: none;
 }

@@ -1,106 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - TMV</title>
 
-    <meta name="description"
-        content="Revisa los productos seleccionados y administra tu pedido en TMV.">
-
-    <title>Mi carrito - TMV</title>
-
-    <!-- Fuentes del catálogo -->
+    <!-- Fuentes globales -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap"
-        rel="stylesheet">
-
-    <!-- Estilos reutilizados del catálogo -->
+    <!-- Estilos modulares del proyecto -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/components/header.css">
     <link rel="stylesheet" href="../styles/components/footer.css">
-
-    <!-- Estilos propios del carrito -->
+    
+    <!-- Tu hoja de estilos específica para esta página -->
     <link rel="stylesheet" href="../styles/pages/carrito.css">
 </head>
-
 <body>
 
-    <!-- Encabezado reutilizable -->
-    <div id="header-container"></div>
+    <!-- ==================== HEADER DINÁMICO ==================== -->
+    <div id="header-container" data-component="header.html"></div>
 
-    <main class="cart-main container">
+    <!-- ==================== CONTENIDO PRINCIPAL DEL CARRITO ==================== -->
+    <main class="cart-main-container container py-5">
+        <h1 class="cart-page-title">Mi Carrito</h1>
 
-        <section class="cart-hero">
-            <span class="catalog-eyebrow">TU PEDIDO TMV</span>
-            <h1 class="cart-title">Mi carrito</h1>
-            <p class="cart-description">
-                Revisa tus productos y ajusta las cantidades antes de continuar.
-            </p>
-        </section>
-
-        <div class="cart-layout">
-
-            <!-- Lista de productos -->
-            <section class="cart-products-section">
-                <div class="cart-section-header">
-                    <h2>Productos seleccionados</h2>
-                    <span id="cart-items-count">0 artículos</span>
+        <div class="cart-layout-grid">
+            
+            <!-- COLUMNA IZQUIERDA: Lista de Productos (Juan) -->
+            <section class="cart-items-section">
+                <!-- Aquí Juan  -->
+                <div id="cart-items-container">
+                    <p>Cargando productos...</p>
                 </div>
-
-                <div id="cart-products" class="cart-products">
-                    <p class="cart-loading">Cargando carrito...</p>
-                </div>
-
-                <a href="catalog.html" class="cart-back-link">
-                    ← Seguir comprando
-                </a>
             </section>
 
-            <!-- Resumen del pedido -->
-            <aside class="cart-summary">
-                <h2>Resumen del pedido</h2>
+            <!-- COLUMNA DERECHA: Resumen de Compra (ANGELA) -->
+            <aside class="cart-summary-card">
+                <h3 class="summary-title">Resumen de compra</h3>
 
-                <div class="cart-summary-row">
-                    <span>Productos</span>
-                    <span id="cart-total-units">0 unidades</span>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Productos (<span id="summary-count">0</span>)</span>
+                        <span id="summary-subtotal">$0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span id="summary-shipping" class="shipping-status">Pendiente</span>
+                    </div>
                 </div>
 
-                <div class="cart-summary-row">
-                    <span>Subtotal</span>
-                    <span id="cart-subtotal">$ 0</span>
+                <hr class="summary-divider">
+
+                <div class="summary-row summary-total-row">
+                    <span>Total</span>
+                    <span id="summary-total" class="total-price">$0</span>
                 </div>
 
-                <div class="cart-summary-divider"></div>
-
-                <div class="cart-summary-row cart-total-row">
-                    <strong>Total</strong>
-                    <strong id="cart-total">$ 0</strong>
-                </div>
-
-                <button type="button" id="checkout-button" class="cart-checkout-button">
-                    Continuar con la compra
+                <button id="summary-checkout-btn" class="btn-tmv w-100 mt-summary" disabled>
+                    Continuar compra
                 </button>
-
-                <p class="cart-summary-note">
-                    Los valores se calculan según las cantidades seleccionadas.
-                </p>
             </aside>
-
+            
         </div>
-
     </main>
 
-    <!-- Pie de página reutilizable -->
-    <div id="footer-container"></div>
+    <!-- ==================== FOOTER DINÁMICO ==================== -->
+    <div id="footer-container" data-component="footer.html"></div>
 
-    <!-- Scripts -->
+    <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
-    <script type="module" src="../scripts/pages/carrito.js"></script>
-
+    <script type="module" src="../scripts/pages/carritoView.js"></script>
 </body>
 </html>
-
