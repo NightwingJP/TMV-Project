@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Revisa los productos seleccionados y administra tu pedido en TMV.">
+
+    <title>Mi carrito - TMV</title>
+
+    <!-- Fuentes del catálogo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos reutilizados del catálogo -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components/header.css">
+    <link rel="stylesheet" href="../styles/components/footer.css">
+
+    <!-- Estilos propios del carrito -->
+    <link rel="stylesheet" href="../styles/pages/carrito.css">
+</head>
+
+<body>
+
+    <!-- Encabezado reutilizable -->
+    <div id="header-container"></div>
+
+    <main class="cart-main container">
+
+        <section class="cart-hero">
+            <span class="catalog-eyebrow">TU PEDIDO TMV</span>
+            <h1 class="cart-title">Mi carrito</h1>
+            <p class="cart-description">
+                Revisa tus productos y ajusta las cantidades antes de continuar.
+            </p>
+        </section>
+
+        <div class="cart-layout">
+
+            <!-- Lista de productos -->
+            <section class="cart-products-section">
+                <div class="cart-section-header">
+                    <h2>Productos seleccionados</h2>
+                    <span id="cart-items-count">0 artículos</span>
+                </div>
+
+                <div id="cart-products" class="cart-products">
+                    <p class="cart-loading">Cargando carrito...</p>
+                </div>
+
+                <a href="catalog.html" class="cart-back-link">
+                    ← Seguir comprando
+                </a>
+            </section>
+
+            <!-- Resumen del pedido -->
+            <aside class="cart-summary">
+                <h2>Resumen del pedido</h2>
+
+                <div class="cart-summary-row">
+                    <span>Productos</span>
+                    <span id="cart-total-units">0 unidades</span>
+                </div>
+
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$ 0</span>
+                </div>
+
+                <div class="cart-summary-divider"></div>
+
+                <div class="cart-summary-row cart-total-row">
+                    <strong>Total</strong>
+                    <strong id="cart-total">$ 0</strong>
+                </div>
+
+                <button type="button" id="checkout-button" class="cart-checkout-button">
+                    Continuar con la compra
+                </button>
+
+                <p class="cart-summary-note">
+                    Los valores se calculan según las cantidades seleccionadas.
+                </p>
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- Pie de página reutilizable -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/pages/carrito.js"></script>
+
+</body>
+</html>
 
