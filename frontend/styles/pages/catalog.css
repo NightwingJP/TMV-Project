@@ -434,3 +434,96 @@
 /* ==========================================================================
    6. FAVORITOS JUAN
    ========================================================================== */
+.favorites-section {
+    width: 100%;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 2px solid var(--color-bg-soft);
+    scroll-margin-top: 2rem;
+}
+
+.favorites-header {
+    margin-bottom: 2rem;
+}
+
+.favorites-title {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.favorite-heart {
+    color: #e63946;
+}
+
+.favorites-count {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Cuadrícula de favoritos: máximo 3 columnas */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Mensaje cuando no hay favoritos */
+.favorites-empty {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    padding: 2rem;
+    background-color: var(--color-bg-light);
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Botón eliminar favoritos */
+.btn-remove-favorite {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    background-color: #fff0f0;
+    color: #c62828;
+    border: 1px solid #e8aaaa;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-favorite:hover {
+    background-color: #c62828;
+    color: #ffffff;
+    border-color: #c62828;
+}
+
+/* Adaptación para tablets */
+@media (max-width: 991px) {
+    .favorites-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+/* Adaptación para celulares */
+@media (max-width: 576px) {
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .favorites-title {
+        font-size: 1.8rem;
+    }
+}
