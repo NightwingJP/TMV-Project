@@ -88,7 +88,6 @@ if (typeof window !== "undefined") {
     });
 }
 
-//JUAN
 
 import { formatPrice } from "../catalog/productsData.js";
 

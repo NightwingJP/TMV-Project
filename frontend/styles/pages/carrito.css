@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* ==========================================================================
-   CARRITO Resumen de compra (ANGELA)
+   Resumen de compra
    ========================================================================== */
 .cart-page-title {
     font-family: var(--font-titles);
@@ -35,10 +35,10 @@
     }
 }
 
-/* ... [Aquí pegas el resto del CSS de tu tarjeta que generamos antes] ... */
+
 
 /* ==========================================================================
-   MÓDULO: RESUMEN DE COMPRA (ANGELA)
+   Resumen de compra
    ========================================================================== */
 
 .cart-summary-card {
@@ -112,7 +112,7 @@
 /* Tarjetas para carrito js */
 
 /* ==========================================================================
-   MÓDULO: TARJETAS DE PRODUCTOS DEL CARRITO (JUAN)
+   Tarjetas de productos del carrito
    ========================================================================== */
 
 .cart-items-section {
