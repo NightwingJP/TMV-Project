@@ -88,9 +88,8 @@ if (typeof window !== "undefined") {
     });
 }
 
-//JUAN
-
 import { formatPrice } from "../catalog/productsData.js";
+import { createCartItem } from "../components/cartItem.js";
 
 function initCartPage() {
     const cartProducts = document.getElementById("cart-items-container");
@@ -121,6 +120,8 @@ function initCartPage() {
             if (checkoutButton) checkoutButton.disabled = false;
         }
 
+        const fragment = document.createDocumentFragment();
+
         cart.forEach((product) => {
             const quantity = Number(product.quantity) || 1;
             const price = Number(product.price) || 0;
@@ -129,104 +130,23 @@ function initCartPage() {
             totalUnits += quantity;
             totalPrice += subtotal;
 
-            const productElement = document.createElement("article");
-            productElement.classList.add("cart-product");
-
-            productElement.innerHTML = `
-                <img
-                    src="${product.image}"
-                    alt="${product.title}"
-                    class="cart-product-image"
-                >
-
-                <div class="cart-product-info">
-                    <h3 class="cart-product-title">${product.title}</h3>
-
-                    <p class="cart-product-description">
-                        ${product.description}
-                    </p>
-
-                    <p class="cart-product-price">
-                        Precio unitario: ${formatPrice(price)}
-                    </p>
-
-                    <div class="cart-quantity-controls">
-                        <button
-                            type="button"
-                            class="quantity-decrease"
-                            aria-label="Disminuir cantidad"
-                        >−</button>
-
-                        <input
-                            type="number"
-                            class="quantity-input"
-                            min="1"
-                            step="1"
-                            value="${quantity}"
-                            aria-label="Cantidad de ${product.title}"
-                        >
-
-                        <button
-                            type="button"
-                            class="quantity-increase"
-                            aria-label="Aumentar cantidad"
-                        >+</button>
-
-                        <button
-                            type="button"
-                            class="cart-remove-button"
-                        >Eliminar</button>
-                    </div>
-
-                    <p class="cart-product-subtotal">
-                        Subtotal: <strong>${formatPrice(subtotal)}</strong>
-                    </p>
-                </div>
-            `;
-
-            // Aumentar cantidad
-            productElement
-                .querySelector(".quantity-increase")
-                .addEventListener("click", () => {
-                    changeQuantity(product.id, quantity + 1);
-                });
-
-            // Disminuir cantidad
-            productElement
-                .querySelector(".quantity-decrease")
-                .addEventListener("click", () => {
-                    if (quantity > 1) {
-                        changeQuantity(product.id, quantity - 1);
-                    }
-                });
-
-            // Cambiar cantidad escribiendo en el campo numérico
-            productElement
-                .querySelector(".quantity-input")
-                .addEventListener("change", (event) => {
-                    const newQuantity = Number(event.target.value);
-
-                    if (Number.isInteger(newQuantity) && newQuantity >= 1) {
-                        changeQuantity(product.id, newQuantity);
-                    } else {
-                        renderCart();
-                    }
-                });
-
-            // Eliminar producto
-            productElement
-                .querySelector(".cart-remove-button")
-                .addEventListener("click", () => {
+            const itemElement = createCartItem(product, {
+                onQuantityChange: (productId, newQuantity) => {
+                    changeQuantity(productId, newQuantity);
+                },
+                onRemove: (productId) => {
                     const updatedCart = getCart().filter(
-                        (item) => String(item.id) !== String(product.id),
+                        (item) => String(item.id) !== String(productId)
                     );
-
                     saveCart(updatedCart);
                     renderCart();
-                });
+                }
+            });
 
-            cartProducts.appendChild(productElement);
+            fragment.appendChild(itemElement);
         });
+
+        cartProducts.appendChild(fragment);
 
         // Actualizar resumen
         if (cartItemsCount) {
@@ -279,4 +199,3 @@ if (document.readyState === "loading") {
 } else {
     initCartPage();
 }
-

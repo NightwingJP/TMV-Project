@@ -1,0 +1,31 @@
+<!-- Plantilla reutilizable para los productos en el carrito de compras -->
+<template id="cart-item-template">
+    <article class="cart-product" data-product-id="">
+        <img src="" alt="" class="cart-product-image" loading="lazy">
+
+        <div class="cart-product-info">
+            <h3 class="cart-product-title"></h3>
+            <p class="cart-product-description"></p>
+            <p class="cart-product-price"></p>
+
+            <div class="cart-quantity-controls">
+                <div class="cart-quantity-selector">
+                    <button type="button" class="quantity-decrease" aria-label="Disminuir cantidad">−</button>
+                    <input type="number" class="quantity-input" min="1" step="1" aria-label="Cantidad">
+                    <button type="button" class="quantity-increase" aria-label="Aumentar cantidad">+</button>
+                </div>
+                <button type="button" class="cart-remove-button">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Eliminar</span>
+                </button>
+            </div>
+
+            <p class="cart-product-subtotal">
+                Subtotal: <strong></strong>
+            </p>
+        </div>
+    </article>
+</template>
