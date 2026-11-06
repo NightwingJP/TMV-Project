@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accede o crea tu cuenta en TMV para gestionar tus pedidos y compras corporativas.">
+    <title>Acceso y Registro - TMV</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/login.css">
+</head>
+
+<body>
+
+    <main class="auth-page-wrapper">
+        <div class="auth-notebook-card" id="authNotebook">
+
+            <a href="../index.html" class="auth-back-notebook-link" title="Regresar a la página principal">
+                Volver a TMV
+            </a>
+
+            <!-- Panel Registro -->
+            <div class="form-panel sign-up-panel">
+                <form id="form-signup" class="auth-form" novalidate>
+                    <h2 class="auth-title">Crea tu Cuenta</h2>
+                    <p class="auth-subtitle">Ingresa tus datos para registrarte como aliado en TMV</p>
+
+                    <div id="signup-feedback" class="auth-feedback" aria-live="polite"></div>
+
+                    <div class="auth-input-group">
+                        <input type="text" id="signup-fullname" name="fullName" placeholder=" " autocomplete="name" required>
+                        <label for="signup-fullname">Nombre completo</label>
+                        <small class="field-error" id="error-fullname"></small>
+                    </div>
+
+                    <div class="auth-input-group">
+                        <input type="tel" id="signup-phone" name="phone" placeholder=" " autocomplete="tel" required>
+                        <label for="signup-phone">Número de teléfono</label>
+                        <small class="field-error" id="error-phone"></small>
+                    </div>
+
+                    <div class="auth-input-group">
+                        <input type="email" id="signup-email" name="email" placeholder=" " autocomplete="username" required>
+                        <label for="signup-email">Email (nombre de usuario)</label>
+                        <small class="field-error" id="error-email"></small>
+                    </div>
+
+                    <div class="auth-input-group">
+                        <input type="password" id="signup-password" name="password" placeholder=" " autocomplete="new-password" required>
+                        <label for="signup-password">Contraseña</label>
+                        <small class="field-error" id="error-password"></small>
+                    </div>
+
+                    <button type="submit" class="btn-tmv auth-submit-btn">Registrarse</button>
+
+                    <p class="auth-mobile-switch">¿Ya tienes cuenta? <a id="mobile-to-login">Inicia sesión</a></p>
+                </form>
+            </div>
+
+            <!-- Panel Login -->
+            <div class="form-panel sign-in-panel">
+                <form id="form-signin" class="auth-form" novalidate>
+                    <h2 class="auth-title">Inicia Sesión</h2>
+                    <p class="auth-subtitle">Ingresa tus credenciales para acceder a tu cuenta</p>
+
+                    <div id="signin-feedback" class="auth-feedback" aria-live="polite"></div>
+
+                    <div class="auth-input-group">
+                        <input type="email" id="signin-email" name="email" placeholder=" " autocomplete="username" required>
+                        <label for="signin-email">Email o nombre de usuario</label>
+                        <small class="field-error" id="error-signin-email"></small>
+                    </div>
+
+                    <div class="auth-input-group">
+                        <input type="password" id="signin-password" name="password" placeholder=" " autocomplete="current-password" required>
+                        <label for="signin-password">Contraseña</label>
+                        <small class="field-error" id="error-signin-password"></small>
+                    </div>
+
+                    <a href="#" class="auth-forgot-link">¿Olvidaste tu contraseña?</a>
+
+                    <button type="submit" class="btn-tmv auth-submit-btn">Ingresar</button>
+
+                    <p class="auth-mobile-switch">¿No tienes cuenta? <a id="mobile-to-register">Regístrate</a></p>
+                </form>
+            </div>
+
+            <!-- Panel deslizante -->
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h2 class="toggle-title">¡Bienvenido Nuevamente!</h2>
+                        <p class="toggle-text">
+                            ¿Ya tienes cuenta creada? Inicia sesión con tus credenciales para continuar tus compras y pedidos.
+                        </p>
+                        <button type="button" class="btn-toggle-outline" id="btn-show-login">Iniciar Sesión</button>
+                    </div>
+
+                    <div class="toggle-panel toggle-right">
+                        <h2 class="toggle-title">¡Hola, Amigo!</h2>
+                        <p class="toggle-text">
+                            ¿Aún no tienes cuenta? Regístrate hoy y accede a compras corporativas y precios preferenciales.
+                        </p>
+                        <button type="button" class="btn-toggle-outline" id="btn-show-register">Crear Cuenta</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script type="module" src="../scripts/pages/login.js"></script>
+</body>
+
+</html>

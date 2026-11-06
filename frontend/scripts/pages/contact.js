@@ -2,87 +2,19 @@
 // contact.js - Validaciones y envío asíncrono PQRSF (Contáctanos)
 // ============================================================
 
+import {
+    normalizeColombianPhone,
+    validateName,
+    validateEmail,
+    validatePhone,
+    validateType,
+    validateMessage
+} from '../utils/utils.js';
+
+export { normalizeColombianPhone };
+
 // Web3Forms API Key para envío en cliente
 const WEB3FORMS_ACCESS_KEY = '7ba4153d-f08c-460b-9453-83f7ff916d77';
-
-// ---------- Expresiones regulares ----------
-
-// Nombre: solo letras (con tildes y ñ), separadas por espacio, guion o apóstrofe.
-const NAME_REGEX = /^\p{L}+(?:[ '\-]\p{L}+)*$/u;
-
-// Correo: usuario@dominio.ext (extensión de 2+ letras, sin espacios).
-const EMAIL_REGEX = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}$/;
-
-// Teléfonos de Colombia (ya sin prefijo, espacios ni símbolos):
-//  - Celular: 10 dígitos, empieza por 3        -> 3001234567
-//  - Fijo con indicativo: 10 dígitos, 601-608  -> 6011234567
-//  - Fijo local: 7 dígitos, empieza por 2-8    -> 2345678
-const MOBILE_REGEX = /^3\d{9}$/;
-const LANDLINE_REGEX = /^60[1-8]\d{7}$/;
-const LOCAL_LANDLINE_REGEX = /^[2-8]\d{6}$/;
-
-// ---------- Utilidades ----------
-
-/** Quita espacios, guiones, puntos y paréntesis, y el prefijo +57 / 57. */
-export function normalizeColombianPhone(raw) {
-    let phone = raw.replace(/[\s\-().]/g, '');
-
-    if (phone.startsWith('+57')) {
-        phone = phone.slice(3);
-    } else if (phone.startsWith('57') && phone.length === 12) {
-        phone = phone.slice(2);
-    }
-    return phone;
-}
-
-// ---------- Validadores: devuelven un mensaje de error, o '' si el campo es válido ----------
-
-function validateName(value) {
-    const name = value.trim().replace(/\s+/g, ' ');
-
-    if (name === '') return 'Ingresa tu nombre completo.';
-    if (name.length < 3) return 'El nombre es demasiado corto.';
-    if (name.length > 60) return 'El nombre no puede superar los 60 caracteres.';
-    if (!NAME_REGEX.test(name)) return 'El nombre solo puede contener letras (sin números ni símbolos).';
-    if (name.split(' ').length < 2) return 'Escribe al menos tu nombre y un apellido.';
-    return '';
-}
-
-function validateEmail(value) {
-    const email = value.trim();
-
-    if (email === '') return 'Ingresa tu correo electrónico.';
-    if (email.length > 100) return 'El correo es demasiado largo.';
-    if (email.includes('..')) return 'El correo no puede tener dos puntos seguidos.';
-    if (!EMAIL_REGEX.test(email)) return 'Ingresa un correo válido, por ejemplo: nombre@dominio.com';
-    return '';
-}
-
-function validatePhone(value) {
-    if (value.trim() === '') return 'Ingresa tu número de teléfono.';
-
-    if (/[^\d\s\-().+]/.test(value)) return 'El teléfono solo puede contener números.';
-
-    const phone = normalizeColombianPhone(value);
-
-    if (MOBILE_REGEX.test(phone) || LANDLINE_REGEX.test(phone) || LOCAL_LANDLINE_REGEX.test(phone)) {
-        return '';
-    }
-    return 'Ingresa un teléfono colombiano válido: celular de 10 dígitos (ej. 300 123 4567) o fijo (ej. 601 234 5678).';
-}
-
-function validateType(value) {
-    return value === '' ? 'Selecciona el tipo de solicitud.' : '';
-}
-
-function validateMessage(value) {
-    const message = value.trim();
-
-    if (message === '') return 'Escribe el detalle de tu solicitud.';
-    if (message.length < 10) return 'Cuéntanos un poco más (mínimo 10 caracteres).';
-    if (message.length > 1000) return 'El mensaje no puede superar los 1000 caracteres.';
-    return '';
-}
 
 // ---------- Configuración: campo -> validador ----------
 

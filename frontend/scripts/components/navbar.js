@@ -54,13 +54,13 @@ export function initNavbar() {
 
     const authBtn = document.getElementById("tmvAuthBtn");
     if (authBtn) {
-        const targetHref = `${pathToPages}homePageAdmin.html`;
+        const targetHref = `${pathToPages}login.html`;
         authBtn.setAttribute("href", targetHref);
 
         authBtn.addEventListener("click", (event) => {
             event.preventDefault();
             const inPages = /\/pages(\/|$)/i.test(window.location.pathname);
-            window.location.href = inPages ? "homePageAdmin.html" : "pages/homePageAdmin.html";
+            window.location.href = inPages ? "login.html" : "pages/login.html";
         });
     }
 
