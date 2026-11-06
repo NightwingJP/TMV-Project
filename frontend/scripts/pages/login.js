@@ -1,3 +1,4 @@
+
 import {
     validateName,
     validateEmail,
@@ -6,6 +7,13 @@ import {
 } from "../utils/utils.js";
 
 export const USERS_STORAGE_KEY = "tmvUsuarios";
+
+const ALL_FIELDS = [
+    { id: 'fullName', validate: validateName },
+    { id: 'email', validate: validateEmail },
+    { id: 'phone', validate: validatePhone },
+    { id: 'password', validate: validatePassword }
+];
 
 export function initNotebookToggle() {
     const notebook = document.getElementById("authNotebook");
@@ -36,15 +44,43 @@ export function initNotebookToggle() {
 
 // VALIDAR NOMBRE FUNCION (ANGELA ) --------------------------------------------------------
 
+// Buscar dentro de ALL_FIELDS la configuración del nombre.
 
-// VALIDAR NUMERO FUNCION (FER) ------------------------------------------------------------
+const NAME_FIELD = ALL_FIELDS.find(
+    (field) => field.id === "fullName"
+);
+export function validarNombre(nombre) {
+
+    // Validación original de utils.js.
+    const mensajeError = NAME_FIELD.validate(nombre);
+
+    if (mensajeError) {
+        return mensajeError;
+    }
+
+    const nombreLimpio = nombre.trim().replace(/\s+/g, " ");
+
+    const palabras = nombreLimpio.split(" ");
+
+    if (palabras.length < 3) {
+        return "Ingresa tu nombres y apellidos completos.";
+    }
+
+    return "";
+}
 
 
 
-// VALIDAR CORREO  (JUAN PABLO ) -----------------------------------------------------------
+// VALIDAR NUMERO FUNCION (FER) ----------------------------------------------
 
 
-// VALIDAR CONTRASENA (JUAN) -----------------------------------------------------------------
+
+// VALIDAR CORREO (JUAN PABLO) -----------------------------------------------
+
+
+
+// VALIDAR CONTRASENA (JUAN) -------------------------------------------------
+
 
 export function validarRegistro(datos) {
     return {
@@ -65,8 +101,72 @@ export function registrarUsuario(datosFormulario) {
     return { exito: true };
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
     initNotebookToggle();
+
+    // Validaciones del NOMBRE (Angela)
+    const campoNombre = document.getElementById("signup-fullname");
+    const errorNombre = document.getElementById("error-fullname");
+    const formularioRegistro = document.getElementById("form-signup");
+
+    if (campoNombre && errorNombre && formularioRegistro) {
+        let nombreRevisado = false;
+
+        campoNombre.setAttribute(
+            "aria-describedby",
+            "error-fullname"
+        );
+
+        errorNombre.setAttribute(
+            "aria-live",
+            "polite"
+        );
+
+        // Comprobamos nombre y mostrar el error de ser necesario.
+
+        const comprobarNombre = () => {
+            const mensaje = validarNombre(campoNombre.value);
+
+            errorNombre.textContent = mensaje;
+            campoNombre.setAttribute(
+                "aria-invalid",
+                mensaje ? "true" : "false"
+            );
+
+            return mensaje === "";
+        };
+
+        // Validar cuando el usuario abandona el campo.
+        campoNombre.addEventListener("blur", () => {
+            nombreRevisado = true;
+            comprobarNombre();
+
+        });
+
+        // Actualizar la validación mientras corrige el nombre.
+        campoNombre.addEventListener("input", () => {
+            if (nombreRevisado) {
+                comprobarNombre();
+            }
+        });
+
+        // EVENTO SUBMIT
+        // Validamos nombre antes de ejecutar el registro, de ser inválido muestra error, continúa al ser válido.
+
+        formularioRegistro.addEventListener("submit", (event) => {
+            nombreRevisado = true;
+
+            if (!comprobarNombre()) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                campoNombre.focus();
+            }
+        }, true);
+
+    }
+    // fin validación de nombre.
+
 
     const formSignUp = document.getElementById("form-signup");
     if (formSignUp) {
@@ -84,4 +184,5 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
         });
     }
+
 });
