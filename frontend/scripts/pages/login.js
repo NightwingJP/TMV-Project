@@ -34,6 +34,18 @@ export function initNotebookToggle() {
     if (mobileToLogin) mobileToLogin.addEventListener("click", activarLogin);
 }
 
+// VALIDAR NOMBRE FUNCION (ANGELA ) --------------------------------------------------------
+
+
+// VALIDAR NUMERO FUNCION (FER) ------------------------------------------------------------
+
+
+
+// VALIDAR CORREO  (JUAN PABLO ) -----------------------------------------------------------
+
+
+// VALIDAR CONTRASENA (JUAN) -----------------------------------------------------------------
+
 export function validarRegistro(datos) {
     return {
         valido: true,
