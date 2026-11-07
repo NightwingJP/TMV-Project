@@ -63,7 +63,7 @@ export function validarNombre(nombre) {
     const palabras = nombreLimpio.split(" ");
 
     if (palabras.length < 3) {
-        return "Ingresa tu nombres y apellidos completos.";
+        return "Ingresa nombres y apellidos completos.";
     }
 
     return "";
