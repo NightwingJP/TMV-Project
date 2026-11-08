@@ -71,7 +71,50 @@ export function validarNombre(nombre) {
 
 
 
-// VALIDAR NUMERO FUNCION (FER) ----------------------------------------------
+// VALIDAR NUMERO FUNCION (FER) ------------------------------------------------
+
+// Validar que el teléfono no esté vacío y contenga únicamente números.
+export function validarTelefono(telefono) {
+
+    if (telefono.trim() === "") {
+        return "Ingresa tu número de teléfono.";
+    }
+
+    if (!/^\d+$/.test(telefono)) {
+        return "El teléfono solo puede contener números.";
+    }
+
+    if (telefono.length !== 10) {
+        return "El teléfono debe tener exactamente 10 dígitos.";
+    }
+
+    return "";
+}
+
+// FIN VALIDACIÓN NUMERO (FER) ------------------------------------------------
+
+
+// VALIDAR NUMERO EN EL FORMULARIO (FER) --------------------------------------
+
+const phoneInput = document.getElementById("signup-phone");
+const phoneError = document.getElementById("error-phone");
+
+// Mostrar el error en letras rojas cuando el usuario salga del campo.
+phoneInput.addEventListener("blur", () => {
+
+    const error = validarTelefono(phoneInput.value);
+
+    phoneError.textContent = error;
+});
+
+// Validar mientras el usuario escribe.
+phoneInput.addEventListener("input", () => {
+
+    const error = validarTelefono(phoneInput.value);
+
+    phoneError.textContent = error;
+});
+// FIN VALIDACIÓN NUMERO EN EL FORMULARIO (FER) -------------------------------
 
 
 
