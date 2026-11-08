@@ -81,8 +81,21 @@ export function validatePhone(value) {
  */
 export function validatePassword(value) {
     const password = value || '';
-    if (password.trim() === '') return 'La contraseña es obligatoria.';
-    if (password.length < 6) return 'La contraseña debe tener al menos 6 caracteres.';
+    if (password.trim() === '') {
+        return 'La contraseña es obligatoria.';
+    }
+    if (password.length < 8) {
+        return 'La contraseña debe tener al menos 8 caracteres.';
+    }
+    if (!/[A-Z]/.test(password)) {
+        return 'La contraseña debe incluir al menos una mayúscula.';
+    }
+    if (!/\d/.test(password)) {
+        return 'La contraseña debe incluir al menos un número.';
+    }
+    if (!/[^A-Za-z0-9\s]/.test(password)) {
+        return 'La contraseña debe incluir al menos un carácter especial (+, -, *, /, @, #).';
+    }
     return '';
 }
 

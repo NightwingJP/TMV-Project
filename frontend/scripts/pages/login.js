@@ -170,6 +170,9 @@ export function validarCorreo(correo) {
 
 // VALIDAR CONTRASENA (JUAN) -------------------------------------------------
 
+export function validarContrasena(contrasena){
+    return validatePassword(contrasena);
+}
 
 export function validarRegistro(datos) {
     return {
@@ -193,6 +196,47 @@ export function registrarUsuario(datosFormulario) {
 
 document.addEventListener("DOMContentLoaded", () => {
     initNotebookToggle();
+
+    //Validación contraseña (Juan)
+    const campoPassword = document.getElementById("signup-password");
+    const errorPassword = document.getElementById("error-password");
+
+    if(campoPassword && errorPassword && formularioRegistro) {
+        let passwordRevisada = false;
+
+        campoPassword.setAttribute("aria-describedby", "error-password");
+        errorPassword.setAttribute("aria-live", "polite");
+
+        const comprobarPassword = ()=>{
+            const mensaje = validarContrasena(campoPassword.value);
+
+            errorPassword.textContent = mensaje;
+            campoPassword.setAttribute("aria-invalid", mensaje ? "true" : "false");
+
+            return mensaje === "";
+        };
+
+        campoPassword.addEventListener("blur", ()=>{
+            passwordRevisada = true;
+            comprobarPassword();
+        });
+
+        campoPassword.addEventListener("input", ()=>{
+            if(passwordRevisada){
+                comprobarPassword();
+            }
+        });
+
+        formularioRegistro.addEventListener("submit", (event)=>{
+            passwordRevisada = true;
+
+            if(!comprobarPassword()){
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                campoPassword.focus();
+            }
+        }, true);
+    }
 
     // Validaciones del NOMBRE (Angela)
     const campoNombre = document.getElementById("signup-fullname");
