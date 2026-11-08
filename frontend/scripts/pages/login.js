@@ -120,6 +120,52 @@ phoneInput.addEventListener("input", () => {
 
 // VALIDAR CORREO (JUAN PABLO) -----------------------------------------------
 
+// Toda la lógica (vacío, longitud, puntos seguidos y formato) vive en utils.js.
+export function validarCorreo(correo) {
+    return validateEmail(correo);
+}
+    // Validaciones del CORREO (Juan Pablo)
+    const campoCorreo = document.getElementById("signup-email");
+    const errorCorreo = document.getElementById("error-email");
+
+    if (campoCorreo && errorCorreo && formularioRegistro) {
+        let correoRevisado = false;
+
+        campoCorreo.setAttribute("aria-describedby", "error-email");
+        errorCorreo.setAttribute("aria-live", "polite");
+
+        const comprobarCorreo = () => {
+            const mensaje = validarCorreo(campoCorreo.value);
+
+            errorCorreo.textContent = mensaje;
+            campoCorreo.setAttribute("aria-invalid", mensaje ? "true" : "false");
+
+            return mensaje === "";
+        };
+
+        campoCorreo.addEventListener("blur", () => {
+            correoRevisado = true;
+            comprobarCorreo();
+        });
+
+        campoCorreo.addEventListener("input", () => {
+            if (correoRevisado) {
+                comprobarCorreo();
+            }
+        });
+
+        formularioRegistro.addEventListener("submit", (event) => {
+            correoRevisado = true;
+
+            if (!comprobarCorreo()) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                campoCorreo.focus();
+            }
+        }, true);
+    }
+
+// FIN VALIDAR CORREO (JUAN PABLO) -------------------------------------------
 
 
 // VALIDAR CONTRASENA (JUAN) -------------------------------------------------
