@@ -3,5 +3,3 @@
 
 // Juan Pablo validaciones para validar usuario manipulado el local storage ( SI es admin -< dirigir a homePageAdmin, si es usuario -> catalog.html -> no encontrado alerta 
 
-
-
