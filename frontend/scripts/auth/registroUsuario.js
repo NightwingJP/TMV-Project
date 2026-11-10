@@ -258,13 +258,5 @@ export function initRegistroUsuario() {
         const datos = Object.fromEntries(formData.entries());
         registrarUsuario(datos);
     });
-
-    // Formulario de Inicio de Sesión (Login)
-    const formSignIn = document.getElementById("form-signin");
-    if (formSignIn) {
-        formSignIn.addEventListener("submit", (event) => {
-            event.preventDefault();
-        });
-    }
 }
 

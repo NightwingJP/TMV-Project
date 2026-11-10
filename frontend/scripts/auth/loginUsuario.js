@@ -39,21 +39,15 @@ export function validarCamposLogin(correo, contrasena) {
 }
 
 /**
- * Muestra la alerta visual en el formulario y dispara una alerta nativa del navegador.
+ * Muestra el mensaje de alerta visual en el contenedor de feedback del formulario.
  * @param {HTMLElement | null} feedbackEl
  * @param {string[]} mensajes
  */
 function mostrarAlertaLogin(feedbackEl, mensajes) {
-    const textoAlerta = mensajes.join("\n");
-
     if (feedbackEl) {
         feedbackEl.textContent = mensajes.join(" ");
         feedbackEl.className = "auth-feedback is-error";
         feedbackEl.setAttribute("role", "alert");
-    }
-
-    if (typeof window !== "undefined" && typeof window.alert === "function") {
-        window.alert(`Error de inicio de sesión:\n${textoAlerta}`);
     }
 }
 
