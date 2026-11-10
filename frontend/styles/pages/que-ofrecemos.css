@@ -1,0 +1,281 @@
+/* ==========================================================================
+   ESTILOS - PÁGINA ¿QUÉ OFRECEMOS? (Vanilla CSS)
+   ========================================================================== */
+
+/* ---------- 1. Encabezado Hero Comercial (Layout Amplio) ---------- */
+/* CORRECCIÓN: Aumentamos el margen inferior de 3rem (mb-5) a 6rem para separar el Hero de los beneficios */
+.offer-hero {
+    background: linear-gradient(135deg, var(--color-bg-soft) 0%, var(--color-bg-light) 100%);
+    border: 1px solid var(--color-highlight);
+    border-radius: 1rem;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+    box-shadow: 0 10px 30px rgba(0, 50, 89, 0.08);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 6rem !important;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.offer-hero-text {
+    flex: 1 1 350px;
+    padding-right: 2rem;
+}
+
+.hero-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background-color: #ffffff;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 50px;
+    padding: 0.35rem 1.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 50, 89, 0.08);
+}
+
+/* Título protagonista con efecto "Océano" animado en hover */
+.display-title {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+    text-shadow: 2px 2px 4px rgba(0, 50, 89, 0.1);
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: color 0.4s ease;
+}
+
+.display-title:hover {
+    color: transparent;
+    background-image: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-bg-light), var(--color-highlight), var(--color-primary));
+    background-size: 200% auto;
+    animation: oceanWaves 3s linear infinite;
+    text-shadow: none;
+}
+
+@keyframes oceanWaves {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.offer-hero .lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    opacity: 0.9;
+}
+
+/* Imagen dinámica */
+.offer-hero-image-wrapper {
+    flex: 1 1 350px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image-backdrop {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-highlight);
+    border-radius: 1rem;
+    z-index: 0;
+    opacity: 0.3;
+    transform: rotate(-3deg);
+    transition: transform 0.4s ease;
+}
+
+.hero-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 1rem;
+    border: 4px solid #ffffff;
+    box-shadow: 0 12px 24px rgba(0, 50, 89, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.offer-hero:hover .hero-image {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.offer-hero:hover .hero-image-backdrop {
+    transform: rotate(0deg);
+}
+
+/* ---------- 2. Sección de Beneficios (Tarjetas Animadas) ---------- */
+.offer-benefits {
+    margin-bottom: 5rem;
+}
+
+.offer-benefits h2 {
+    font-size: 2.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.offer-benefits .subtitle {
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+}
+
+.offer-card {
+    background-color: #ffffff;
+    border: 1.5px solid var(--color-highlight);
+    border-radius: 1rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 50, 89, 0.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    top: 0;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.offer-card:hover {
+    border-color: var(--color-accent);
+    background-color: #ffffff;
+    box-shadow: 0 15px 30px rgba(0, 50, 89, 0.12);
+    top: -8px;
+}
+
+.offer-card:hover .card-icon {
+    transform: scale(1.2);
+}
+
+.offer-card h3 {
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--color-bg-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
+    display: inline-block;
+    transition: border-color 0.3s ease;
+}
+
+.offer-card:hover h3 {
+    border-color: var(--color-accent);
+}
+
+.offer-card p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ---------- 3. Botones Estratégicos (CTAs Interactivos) ---------- */
+.offer-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.btn-tmv {
+    font-size: 1.1rem;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-explore {
+    background-color: var(--color-accent);
+    box-shadow: 0 4px 15px rgba(45, 122, 194, 0.3);
+}
+
+.btn-explore:hover {
+    background-color: var(--color-primary);
+    box-shadow: 0 6px 20px rgba(0, 50, 89, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-login {
+    background-color: #ffffff;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-login:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 50, 89, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ---------- 4. Sección de Soporte Final ---------- */
+.offer-support {
+    background-color: var(--color-bg-soft);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.offer-support h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.offer-support p {
+    font-size: 1.15rem;
+}
+
+.btn-support {
+    background-color: var(--color-primary);
+}
+
+.btn-support:hover {
+    background-color: var(--color-accent);
+}
+
+/* ---------- 5. Ajustes Responsivos Básicos ---------- */
+@media (max-width: 768px) {
+    .offer-hero {
+        margin-bottom: 4rem !important;
+    }
+
+    .offer-hero .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .offer-hero-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .display-title {
+        font-size: 2.2rem;
+    }
+
+    .offer-actions {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .btn-tmv {
+        width: 100%;
+    }
+}
