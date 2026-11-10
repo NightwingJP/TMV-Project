@@ -99,6 +99,56 @@
     color: #ffffff;
 }
 
+/* ---------- Barra de Confianza (Trust Bar) ---------- */
+.trust-bar {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 50, 89, 0.08);
+    padding: 1.25rem 0;
+}
+
+.trust-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex: 1 1 240px;
+}
+
+.trust-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-bg-soft);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.trust-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.trust-text strong {
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    line-height: 1.2;
+}
+
+.trust-text span {
+    font-size: 0.85rem;
+    color: #5b7083;
+}
+
 /* ---------- Beneficios / Propuesta de Valor ---------- */
 .features-section h2 {
     margin-bottom: 2.5rem;
