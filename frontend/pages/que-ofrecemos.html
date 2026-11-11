@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="¿Qué ofrecemos? - Conoce los servicios y soluciones comerciales que brinda TMV.">
+    <meta name="description" content="¿Qué ofrecemos? - Conoce los servicios, el catálogo y las soluciones comerciales que brinda TMV para tu negocio.">
     <title>¿Qué ofrecemos? - TMV</title>
 
     <!-- Google Fonts: Patrick Hand & Comic Neue -->
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/components/header.css">
     <link rel="stylesheet" href="../styles/components/footer.css">
+    <!-- Nuevo archivo de estilos específico para esta vista -->
+    <link rel="stylesheet" href="../styles/pages/que-ofrecemos.css">
 </head>
 <body>
 
@@ -23,16 +25,71 @@
 
     <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
     <main class="main-content py-5">
-        <div class="container text-center">
-            <section>
-                <h1>¿Qué Ofrecemos?</h1>
-                <p>Breve descripción del servicio que presta la página web y de las soluciones comerciales disponibles para nuestros clientes y aliados.</p>
-                <div>
-                    <a href="aliados.html" class="btn-tmv">
-                        Déjanos ser tu aliado
+        <div class="container">
+            
+            <!-- Hero Section Comercial (Rediseñado) -->
+            <header class="offer-hero mb-5">
+                <div class="row align-items-center">
+                    <div class="col offer-hero-text">
+                        <span class="hero-tag">Soluciones TMV</span>
+                        <h1 class="display-title">TMV - Tu Mayorista Virtual</h1>
+                        <p class="lead">
+                            En Tu Mayorista Virtual (TMV) no solo te entregamos productos de aseo; somos una plataforma integral diseñada para la reposición ágil y segura de todo tipo de suministros para tu minimercado o negocio.
+                        </p>
+                    </div>
+                    <div class="col offer-hero-image-wrapper">
+                        <!-- Añadimos un pequeño efecto visual decorativo al fondo de la imagen -->
+                        <div class="hero-image-backdrop"></div>
+                        <img src="../assets/images/products/perfil-tmv2.jpg" alt="Camión logístico de TMV" class="hero-image">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Propuesta de Valor (Beneficios del Registro) -->
+            <section class="offer-benefits mb-5">
+                <div class="text-center mb-5">
+                    <h2>Beneficios de ser un Aliado Registrado</h2>
+                    <p class="subtitle">Alianzas comerciales estratégicas, seguridad en tus datos y gestión eficiente de pedidos.</p>
+                </div>
+
+                <div class="row">
+                    <article class="col offer-card">
+                        <div class="card-icon">📊</div>
+                        <h3>Gestión y Seguimiento</h3>
+                        <p>Al crear tu usuario y contraseña, obtienes acceso inmediato a tu historial de compras, facturas y seguimiento en tiempo real del estado de tus pedidos.</p>
+                    </article>
+
+                    <article class="col offer-card">
+                        <div class="card-icon">💎</div>
+                        <h3>Tarifas Preferenciales</h3>
+                        <p>Los clientes registrados acceden a nuestro sistema de precios mayoristas, promociones exclusivas y atención prioritaria por parte de nuestro equipo.</p>
+                    </article>
+
+                    <article class="col offer-card">
+                        <div class="card-icon">📦</div>
+                        <h3>Catálogo Categorizado</h3>
+                        <p>Explora nuestro catálogo digital optimizado. Encuentra rápidamente productos de aseo, ferretería o abarrotes organizados para la reposición inmediata de tu comercio.</p>
+                    </article>
+                </div>
+
+                <!-- CTAs Estratégicos (Call to Action) -->
+                <div class="offer-actions text-center mt-5">
+                    <a href="productos.html" class="btn-tmv btn-explore">Explorar Catálogo</a>
+                    <a href="login.html" class="btn-tmv btn-login">Iniciar Sesión / Registro</a>
+                </div>
+            </section>
+
+            <!-- Soporte Final -->
+            <section class="offer-support text-center">
+                <h2>¿Tienes dudas con tu registro o pedidos?</h2>
+                <p>Nuestro equipo de atención al cliente está listo para ayudarte en todo momento.</p>
+                <div class="mt-4">
+                    <a href="contactanos.html" class="btn-tmv btn-support">
+                        Centro de Ayuda
                     </a>
                 </div>
             </section>
+
         </div>
     </main>
 
@@ -41,5 +98,6 @@
 
     <!-- Scripts de la Aplicación -->
     <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/pages/que-ofrecemos.js"></script> <!-- Si necesitas lógica JS futura -->
 </body>
 </html>
