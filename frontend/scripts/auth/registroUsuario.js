@@ -4,9 +4,16 @@ import {
     validatePhone,
     validatePassword
 } from "../utils/utils.js";
+import {
+    guardarUsuario as guardarUsuarioStorage,
+    obtenerUsuariosRegistrados as obtenerUsuariosStorage,
+    existeUsuario,
+    ROLES,
+    USERS_STORAGE_KEY
+} from "./UsuarioData.js";
 
-// Clave utilizada para guardar y leer los usuarios en localStorage
-export const USERS_STORAGE_KEY = "tmvUsuarios";
+// Re-exportamos la clave para mantener compatibilidad
+export { USERS_STORAGE_KEY };
 
 // Mapeo de campos con sus validadores base
 const ALL_FIELDS = [
@@ -69,26 +76,37 @@ export function validarContrasena(contrasena) {
 }
 
 // -----------------------------------------------------------------------------
-// PROTOTIPOS DE GESTIÓN Y PERSISTENCIA (LOCALSTORAGE)
+// GESTIÓN Y PERSISTENCIA (LOCALSTORAGE)
 // -----------------------------------------------------------------------------
 
 export function validarRegistro(datos) {
-    return {
-        valido: true,
-        errores: {}
+    const errores = {
+        fullName: validarNombre(datos?.fullName),
+        phone: validarTelefono(datos?.phone),
+        email: validarCorreo(datos?.email),
+        password: validarContrasena(datos?.password)
     };
+
+    const valido = Object.values(errores).every((e) => e === "");
+    return { valido, errores };
 }
 
 export function obtenerUsuariosRegistrados() {
-    return [];
+    return obtenerUsuariosStorage();
 }
 
 export function guardarUsuario(nuevoUsuario) {
-    return null;
+    return guardarUsuarioStorage(nuevoUsuario);
 }
 
 export function registrarUsuario(datosFormulario) {
-    return { exito: true };
+    return guardarUsuarioStorage({
+        nombre: datosFormulario.fullName,
+        phone: datosFormulario.phone,
+        email: datosFormulario.email,
+        password: datosFormulario.password,
+        rol: ROLES.CLIENTE
+    });
 }
 
 // -----------------------------------------------------------------------------
@@ -112,6 +130,15 @@ export function initRegistroUsuario() {
     const campoPassword = document.getElementById("signup-password");
     const errorPassword = document.getElementById("error-password");
 
+    const feedbackRegistro = document.getElementById("signup-feedback");
+
+    const limpiarFeedbackRegistro = () => {
+        if (!feedbackRegistro) return;
+        feedbackRegistro.textContent = "";
+        feedbackRegistro.className = "auth-feedback";
+        feedbackRegistro.removeAttribute("role");
+    };
+
     // 1. Validación de Nombre
     let nombreRevisado = false;
     const comprobarNombre = () => {
@@ -126,17 +153,14 @@ export function initRegistroUsuario() {
         campoNombre.setAttribute("aria-describedby", "error-fullname");
         errorNombre.setAttribute("aria-live", "polite");
 
-        // Valida la primera vez que el usuario sale del input
         campoNombre.addEventListener("blur", () => {
             nombreRevisado = true;
             comprobarNombre();
         });
 
-        // Actualiza el error mientras escribe solo si el campo ya fue revisado
         campoNombre.addEventListener("input", () => {
-            if (nombreRevisado) {
-                comprobarNombre();
-            }
+            if (nombreRevisado) comprobarNombre();
+            limpiarFeedbackRegistro();
         });
     }
 
@@ -160,9 +184,8 @@ export function initRegistroUsuario() {
         });
 
         phoneInput.addEventListener("input", () => {
-            if (telefonoRevisado) {
-                comprobarTelefono();
-            }
+            if (telefonoRevisado) comprobarTelefono();
+            limpiarFeedbackRegistro();
         });
     }
 
@@ -186,9 +209,8 @@ export function initRegistroUsuario() {
         });
 
         campoCorreo.addEventListener("input", () => {
-            if (correoRevisado) {
-                comprobarCorreo();
-            }
+            if (correoRevisado) comprobarCorreo();
+            limpiarFeedbackRegistro();
         });
     }
 
@@ -212,16 +234,15 @@ export function initRegistroUsuario() {
         });
 
         campoPassword.addEventListener("input", () => {
-            if (passwordRevisada) {
-                comprobarPassword();
-            }
+            if (passwordRevisada) comprobarPassword();
+            limpiarFeedbackRegistro();
         });
     }
 
     // 5. Envío del Formulario de Registro
-    // Revisa los cuatro campos en orden; si alguno falla, detiene el envío y enfoca el campo con error
     formularioRegistro.addEventListener("submit", (event) => {
         event.preventDefault();
+        limpiarFeedbackRegistro();
 
         nombreRevisado = true;
         telefonoRevisado = true;
@@ -253,10 +274,58 @@ export function initRegistroUsuario() {
             return;
         }
 
-        // Si todos los campos son correctos, se extraen los datos para el registro
+        // Validación de correo ya registrado en el sistema
+        const emailIngresado = (campoCorreo?.value || "").trim().toLowerCase();
+        if (existeUsuario(emailIngresado)) {
+            const mensajeDuplicado = "Este correo electrónico ya se encuentra registrado.";
+            if (errorCorreo) errorCorreo.textContent = mensajeDuplicado;
+            campoCorreo?.setAttribute("aria-invalid", "true");
+            if (feedbackRegistro) {
+                feedbackRegistro.textContent = "El correo ya está registrado. Inicia sesión o utiliza otro.";
+                feedbackRegistro.className = "auth-feedback is-error";
+                feedbackRegistro.setAttribute("role", "alert");
+            }
+            campoCorreo?.focus();
+            return;
+        }
+
+        // Extracción de datos y guardado en localStorage
         const formData = new FormData(formularioRegistro);
         const datos = Object.fromEntries(formData.entries());
-        registrarUsuario(datos);
+        const resultado = registrarUsuario(datos);
+
+        if (resultado.exito) {
+            if (feedbackRegistro) {
+                feedbackRegistro.textContent = "¡Registro exitoso! Ya puedes iniciar sesión con tus credenciales.";
+                feedbackRegistro.className = "auth-feedback is-success";
+                feedbackRegistro.setAttribute("role", "status");
+            }
+
+            formularioRegistro.reset();
+            nombreRevisado = false;
+            telefonoRevisado = false;
+            correoRevisado = false;
+            passwordRevisada = false;
+
+            // Pre-llenar el correo en el formulario de login para agilizar la entrada
+            const campoSigninEmail = document.getElementById("signin-email");
+            if (campoSigninEmail) {
+                campoSigninEmail.value = emailIngresado;
+            }
+
+            // Deslizar automáticamente hacia el panel de login tras un breve delay
+            setTimeout(() => {
+                const notebook = document.getElementById("authNotebook");
+                notebook?.classList.remove("active");
+                const campoSigninPass = document.getElementById("signin-password");
+                campoSigninPass?.focus();
+            }, 1500);
+        } else {
+            if (feedbackRegistro) {
+                feedbackRegistro.textContent = resultado.mensaje || "Ocurrió un error al registrar el usuario.";
+                feedbackRegistro.className = "auth-feedback is-error";
+                feedbackRegistro.setAttribute("role", "alert");
+            }
+        }
     });
 }
-
