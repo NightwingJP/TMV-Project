@@ -26,9 +26,6 @@
                     <li class="tmv-nav-item">
                         <a href="#mis-productos" class="tmv-nav-link" data-anchor="mis-productos">MIS PRODUCTOS</a>
                     </li>
-                    <li class="tmv-nav-item">
-                        <a href="index.html" class="tmv-nav-link tmv-nav-link-exit" data-public-store="true">TIENDA PÚBLICA</a>
-                    </li>
                 </ul>
             </nav>
 
@@ -66,26 +63,27 @@
                     </li>
                     <li class="tmv-dropdown-divider" role="separator"></li>
                     <li>
-                        <a href="index.html" class="tmv-dropdown-item tmv-dropdown-item-exit" data-public-store="true">
-                            <span class="tmv-item-bullet">↗</span>
-                            <span class="tmv-item-text">Ver Tienda Pública</span>
-                        </a>
+                        <button type="button" class="tmv-dropdown-item tmv-dropdown-item-logout" id="adminDropdownLogoutBtn">
+                            <span class="tmv-item-bullet">🚪</span>
+                            <span class="tmv-item-text">Cerrar Sesión</span>
+                        </button>
                     </li>
                 </ul>
             </div>
 
-            <!-- Botón de perfil del administrador -->
+            <!-- Botón de acción: Cerrar sesión del administrador -->
             <div class="tmv-actions tmv-admin-actions">
-                <a href="#admin-perfil" class="tmv-auth-btn tmv-admin-user-btn" id="tmvAdminUserBtn"
-                    aria-label="Perfil del Administrador">
+                <button type="button" class="tmv-auth-btn tmv-admin-user-btn tmv-admin-logout-btn" id="tmvAdminLogoutBtn"
+                    title="Cerrar sesión y volver al inicio" aria-label="Cerrar sesión de administrador">
                     <svg class="tmv-auth-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         aria-hidden="true">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
                     </svg>
-                    <span class="tmv-admin-user-text">Administrador</span>
-                </a>
+                    <span class="tmv-admin-user-text">Cerrar Sesión</span>
+                </button>
             </div>
         </div>
 

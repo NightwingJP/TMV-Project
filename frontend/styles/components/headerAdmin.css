@@ -146,6 +146,40 @@
     list-style: none;
 }
 
+/* Botones de cierre de sesión en admin */
+.tmv-admin-logout-btn {
+    cursor: pointer;
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+    transition: all 0.2s ease;
+}
+
+.tmv-admin-logout-btn:hover {
+    background-color: #c92a2a !important;
+    border-color: #c92a2a !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(201, 42, 42, 0.25) !important;
+}
+
+.tmv-dropdown-item-logout {
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+}
+
+.tmv-dropdown-item-logout:hover {
+    background-color: #ffe3e3 !important;
+    color: #c92a2a !important;
+}
+
+.tmv-dropdown-item-logout:hover .tmv-item-bullet {
+    color: #c92a2a !important;
+}
+
 /* Responsividad móvil */
 .tmv-header-admin .tmv-nav-toggle {
     display: none !important;
