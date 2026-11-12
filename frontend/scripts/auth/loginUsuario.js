@@ -1,14 +1,15 @@
 // =============================================================================
 // TMV - Inicio de sesión (loginUsuario.js)
 // -----------------------------------------------------------------------------
-// Valida los campos del login con las mismas reglas del registro y compara las
-// credenciales contra los usuarios fijos de UsuarioData.js:
+// Valida los campos del login con las mismas reglas del registro y autentica
+// las credenciales contra los usuarios fijos de UsuarioData.js:
 //   - Administrador -> homePageAdmin.html
 //   - Cliente       -> productos.html (catálogo)
-//   - Otro caso     -> mensaje de error
+//   - Otro caso     -> mensaje de error visual
 // =============================================================================
-// Validaciones de campos de formulario en login ( 1er campo NOMBRE usuario O correo a validad 2do contrasena (FER)
+
 import { validateEmail, validatePassword } from "../utils/utils.js";
+import { buscarUsuarioFijo, guardarSesion, RUTAS_POR_ROL } from "./UsuarioData.js";
 
 /**
  * Valida que el primer campo del login contenga un correo electrónico válido.
@@ -50,14 +51,14 @@ export function validarCamposLogin(correo, contrasena) {
 /**
  * Muestra el mensaje de alerta visual en el contenedor de feedback del formulario.
  * @param {HTMLElement | null} feedbackEl
- * @param {string[]} mensajes
+ * @param {string | string[]} mensajes
  */
 function mostrarAlertaLogin(feedbackEl, mensajes) {
-    if (feedbackEl) {
-        feedbackEl.textContent = mensajes.join(" ");
-        feedbackEl.className = "auth-feedback is-error";
-        feedbackEl.setAttribute("role", "alert");
-    }
+    if (!feedbackEl) return;
+    const texto = Array.isArray(mensajes) ? mensajes.join(" ") : mensajes;
+    feedbackEl.textContent = texto;
+    feedbackEl.className = "auth-feedback is-error";
+    feedbackEl.setAttribute("role", "alert");
 }
 
 /**
@@ -72,7 +73,27 @@ function limpiarAlertaLogin(feedbackEl) {
 }
 
 /**
- * Inicializa las validaciones y alertas del formulario de inicio de sesión (#form-signin).
+ * Intenta autenticar al usuario contra los usuarios registrados/fijos.
+ * @param {string} email
+ * @param {string} password
+ * @returns {{ exito: boolean, usuario?: object, destino?: string, mensaje?: string }}
+ */
+export function autenticarUsuario(email, password) {
+    const usuario = buscarUsuarioFijo(email, password);
+
+    if (!usuario) {
+        return { exito: false, mensaje: "Correo o contraseña incorrectos." };
+    }
+
+    return {
+        exito: true,
+        usuario,
+        destino: RUTAS_POR_ROL[usuario.rol] || "productos.html"
+    };
+}
+
+/**
+ * Inicializa las validaciones, eventos y autenticación del formulario de login (#form-signin).
  */
 export function initLoginUsuario() {
     if (typeof document === "undefined") return;
@@ -87,175 +108,88 @@ export function initLoginUsuario() {
     const errorPassword = document.getElementById("error-signin-password");
     const feedbackLogin = document.getElementById("signin-feedback");
 
-    const campos = [
-        {
-            input: campoEmail,
-            errorEl: errorEmail,
-            errorId: "error-signin-email",
-            validar: validarCorreoLogin,
-            revisado: false
-        },
-        {
-            input: campoPassword,
-            errorEl: errorPassword,
-            errorId: "error-signin-password",
-            validar: validarContrasenaLogin,
-            revisado: false
-        }
-    ];
-
-    const comprobarCampo = (campo) => {
-        if (!campo.input) return "";
-        const mensaje = campo.validar(campo.input.value);
-        if (campo.errorEl) {
-            campo.errorEl.textContent = mensaje;
-        }
-        campo.input.setAttribute("aria-invalid", mensaje ? "true" : "false");
+    const comprobarEmail = () => {
+        if (!campoEmail) return "";
+        const mensaje = validarCorreoLogin(campoEmail.value);
+        if (errorEmail) errorEmail.textContent = mensaje;
+        campoEmail.setAttribute("aria-invalid", mensaje ? "true" : "false");
         return mensaje;
     };
 
-    campos.forEach((campo) => {
-        if (!campo.input) return;
-        if (campo.errorEl) {
-            campo.input.setAttribute("aria-describedby", campo.errorId);
-            campo.errorEl.setAttribute("aria-live", "polite");
-        }
+    const comprobarPassword = () => {
+        if (!campoPassword) return "";
+        const mensaje = validarContrasenaLogin(campoPassword.value);
+        if (errorPassword) errorPassword.textContent = mensaje;
+        campoPassword.setAttribute("aria-invalid", mensaje ? "true" : "false");
+        return mensaje;
+    };
 
-        campo.input.addEventListener("blur", () => {
-            campo.revisado = true;
-            comprobarCampo(campo);
+    // 1. Validación en tiempo real (blur / input)
+    let emailRevisado = false;
+    let passwordRevisado = false;
+
+    if (campoEmail) {
+        campoEmail.setAttribute("aria-describedby", "error-signin-email");
+        if (errorEmail) errorEmail.setAttribute("aria-live", "polite");
+
+        campoEmail.addEventListener("blur", () => {
+            emailRevisado = true;
+            comprobarEmail();
         });
 
-        campo.input.addEventListener("input", () => {
-            if (campo.revisado) {
-                comprobarCampo(campo);
-            }
+        campoEmail.addEventListener("input", () => {
+            if (emailRevisado) comprobarEmail();
             limpiarAlertaLogin(feedbackLogin);
         });
-    });
-
-    formularioLogin.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const mensajesError = [];
-        let primerCampoInvalido = null;
-
-        campos.forEach((campo) => {
-            campo.revisado = true;
-            const mensaje = comprobarCampo(campo);
-            if (mensaje) {
-                mensajesError.push(mensaje);
-                if (!primerCampoInvalido && campo.input) {
-                    primerCampoInvalido = campo.input;
-                }
-            }
-        });
-
-        if (mensajesError.length > 0) {
-            mostrarAlertaLogin(feedbackLogin, mensajesError);
-            primerCampoInvalido?.focus();
-            return;
-        }
-
-        limpiarAlertaLogin(feedbackLogin);
-        formularioLogin.dispatchEvent(
-            new CustomEvent("tmv:login-validated", {
-                detail: {
-                    email: (campoEmail?.value || "").trim(),
-                    password: campoPassword?.value || ""
-                }
-            })
-        );
-    });
-}
-
-import { validateEmail, validatePassword } from "../utils/utils.js";
-import { buscarUsuarioFijo, guardarSesion, RUTAS_POR_ROL } from "./UsuarioData.js";
-
-/**
- * Valida el formato de los campos del login.
- * @param {string} email
- * @param {string} password
- * @returns {{valido: boolean, errores: {email: string, password: string}}}
- */
-export function validarLogin(email, password) {
-    const errores = {
-        email: validateEmail(email),
-        password: validatePassword(password)
-    };
-    return { valido: !errores.email && !errores.password, errores };
-}
-
-/**
- * Intenta autenticar al usuario.
- * @returns {{exito: boolean, usuario?: object, destino?: string, mensaje?: string}}
- */
-export function autenticarUsuario(email, password) {
-    const usuario = buscarUsuarioFijo(email, password);
-
-    if (!usuario) {
-        return { exito: false, mensaje: "Correo o contraseña incorrectos." };
     }
 
-    return { exito: true, usuario, destino: RUTAS_POR_ROL[usuario.rol] };
-}
+    if (campoPassword) {
+        campoPassword.setAttribute("aria-describedby", "error-signin-password");
+        if (errorPassword) errorPassword.setAttribute("aria-live", "polite");
 
-export function initLoginUsuario() {
-    const formSignIn = document.getElementById("form-signin");
-    if (!formSignIn) return;
+        campoPassword.addEventListener("blur", () => {
+            passwordRevisado = true;
+            comprobarPassword();
+        });
 
-    const campoCorreo = document.getElementById("signin-email");
-    const errorCorreo = document.getElementById("error-signin-email");
-    const campoPassword = document.getElementById("signin-password");
-    const errorPassword = document.getElementById("error-signin-password");
-    const feedback = document.getElementById("signin-feedback");
+        campoPassword.addEventListener("input", () => {
+            if (passwordRevisado) comprobarPassword();
+            limpiarAlertaLogin(feedbackLogin);
+        });
+    }
 
-    const mostrarError = (campo, contenedor, mensaje) => {
-        if (contenedor) contenedor.textContent = mensaje;
-        if (campo) campo.setAttribute("aria-invalid", mensaje ? "true" : "false");
-    };
-
-    const limpiarFeedback = () => {
-        if (feedback) feedback.textContent = "";
-    };
-
-    // Limpia los errores mientras el usuario vuelve a escribir
-    campoCorreo?.addEventListener("input", () => {
-        mostrarError(campoCorreo, errorCorreo, "");
-        limpiarFeedback();
-    });
-    campoPassword?.addEventListener("input", () => {
-        mostrarError(campoPassword, errorPassword, "");
-        limpiarFeedback();
-    });
-
-    formSignIn.addEventListener("submit", (event) => {
+    // 2. Envío del formulario
+    formularioLogin.addEventListener("submit", (event) => {
         event.preventDefault();
-        limpiarFeedback();
+        limpiarAlertaLogin(feedbackLogin);
 
-        const email = campoCorreo?.value ?? "";
-        const password = campoPassword?.value ?? "";
+        emailRevisado = true;
+        passwordRevisado = true;
 
-        // 1. Validación de formato (mismas reglas que el registro)
-        const { valido, errores } = validarLogin(email, password);
-        mostrarError(campoCorreo, errorCorreo, errores.email);
-        mostrarError(campoPassword, errorPassword, errores.password);
+        const errEmail = comprobarEmail();
+        const errPassword = comprobarPassword();
 
-        if (!valido) {
-            (errores.email ? campoCorreo : campoPassword)?.focus();
+        // Si hay errores de formato, enfoca el primer campo inválido
+        if (errEmail || errPassword) {
+            const errores = [errEmail, errPassword].filter(Boolean);
+            mostrarAlertaLogin(feedbackLogin, errores);
+            (errEmail ? campoEmail : campoPassword)?.focus();
             return;
         }
 
-        // 2. Verificación de credenciales y redirección según el rol
+        const email = (campoEmail?.value || "").trim();
+        const password = campoPassword?.value || "";
+
+        // 3. Autenticación de credenciales
         const resultado = autenticarUsuario(email, password);
 
         if (!resultado.exito) {
-            if (feedback) feedback.textContent = resultado.mensaje;
-            alert(resultado.mensaje);
+            mostrarAlertaLogin(feedbackLogin, resultado.mensaje);
             campoPassword?.focus();
             return;
         }
 
+        // 4. Sesión exitosa y redirección por rol
         guardarSesion(resultado.usuario);
         window.location.href = resultado.destino;
     });

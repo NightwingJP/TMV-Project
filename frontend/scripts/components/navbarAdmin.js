@@ -2,6 +2,8 @@
 // TMV - Navbar Administrativo (navbarAdmin.js)
 // ==========================================================================
 
+import { cerrarSesion } from "../auth/UsuarioData.js";
+
 /**
  * Inicializa los eventos del navbar de administración:
  * - Rutas dinámicas para logos y enlaces
@@ -35,10 +37,22 @@ export function initNavbarAdmin() {
         logoLetters.setAttribute("src", `${pathToRoot}assets/images/logos/logo-tmv.png`);
     }
 
-    const publicStoreLinks = document.querySelectorAll('[data-public-store="true"]');
-    publicStoreLinks.forEach((link) => {
-        link.setAttribute("href", `${pathToRoot}index.html`);
-    });
+    // Manejo del cierre de sesión del administrador
+    const handleLogout = (event) => {
+        event.preventDefault();
+        cerrarSesion();
+        window.location.href = `${pathToRoot}index.html`;
+    };
+
+    const logoutBtn = document.getElementById("tmvAdminLogoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", handleLogout);
+    }
+
+    const dropdownLogoutBtn = document.getElementById("adminDropdownLogoutBtn");
+    if (dropdownLogoutBtn) {
+        dropdownLogoutBtn.addEventListener("click", handleLogout);
+    }
 
     // Sincronizar el enlace activo con el hash de la URL
     const updateActiveState = () => {

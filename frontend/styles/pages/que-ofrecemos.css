@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* ---------- 1. Encabezado Hero Comercial (Layout Amplio) ---------- */
-/* CORRECCIÓN: Aumentamos el margen inferior de 3rem (mb-5) a 6rem para separar el Hero de los beneficios */
+/* Margen inferior para separar el Hero de los beneficios */
 .offer-hero {
     background: linear-gradient(135deg, var(--color-bg-soft) 0%, var(--color-bg-light) 100%);
     border: 1px solid var(--color-highlight);
