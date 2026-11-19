@@ -1,5 +1,8 @@
 package com.tmv.dto;
 
+import com.tmv.model.Producto;
+import com.tmv.model.Usuario;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -29,6 +32,32 @@ public class ProductoDTO {
         this.fechaIngreso = fechaIngreso;
         this.stock = stock;
         this.fechaSalida = fechaSalida;
+    }
+
+    public static ProductoDTO fromEntity(Producto producto){
+        return new ProductoDTO(
+                producto.getId(),
+                producto.getNombreProducto(),
+                producto.getPrecio(),
+                producto.getDescripcion(),
+                producto.getImagenProducto(),
+                producto.getCategoria(),
+                producto.getFechaIngreso(),
+                producto.getStock(),
+                producto.getFechaSalida()
+        );
+    }
+
+    public Producto toEntity() {
+        return new Producto(
+                this.nombreProducto,
+                this.precio,
+                this.descripcion,
+                this.imagenProducto,
+                this.categoria,
+                this.fechaIngreso,
+                this.stock,
+                this.fechaSalida);
     }
 
     public Long getId() {

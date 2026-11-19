@@ -1,6 +1,9 @@
 package com.tmv.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tmv.model.Usuario;
+
+import java.security.PublicKey;
 
 public class UsuarioDTO {
 
@@ -23,6 +26,21 @@ public class UsuarioDTO {
         this.email = email;
         this.direccion = direccion;
         this.contrasenia = contrasenia;
+    }
+
+    public static UsuarioDTO fromEntity(Usuario usuario){
+        return new UsuarioDTO(
+                usuario.getId(),
+                usuario.getUsuario(),
+                usuario.getTelefono(),
+                usuario.getEmail(),
+                usuario.getDireccion(),
+                usuario.getContrasenia()
+        );
+    }
+
+    public Usuario toEntity(){
+        return  new Usuario(this.usuario, this.telefono, this.email, this.direccion, this.contrasenia);
     }
 
     public Long getId() {
