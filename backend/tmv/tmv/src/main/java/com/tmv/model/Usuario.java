@@ -5,27 +5,27 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 50)
     private String usuario;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String telefono;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String direccion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String contrasenia;
 
-    public Usuario(){
-
+    public Usuario() {
     }
 
     public Usuario(String usuario, String telefono, String email, String direccion, String contrasenia) {

@@ -1,6 +1,7 @@
 package com.tmv.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vehiculos")
@@ -10,31 +11,40 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cod_poliza_obligatoria", nullable = false)
+    @Column(name = "cod_poliza_obligatoria", nullable = false, length = 50)
     private String codPolizaObligatoria;
 
-    @Column(name = "cod_poliza_voluntaria", nullable = false)
+    @Column(name = "fecha_poliza_obligatoria", nullable = false)
+    private LocalDateTime fechaPolizaObligatoria;
+
+    @Column(name = "cod_poliza_voluntaria", length = 50)
     private String codPolizaVoluntaria;
 
-    @Column(name = "fecha_poliza_obligatoria", nullable = false, columnDefinition = "DATETIME")
-    private String fechaPolizaObligatoria;
+    @Column(name = "fecha_poliza_voluntaria")
+    private LocalDateTime fechaPolizaVoluntaria;
 
-    @Column(name = "fecha_poliza_voluntaria", nullable = false, columnDefinition = "DATETIME")
-    private String fechaPolizaVoluntaria;
+    @Column(name = "fecha_mantenimiento", nullable = false)
+    private LocalDateTime fechaMantenimiento;
 
-    @Column(name = "fecha_mantenimiento", nullable = false, columnDefinition = "DATETIME")
-    private String fechaMantenimiento;
-
-    public Vehiculo(){
-
+    public Vehiculo() {
     }
 
-    public Vehiculo(String codPolizaObligatoria, String codPolizaVoluntaria, String fechaPolizaObligatoria, String fechaPolizaVoluntaria, String fechaMantenimiento) {
+    public Vehiculo(String codPolizaObligatoria, LocalDateTime fechaPolizaObligatoria,
+                    String codPolizaVoluntaria, LocalDateTime fechaPolizaVoluntaria,
+                    LocalDateTime fechaMantenimiento) {
         this.codPolizaObligatoria = codPolizaObligatoria;
-        this.codPolizaVoluntaria = codPolizaVoluntaria;
         this.fechaPolizaObligatoria = fechaPolizaObligatoria;
+        this.codPolizaVoluntaria = codPolizaVoluntaria;
         this.fechaPolizaVoluntaria = fechaPolizaVoluntaria;
         this.fechaMantenimiento = fechaMantenimiento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCodPolizaObligatoria() {
@@ -45,6 +55,14 @@ public class Vehiculo {
         this.codPolizaObligatoria = codPolizaObligatoria;
     }
 
+    public LocalDateTime getFechaPolizaObligatoria() {
+        return fechaPolizaObligatoria;
+    }
+
+    public void setFechaPolizaObligatoria(LocalDateTime fechaPolizaObligatoria) {
+        this.fechaPolizaObligatoria = fechaPolizaObligatoria;
+    }
+
     public String getCodPolizaVoluntaria() {
         return codPolizaVoluntaria;
     }
@@ -53,39 +71,19 @@ public class Vehiculo {
         this.codPolizaVoluntaria = codPolizaVoluntaria;
     }
 
-    public String getFechaPolizaObligatoria() {
-        return fechaPolizaObligatoria;
-    }
-
-    public void setFechaPolizaObligatoria(String fechaPolizaObligatoria) {
-        this.fechaPolizaObligatoria = fechaPolizaObligatoria;
-    }
-
-    public String getFechaPolizaVoluntaria() {
+    public LocalDateTime getFechaPolizaVoluntaria() {
         return fechaPolizaVoluntaria;
     }
 
-    public void setFechaPolizaVoluntaria(String fechaPolizaVoluntaria) {
+    public void setFechaPolizaVoluntaria(LocalDateTime fechaPolizaVoluntaria) {
         this.fechaPolizaVoluntaria = fechaPolizaVoluntaria;
     }
 
-    public String getFechaMantenimiento() {
+    public LocalDateTime getFechaMantenimiento() {
         return fechaMantenimiento;
     }
 
-    public void setFechaMantenimiento(String fechaMantenimiento) {
+    public void setFechaMantenimiento(LocalDateTime fechaMantenimiento) {
         this.fechaMantenimiento = fechaMantenimiento;
     }
 }
-
-/**
- *-- 4. Tabla Vehiculos
- * CREATE TABLE Vehiculos (
- *     id INT AUTO_INCREMENT PRIMARY KEY,
- *     cod_poliza_obligatoria VARCHAR(50) NOT NULL,
- *     fecha_poliza_obligatoria DATETIME NOT NULL,
- *     cod_poliza_voluntaria VARCHAR(50) NULL,
- *     fecha_poliza_voluntaria DATETIME NULL,
- *     fecha_mantenimiento DATETIME NOT NULL
- * );
- */
