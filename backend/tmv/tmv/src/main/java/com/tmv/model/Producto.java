@@ -1,50 +1,53 @@
 package com.tmv.model;
 
 import jakarta.persistence.*;
-import java.math.BigInteger;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "productos")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_producto", nullable = false)
+    @Column(name = "nombre_producto", nullable = false, length = 120)
     private String nombreProducto;
 
-    @Column(nullable = false)
-    private Double precio;
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal precio;
 
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "imagen_producto")
-    private String imageProducto;
+    @Column(name = "imagen_producto", length = 255)
+    private String imagenProducto;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 60)
     private String categoria;
 
-    @Column(name = "fecha_ingreso", nullable = false, columnDefinition = "DATETIME")
-    private String fechaIngreso;
+    @Column(name = "fecha_ingreso", nullable = false)
+    private LocalDateTime fechaIngreso;
 
     @Column(nullable = false)
-    private BigInteger stock;
+    private Long stock = 0L;
 
-    @Column(name = "fecha_salida", columnDefinition = "DATETIME")
-    private String fechaSalida;
+    @Column(name = "fecha_salida")
+    private LocalDateTime fechaSalida;
 
-    public Producto(){
-
+    public Producto() {
     }
 
-    public Producto(String nombreProducto, Double precio, String descripcion, String imageProducto, String categoria, String fechaIngreso, BigInteger stock, String fechaSalida) {
+    public Producto(String nombreProducto, BigDecimal precio, String descripcion, String imagenProducto,
+                    String categoria, LocalDateTime fechaIngreso, Long stock, LocalDateTime fechaSalida) {
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.imageProducto = imageProducto;
+        this.imagenProducto = imagenProducto;
         this.categoria = categoria;
         this.fechaIngreso = fechaIngreso;
-        this.stock = stock;
+        this.stock = stock != null ? stock : 0L;
         this.fechaSalida = fechaSalida;
     }
 
@@ -64,11 +67,11 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-    public Double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
@@ -80,12 +83,12 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public String getImageProducto() {
-        return imageProducto;
+    public String getImagenProducto() {
+        return imagenProducto;
     }
 
-    public void setImageProducto(String imageProducto) {
-        this.imageProducto = imageProducto;
+    public void setImagenProducto(String imagenProducto) {
+        this.imagenProducto = imagenProducto;
     }
 
     public String getCategoria() {
@@ -96,27 +99,27 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public String getFechaIngreso() {
+    public LocalDateTime getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public BigInteger getStock() {
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(BigInteger stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
-    public String getFechaSalida() {
+    public LocalDateTime getFechaSalida() {
         return fechaSalida;
     }
 
-    public void setFechaSalida(String fechaSalida) {
+    public void setFechaSalida(LocalDateTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 }

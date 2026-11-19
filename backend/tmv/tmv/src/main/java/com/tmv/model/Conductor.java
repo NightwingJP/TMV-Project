@@ -1,6 +1,7 @@
 package com.tmv.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "conductores")
@@ -10,23 +11,22 @@ public class Conductor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_conductor", nullable = false)
+    @Column(name = "nombre_conductor", nullable = false, length = 100)
     private String nombreConductor;
 
-    @Column(nullable = false)
+    @Column(name = "telefono_conductor", nullable = false, length = 20)
     private String telefono;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 30)
     private String licencia;
 
-    @Column(name = "fecha_vencimiento_licencia", columnDefinition = "DATETIME")
-    private String fechaVencimientoLicencia;
+    @Column(name = "fecha_vencimiento_licencia", nullable = false)
+    private LocalDateTime fechaVencimientoLicencia;
 
-    public Conductor(){
-
+    public Conductor() {
     }
 
-    public Conductor(String nombreConductor, String telefono, String licencia, String fechaVencimientoLicencia) {
+    public Conductor(String nombreConductor, String telefono, String licencia, LocalDateTime fechaVencimientoLicencia) {
         this.nombreConductor = nombreConductor;
         this.telefono = telefono;
         this.licencia = licencia;
@@ -65,24 +65,11 @@ public class Conductor {
         this.licencia = licencia;
     }
 
-    public String getFechaVencimientoLicencia() {
+    public LocalDateTime getFechaVencimientoLicencia() {
         return fechaVencimientoLicencia;
     }
 
-    public void setFechaVencimientoLicencia(String fechaVencimientoLicencia) {
+    public void setFechaVencimientoLicencia(LocalDateTime fechaVencimientoLicencia) {
         this.fechaVencimientoLicencia = fechaVencimientoLicencia;
     }
 }
-
-/**
- *
- *
- -- 3. Tabla Conductores
- CREATE TABLE Conductores (
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre_conductor VARCHAR(100) NOT NULL,
- telefono_conductor VARCHAR(20) NOT NULL,
- licencia VARCHAR(30) NOT NULL UNIQUE,
- fecha_vencimiento_licencia DATETIME NOT NULL
- );
- */
