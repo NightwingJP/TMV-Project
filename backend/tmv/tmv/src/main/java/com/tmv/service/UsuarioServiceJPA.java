@@ -30,6 +30,11 @@ public class UsuarioServiceJPA implements UsuarioService{
     }
 
     @Override
+    public Usuario findByEmail(String email) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public Usuario save(Usuario envio) {
         return usuarioRepository.save(envio);

@@ -24,12 +24,19 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
+    // FER findAll, findById, findByCategory
+
     //@Override
     //public Page<Producto> findAll(Pageable pageable)
 
     //@Override
     //public Producto findById(Long id)
 
+    //@Override
+    //public Producto findByCategory(String categoria)
+
+
+    // ANGELA mejorar logica y validaciones createProduct(), update(), deleteById()
     @PostMapping
     public ProductoDTO createProduct(@RequestBody ProductoDTO productoDTO) {
         Producto producto = productoDTO.toEntity();
