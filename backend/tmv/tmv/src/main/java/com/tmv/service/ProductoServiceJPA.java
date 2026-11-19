@@ -29,6 +29,11 @@ public class ProductoServiceJPA implements ProductoService{
     }
 
     @Override
+    public Producto findByCategory(String categoria) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public Producto save(Producto producto) {
         return productoRepository.save(producto);

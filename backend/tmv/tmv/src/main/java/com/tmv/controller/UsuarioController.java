@@ -19,11 +19,18 @@ public class UsuarioController {
         this.usuarioServicio = usuarioServicio;
     }
 
+    // JUAN DIAZ findAll, findById,
+
     //@Override
     //public Usuario<Usuario> findAll(Pageable pageable)
 
     //@Override
     //public Usuario findById(Long id)
+
+    //@Override
+    //public Usuario findByEmail(String email)
+
+    // JUAN PABLO -> mejorar createUser (logica y validaciones), update(), deleteById()
 
     @PostMapping
     public UsuarioDTO createUser(@RequestBody UsuarioDTO usuarioDTO) {
