@@ -1,5 +1,7 @@
 package com.tmv.dto;
 
+import com.tmv.model.Pedido;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -27,6 +29,19 @@ public class PedidoDTO {
         this.direccionEnvio = direccionEnvio;
         this.observacion = observacion;
         this.descuento = descuento;
+    }
+
+    public static PedidoDTO fromEntity(Pedido pedido) {
+        return new PedidoDTO(
+                pedido.getId(),
+                pedido.getUsuario() != null ? pedido.getUsuario().getId() : null,
+                pedido.getFechaPedido(),
+                pedido.getEstado(),
+                pedido.getTotalPedido(),
+                pedido.getDireccionEnvio(),
+                pedido.getObservacion(),
+                pedido.getDescuento()
+        );
     }
 
     public Long getId() {

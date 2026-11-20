@@ -1,5 +1,7 @@
 package com.tmv.dto;
 
+import com.tmv.model.DetallePedido;
+
 import java.math.BigDecimal;
 
 public class DetallePedidoDTO {
@@ -24,6 +26,18 @@ public class DetallePedidoDTO {
         this.precioUnitario = precioUnitario;
         this.descuento = descuento;
         this.subtotal = subtotal;
+    }
+
+    public static DetallePedidoDTO fromEntity(DetallePedido detalle) {
+        return new DetallePedidoDTO(
+                detalle.getId(),
+                detalle.getPedido() != null ? detalle.getPedido().getId() : null,
+                detalle.getProducto() != null ? detalle.getProducto().getId() : null,
+                detalle.getCantidad(),
+                detalle.getPrecioUnitario(),
+                detalle.getDescuento(),
+                detalle.getSubtotal()
+        );
     }
 
     public Long getId() {

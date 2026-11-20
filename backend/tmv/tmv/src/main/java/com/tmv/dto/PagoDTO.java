@@ -1,5 +1,7 @@
 package com.tmv.dto;
 
+import com.tmv.model.Pago;
+
 public class PagoDTO {
 
     private Long id;
@@ -13,6 +15,14 @@ public class PagoDTO {
         this.id = id;
         this.idPedido = idPedido;
         this.formaPago = formaPago;
+    }
+
+    public static PagoDTO fromEntity(Pago pago) {
+        return new PagoDTO(
+                pago.getId(),
+                pago.getPedido() != null ? pago.getPedido().getId() : null,
+                pago.getFormaPago()
+        );
     }
 
     public Long getId() {
