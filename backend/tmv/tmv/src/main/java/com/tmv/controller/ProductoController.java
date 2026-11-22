@@ -1,15 +1,10 @@
 package com.tmv.controller;
 
 import com.tmv.dto.ProductoDTO;
-import com.tmv.dto.UsuarioDTO;
 import com.tmv.model.Producto;
-import com.tmv.model.Usuario;
 import com.tmv.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

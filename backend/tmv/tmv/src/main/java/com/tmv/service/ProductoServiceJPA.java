@@ -2,13 +2,12 @@ package com.tmv.service;
 
 import com.tmv.model.Producto;
 import com.tmv.repository.ProductoRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -44,28 +43,14 @@ public class ProductoServiceJPA implements ProductoService{
     @Override
     @Transactional
     public Producto save(Producto producto) {
-        String nombre = producto.getNombreProducto();
-        String categoria = producto.getCategoria();
-        BigDecimal precio = producto.getPrecio();
-        Long stock = producto.getStock();
-        String imagen = producto.getImagenProducto();
-
-        if (nombre == null || nombre.isBlank() || nombre.length() > 120) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre es obligatorio y admite hasta 120 caracteres");
-        }
-        if (categoria == null || categoria.isBlank() || categoria.length() > 60) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La categoría es obligatoria y admite hasta 60 caracteres");
-        }
-        if (precio == null || precio.signum() <= 0 || precio.stripTrailingZeros().scale() > 2
-                || precio.compareTo(BigDecimal.TEN.pow(10)) >= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El precio debe ser positivo y admitir hasta 10 enteros y 2 decimales");
-        }
-        if (stock == null || stock < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El stock debe ser cero o mayor");
-        }
-        if (imagen != null && imagen.length() > 255) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La imagen admite hasta 255 caracteres");
-        }
+        validarCampos(
+                producto.getNombreProducto(),
+                producto.getCategoria(),
+                producto.getPrecio(),
+                producto.getStock(),
+                producto.getImagenProducto(),
+                true
+        );
 
         producto.setFechaIngreso(LocalDateTime.now());
         producto.setFechaSalida(null);
@@ -80,6 +65,10 @@ public class ProductoServiceJPA implements ProductoService{
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
 
+        if (producto.getFechaSalida() != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "No se puede actualizar un producto retirado");
+        }
+
         String nombre = cambios.getNombreProducto();
         String categoria = cambios.getCategoria();
         BigDecimal precio = cambios.getPrecio();
@@ -87,22 +76,7 @@ public class ProductoServiceJPA implements ProductoService{
         String imagen = cambios.getImagenProducto();
         String descripcion = cambios.getDescripcion();
 
-        if (nombre != null && (nombre.isBlank() || nombre.length() > 120)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre es obligatorio y admite hasta 120 caracteres");
-        }
-        if (categoria != null && (categoria.isBlank() || categoria.length() > 60)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La categoría es obligatoria y admite hasta 60 caracteres");
-        }
-        if (precio != null && (precio.signum() <= 0 || precio.stripTrailingZeros().scale() > 2
-                || precio.compareTo(BigDecimal.TEN.pow(10)) >= 0)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El precio debe ser positivo y admitir hasta 10 enteros y 2 decimales");
-        }
-        if (stock != null && stock < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El stock debe ser cero o mayor");
-        }
-        if (imagen != null && imagen.length() > 255) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La imagen admite hasta 255 caracteres");
-        }
+        validarCampos(nombre, categoria, precio, stock, imagen, false);
 
         if (nombre != null) {
             producto.setNombreProducto(nombre);
@@ -135,6 +109,26 @@ public class ProductoServiceJPA implements ProductoService{
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
         if (producto.getFechaSalida() == null) {
             producto.setFechaSalida(LocalDateTime.now());
+        }
+    }
+
+    private void validarCampos(String nombre, String categoria, BigDecimal precio,
+                               Long stock, String imagen, boolean requerido) {
+        if ((requerido && nombre == null) || (nombre != null && (nombre.isBlank() || nombre.length() > 120))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre es obligatorio y admite hasta 120 caracteres");
+        }
+        if ((requerido && categoria == null) || (categoria != null && (categoria.isBlank() || categoria.length() > 60))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La categoría es obligatoria y admite hasta 60 caracteres");
+        }
+        if ((requerido && precio == null) || (precio != null && (precio.signum() <= 0
+                || precio.stripTrailingZeros().scale() > 2 || precio.compareTo(BigDecimal.TEN.pow(10)) >= 0))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El precio debe ser positivo y admitir hasta 10 enteros y 2 decimales");
+        }
+        if ((requerido && stock == null) || (stock != null && stock < 0)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El stock debe ser cero o mayor");
+        }
+        if (imagen != null && imagen.length() > 255) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La imagen admite hasta 255 caracteres");
         }
     }
 }
