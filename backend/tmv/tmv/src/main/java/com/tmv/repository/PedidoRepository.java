@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     Page<Pedido> findByUsuarioId(Long idUsuario, Pageable pageable);
+    boolean existsByUsuarioId(Long idUsuario);
     Page<Pedido> findByEstado(String estado, Pageable pageable);
 }

@@ -10,4 +10,9 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByUsuario(String cliente, Pageable pageable);
+
+    boolean existsByUsuarioIgnoreCase(String usuario);
+    boolean existsByUsuarioIgnoreCaseAndIdNot(String usuario, Long id);
+    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmailIgnoreCaseAndIdNot(String email, Long id);
 }
