@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +28,23 @@ public class ProductoController {
 
     // FER findAll, findById, findByCategory
 
-    //@Override
-    //public Page<Producto> findAll(Pageable pageable)
+    // Funciona para listar todos los productos de forma paginada FER
+    @GetMapping
+    public Page<Producto> findAll(Pageable pageable) {
+        return productoService.findAll(pageable);
+    }
 
-    //@Override
-    //public Producto findById(Long id)
+    // Funciona para buscar un producto por su id FER
+    @GetMapping("/{id}")
+    public Producto findById(@PathVariable Long id) {
+        return productoService.findById(id);
+    }
 
-    //@Override
-    //public Producto findByCategory(String categoria)
+    // Funciona para buscar un producto por su categoria FER
+    @GetMapping("/categoria/{categoria}")
+    public Producto findByCategory(@PathVariable String categoria) {
+        return productoService.findByCategory(categoria);
+    }
 
 
     // ANGELA mejorar logica y validaciones createProduct(), update(), deleteById()
