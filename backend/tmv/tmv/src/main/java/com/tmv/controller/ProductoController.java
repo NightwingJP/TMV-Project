@@ -8,10 +8,15 @@ import com.tmv.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,16 +43,24 @@ public class ProductoController {
 
     // ANGELA mejorar logica y validaciones createProduct(), update(), deleteById()
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductoDTO createProduct(@RequestBody ProductoDTO productoDTO) {
         Producto producto = productoDTO.toEntity();
         return ProductoDTO.fromEntity(productoService.save(producto));
     }
 
-    //@Override
-    //@Transactional
-    //public Producto update(Long id, Producto productoActualizado)
+    @PatchMapping("/{id}")
+    public ProductoDTO update(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
+        Producto cambios = productoDTO.toEntity();
+        // El constructor asigna cero al stock omitido. El servicio usa null para conservarlo.
+        cambios.setStock(productoDTO.getStock());
+        return ProductoDTO.fromEntity(productoService.update(id, cambios));
+    }
 
-    //@Override
-    //public void deleteById(Long id)
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        productoService.deleteById(id);
+    }
 
 }
