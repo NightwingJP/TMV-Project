@@ -1,7 +1,6 @@
 package com.tmv.dto;
 
 import com.tmv.model.Producto;
-import com.tmv.model.Usuario;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
