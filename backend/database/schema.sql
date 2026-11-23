@@ -8,6 +8,7 @@ USE db_tienda_virtual_mayorista;
 CREATE TABLE Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL UNIQUE,
+    rol VARCHAR(20) NOT NULL DEFAULT 'USER',
     telefono VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     direccion VARCHAR(255) NOT NULL,
