@@ -23,19 +23,28 @@ public class ProductoServiceJPA implements ProductoService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Producto> findAll(Pageable pageable) {
-        return null;
+        return productoRepository.findByFechaSalidaIsNull(pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Producto findById(Long id) {
-        return null;
+        if (id == null || id <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El id debe ser un número positivo");
+        }
+        return productoRepository.findByIdAndFechaSalidaIsNull(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
     }
 
-
     @Override
-    public Producto findByCategory(String categoria) {
-        return null;
+    @Transactional(readOnly = true)
+    public Page<Producto> findByCategory(String categoria, Pageable pageable) {
+        if (categoria == null || categoria.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La categoría es obligatoria");
+        }
+        return productoRepository.findByCategoriaIgnoreCaseAndFechaSalidaIsNull(categoria.trim(), pageable);
     }
 
     // Revisa los datos y guarda el producto como activo con la fecha actual.

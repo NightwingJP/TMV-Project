@@ -7,17 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @Service
 @Primary
 public class UsuarioServiceJPA implements UsuarioService{
-    private static final Pattern EMAIL = Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+    private static final int MAX_PAGE_SIZE = 50;
+    private static final int MAX_EMAIL_LENGTH = 100;
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9\\-]+(?:\\.[A-Za-z0-9\\-]+)*\\.[A-Za-z]{2,}$");
+    private static final Set<String> CAMPOS_ORDEN_VALIDOS = Set.of(
+            "id", "usuario", "email", "telefono", "direccion");
+
     private static final Pattern TELEFONO = Pattern.compile("^\\+?[0-9 ()-]{7,20}$");
     private static final int CONTRASENIA_MIN = 8;
 
@@ -31,18 +39,73 @@ public class UsuarioServiceJPA implements UsuarioService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Usuario> findAll(Pageable pageable) {
-        return null;
+        if (pageable == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La paginación es obligatoria");
+        }
+        if (pageable.getPageNumber() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El número de página no puede ser negativo");
+        }
+        if (pageable.getPageSize() <= 0 || pageable.getPageSize() > MAX_PAGE_SIZE) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El tamaño de página debe estar entre 1 y " + MAX_PAGE_SIZE);
+        }
+        for (Sort.Order order : pageable.getSort()) {
+            if (!CAMPOS_ORDEN_VALIDOS.contains(order.getProperty())) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Campo de ordenamiento no permitido: " + order.getProperty());
+            }
+        }
+        return usuarioRepository.findAll(pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Usuario findById(Long id) {
-        return null;
+        if (id == null || id <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El id debe ser un número positivo");
+        }
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario no encontrado con id: " + id));
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Usuario findByUsuario(String usuario) {
+        if (usuario == null || usuario.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El usuario es obligatorio");
+        }
+        String usuarioLimpio = limpiar(usuario);
+        return usuarioRepository.findByUsuarioIgnoreCase(usuarioLimpio)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario no encontrado: " + usuarioLimpio));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Usuario findByEmail(String email) {
-        return null;
+        if (email == null || email.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El email es obligatorio");
+        }
+        String emailLimpio = email.trim();
+        if (emailLimpio.length() > MAX_EMAIL_LENGTH) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El email no puede superar los " + MAX_EMAIL_LENGTH + " caracteres");
+        }
+        if (emailLimpio.contains("..") || !EMAIL_PATTERN.matcher(emailLimpio).matches()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El formato del email no es válido");
+        }
+        return usuarioRepository.findByEmailIgnoreCase(emailLimpio)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario no encontrado con email: " + emailLimpio));
     }
 
     // Normaliza (trim, email en minúsculas), valida todos los campos y rechaza usuario o email repetidos.
@@ -133,7 +196,7 @@ public class UsuarioServiceJPA implements UsuarioService{
         if ((requerido && telefono == null) || (telefono != null && !TELEFONO.matcher(telefono).matches())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El teléfono es obligatorio y debe tener entre 7 y 20 dígitos");
         }
-        if ((requerido && email == null) || (email != null && (email.length() > 100 || !EMAIL.matcher(email).matches()))) {
+        if ((requerido && email == null) || (email != null && (email.length() > 100 || !EMAIL_PATTERN.matcher(email).matches()))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El email es obligatorio, válido y admite hasta 100 caracteres");
         }
         if ((requerido && direccion == null) || (direccion != null && (direccion.isEmpty() || direccion.length() > 255))) {

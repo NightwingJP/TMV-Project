@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface UsuarioService {
     Page<Usuario> findAll(Pageable pageable);
     Usuario findById(Long id);
+    Usuario findByUsuario(String usuario);
     Usuario findByEmail(String email);
     Usuario save(Usuario usuario);
     Usuario update(Long id, Usuario usuario);

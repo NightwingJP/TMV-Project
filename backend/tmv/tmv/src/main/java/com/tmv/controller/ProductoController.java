@@ -29,22 +29,22 @@ public class ProductoController {
 
     // FER findAll, findById, findByCategory
 
-    // Funciona para listar todos los productos de forma paginada FER
+    // Funciona para listar todos los productos activos de forma paginada
     @GetMapping
-    public Page<Producto> findAll(Pageable pageable) {
-        return productoService.findAll(pageable);
+    public Page<ProductoDTO> findAll(Pageable pageable) {
+        return productoService.findAll(pageable).map(ProductoDTO::fromEntity);
     }
 
-    // Funciona para buscar un producto por su id FER
+    // Funciona para buscar un producto activo por su id
     @GetMapping("/{id}")
-    public Producto findById(@PathVariable Long id) {
-        return productoService.findById(id);
+    public ProductoDTO findById(@PathVariable Long id) {
+        return ProductoDTO.fromEntity(productoService.findById(id));
     }
 
-    // Funciona para buscar un producto por su categoria FER
+    // Funciona para buscar productos activos por categoria de forma paginada
     @GetMapping("/categoria/{categoria}")
-    public Producto findByCategory(@PathVariable String categoria) {
-        return productoService.findByCategory(categoria);
+    public Page<ProductoDTO> findByCategory(@PathVariable String categoria, Pageable pageable) {
+        return productoService.findByCategory(categoria, pageable).map(ProductoDTO::fromEntity);
     }
 
 
