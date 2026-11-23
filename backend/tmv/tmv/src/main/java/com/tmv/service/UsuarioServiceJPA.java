@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,11 +32,15 @@ public class UsuarioServiceJPA implements UsuarioService{
 
     private final UsuarioRepository usuarioRepository;
     private final PedidoRepository pedidoRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioServiceJPA(UsuarioRepository usuarioRepository, PedidoRepository pedidoRepository) {
+    public UsuarioServiceJPA(UsuarioRepository usuarioRepository,
+                             PedidoRepository pedidoRepository,
+                             PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.pedidoRepository = pedidoRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -108,7 +113,7 @@ public class UsuarioServiceJPA implements UsuarioService{
                         "Usuario no encontrado con email: " + emailLimpio));
     }
 
-    // Normaliza (trim, email en minúsculas), valida todos los campos y rechaza usuario o email repetidos.
+    // Normaliza (trim, email en minúsculas), valida todos los campos, cifra la contraseña con BCrypt y rechaza duplicados.
     @Override
     @Transactional
     public Usuario save(Usuario usuario) {
@@ -130,6 +135,7 @@ public class UsuarioServiceJPA implements UsuarioService{
         if (usuarioRepository.existsByEmailIgnoreCase(usuario.getEmail())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "El email ya está registrado");
         }
+        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
         return usuarioRepository.save(usuario);
     }
 
@@ -169,7 +175,7 @@ public class UsuarioServiceJPA implements UsuarioService{
             actual.setDireccion(direccion);
         }
         if (contrasenia != null) {
-            actual.setContrasenia(contrasenia);
+            actual.setContrasenia(passwordEncoder.encode(contrasenia));
         }
         return usuarioRepository.save(actual);
     }

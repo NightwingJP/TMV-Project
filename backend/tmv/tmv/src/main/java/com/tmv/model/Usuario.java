@@ -13,6 +13,10 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 50)
     private String usuario;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Rol rol = Rol.USER;
+
     @Column(nullable = false, length = 20)
     private String telefono;
 
@@ -36,6 +40,15 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public Usuario(String usuario, Rol rol, String telefono, String email, String direccion, String contrasenia) {
+        this.usuario = usuario;
+        this.rol = rol;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+        this.contrasenia = contrasenia;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,6 +65,13 @@ public class Usuario {
         this.usuario = usuario;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     public String getTelefono() {
         return telefono;
     }
