@@ -11,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +55,21 @@ public class AuthController {
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         String token = jwtUtil.generateToken(userDetails);
+        Usuario usuario = usuarioService.findByEmail(email);
 
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(new AuthResponseDTO(
+                token,
+                usuario.getId(),
+                usuario.getUsuario(),
+                usuario.getEmail(),
+                usuario.getDireccion(),
+                usuario.getRol() != null ? usuario.getRol().name() : null
+        ));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UsuarioDTO> me(Authentication authentication) {
+        Usuario usuario = usuarioService.findByEmail(authentication.getName());
+        return ResponseEntity.ok(UsuarioDTO.fromEntity(usuario));
     }
 }
