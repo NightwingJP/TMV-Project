@@ -3,8 +3,6 @@ package com.tmv.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tmv.model.Usuario;
 
-import java.security.PublicKey;
-
 public class UsuarioDTO {
 
     private Long id;
@@ -15,6 +13,9 @@ public class UsuarioDTO {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contrasenia;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String rol;
 
     public UsuarioDTO() {
     }
@@ -28,19 +29,26 @@ public class UsuarioDTO {
         this.contrasenia = contrasenia;
     }
 
-    public static UsuarioDTO fromEntity(Usuario usuario){
+    public UsuarioDTO(Long id, String usuario, String telefono, String email, String direccion,
+                      String contrasenia, String rol) {
+        this(id, usuario, telefono, email, direccion, contrasenia);
+        this.rol = rol;
+    }
+
+    public static UsuarioDTO fromEntity(Usuario usuario) {
         return new UsuarioDTO(
                 usuario.getId(),
                 usuario.getUsuario(),
                 usuario.getTelefono(),
                 usuario.getEmail(),
                 usuario.getDireccion(),
-                usuario.getContrasenia()
+                usuario.getContrasenia(),
+                usuario.getRol() != null ? usuario.getRol().name() : null
         );
     }
 
-    public Usuario toEntity(){
-        return  new Usuario(this.usuario, this.telefono, this.email, this.direccion, this.contrasenia);
+    public Usuario toEntity() {
+        return new Usuario(this.usuario, this.telefono, this.email, this.direccion, this.contrasenia);
     }
 
     public Long getId() {
@@ -89,5 +97,13 @@ public class UsuarioDTO {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
